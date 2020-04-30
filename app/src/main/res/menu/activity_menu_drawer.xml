@@ -6,8 +6,11 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/menu1"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="장소로 추가" />
+        <item
+            android:id="@+id/menu2"
+            android:icon="@drawable/ic_launcher_background"
             android:title="캘린더로 추가" />
-
     </group>
 </menu>
