@@ -1,5 +1,6 @@
 package com.androidapp.tobeacontinue;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -120,6 +121,8 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.menu_settings:
                 Toast.makeText(this,"설정 메뉴가 검색되었습니다.",Toast.LENGTH_LONG).show();
+                Intent settingIntent = new Intent(this, Settings.class);
+                startActivity(settingIntent);
                 break;
             default:
                 break;
