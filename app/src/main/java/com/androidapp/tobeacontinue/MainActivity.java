@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
+    //스플래쉬 화면 첫번째 켜질때 뜨는 화면
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

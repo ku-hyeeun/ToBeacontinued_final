@@ -7,6 +7,8 @@ import android.preference.PreferenceFragment;
 import androidx.annotation.Nullable;
 
 public class Settings extends PreferenceActivity {
+    //설정 메뉴
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

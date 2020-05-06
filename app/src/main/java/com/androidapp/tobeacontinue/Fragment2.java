@@ -1,0 +1,81 @@
+package com.androidapp.tobeacontinue;
+
+import android.content.Context;
+import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
+
+
+public class Fragment2 extends Fragment {
+    RecyclerView recyclerView;      //리사이클러뷰 사용
+    NoteAdapter adapter;
+
+    Context context;
+    OnTabSelectedListener listener;
+
+    @Override
+    public void onAttach(Context context) {
+
+        super.onAttach(context);
+        this.context = context;
+
+        if(context instanceof OnTabSelectedListener){
+            listener = (OnTabSelectedListener) context;
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        if (context != null){
+            context = null;
+            listener = null;
+        }
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.fragment_2,container,false);
+        initUI(rootView);
+        return rootView;
+    }
+
+    private void initUI(ViewGroup rootView){
+
+        Button writeButton= rootView.findViewById(R.id.writeButton);
+        writeButton.setOnClickListener(new View.OnClickListener(){          //작성버튼 누를 시
+
+            @Override
+            public void onClick(View view) {
+                if(listener !=null){
+                    listener.OnTabSelected(1);
+                }
+            }
+        });
+
+        recyclerView = rootView.findViewById(R.id.recyclerView);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+
+        adapter = new NoteAdapter();
+        adapter.addItem(new Note(0,"다이소에서 노트 구매","2020-05-06"));
+        recyclerView.setAdapter(adapter);
+
+        adapter.setOnItemClickListener(new OnNoteItemClickListener() {
+            @Override
+            public void OnItemClick(NoteAdapter.ViewHolder holder, View view, int position) {
+                Note item = adapter.getItem(position);
+                Toast.makeText(getContext(),"아이템선택됨: "+item.getContents(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+}
+
