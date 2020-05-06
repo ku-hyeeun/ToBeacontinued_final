@@ -2,17 +2,15 @@ package com.androidapp.tobeacontinue;
 
 import android.content.Context;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class Fragment1 extends Fragment {
     //집에서의 일정 프레그먼트
@@ -24,7 +22,7 @@ public class Fragment1 extends Fragment {
     OnTabSelectedListener listener;
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(Context context) {     //프래그먼트가 액티비티 위에 호출
 
         super.onAttach(context);
         this.context = context;
@@ -35,7 +33,7 @@ public class Fragment1 extends Fragment {
     }
 
     @Override
-    public void onDetach() {
+    public void onDetach() {                    //프래그먼트가 액티비티에서 내려올 때 호출
         super.onDetach();
         if (context != null){
             context = null;
@@ -51,17 +49,6 @@ public class Fragment1 extends Fragment {
     }
 
     private void initUI(ViewGroup rootView){
-
-        Button writeButton= rootView.findViewById(R.id.writeButton);
-        writeButton.setOnClickListener(new View.OnClickListener(){          //작성버튼 누를 시
-
-            @Override
-            public void onClick(View view) {
-                if(listener !=null){
-                    listener.OnTabSelected(1);
-                }
-            }
-        });
 
         recyclerView = rootView.findViewById(R.id.recyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -79,4 +66,6 @@ public class Fragment1 extends Fragment {
             }
         });
     }
+
+
 }

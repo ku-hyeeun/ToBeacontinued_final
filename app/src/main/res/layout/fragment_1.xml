@@ -20,6 +20,8 @@
             android:background="@drawable/write_button"
             android:text="작성"
             android:textColor = "@android:color/white" />
+
+
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView

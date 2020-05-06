@@ -1,4 +1,4 @@
-package com.androidapp.tobeacontinue;
+package com.androidapp.tobeacontinue.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import com.androidapp.tobeacontinue.R;
+import com.androidapp.tobeacontinue.Todolist;
 
 
 public class BeaconFragment extends Fragment {

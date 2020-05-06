@@ -1,10 +1,12 @@
-package com.androidapp.tobeacontinue;
+package com.androidapp.tobeacontinue.etc;
 
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 
 import androidx.annotation.Nullable;
+
+import com.androidapp.tobeacontinue.R;
 
 public class Settings extends PreferenceActivity {
     //설정 메뉴

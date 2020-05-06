@@ -50,17 +50,6 @@ public class Fragment2 extends Fragment {
 
     private void initUI(ViewGroup rootView){
 
-        Button writeButton= rootView.findViewById(R.id.writeButton);
-        writeButton.setOnClickListener(new View.OnClickListener(){          //작성버튼 누를 시
-
-            @Override
-            public void onClick(View view) {
-                if(listener !=null){
-                    listener.OnTabSelected(1);
-                }
-            }
-        });
-
         recyclerView = rootView.findViewById(R.id.recyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
@@ -77,5 +66,6 @@ public class Fragment2 extends Fragment {
             }
         });
     }
+
 }
 

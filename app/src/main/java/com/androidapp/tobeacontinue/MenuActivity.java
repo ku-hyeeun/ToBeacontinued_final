@@ -10,6 +10,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.androidapp.tobeacontinue.etc.Settings;
+import com.androidapp.tobeacontinue.fragment.BeaconFragment;
+import com.androidapp.tobeacontinue.fragment.CalendarFragment;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;

@@ -6,10 +6,8 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.tabs.TabLayout;
 
 public class Todolist extends AppCompatActivity implements OnTabSelectedListener {
     //비콘 프레그먼트에서 각 버튼을 클릭 시 열리는 새로운 액티비티
@@ -71,4 +69,6 @@ public class Todolist extends AppCompatActivity implements OnTabSelectedListener
         }
 
     }
+
+
 }
