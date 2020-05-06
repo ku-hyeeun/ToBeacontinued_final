@@ -10,18 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity
-            android:name=".Todolist" />
-        <activity
-            android:name=".MenuActivity"
+        <activity android:name=".Todolist" />
+        <activity android:name=".MenuActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".etc.Settings"
-            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".etc.Settings" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

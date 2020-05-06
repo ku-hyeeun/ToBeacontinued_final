@@ -13,10 +13,10 @@ public class Todolist extends AppCompatActivity implements OnTabSelectedListener
     //비콘 프레그먼트에서 각 버튼을 클릭 시 열리는 새로운 액티비티
     //하단에 bottomNavigationView를 사용할 것이기 때문에 4개의 하단바에 해당하는 4개의 프레그먼트를 만들어 주었음
 
-    Fragment fragment1;         //집
-    Fragment fragment2;         //집 밖
-    Fragment fragment3;         //한누리관
-    Fragment fragment4;         //학생회관
+    Fragment1 fragment1;         //집
+    Fragment2 fragment2;         //집 밖
+    Fragment3 fragment3;         //한누리관
+    Fragment4 fragment4;         //학생회관
 
     BottomNavigationView bottomNavigationView;      //하단바
 
@@ -25,10 +25,10 @@ public class Todolist extends AppCompatActivity implements OnTabSelectedListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_todolist);
 
-        fragment1 = new Fragment();
-        fragment2 = new Fragment();
-        fragment3 = new Fragment();
-        fragment4 = new Fragment();
+        fragment1 = new Fragment1();
+        fragment2 = new Fragment2();
+        fragment3 = new Fragment3();
+        fragment4 = new Fragment4();
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container1, fragment1).commit();        //시작페이지는 fragment1로
 

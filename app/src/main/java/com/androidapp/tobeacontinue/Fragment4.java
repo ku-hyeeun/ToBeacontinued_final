@@ -50,7 +50,7 @@ public class Fragment4 extends Fragment {
     }
 
     private void initUI(ViewGroup rootView){
-        
+
         recyclerView = rootView.findViewById(R.id.recyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
