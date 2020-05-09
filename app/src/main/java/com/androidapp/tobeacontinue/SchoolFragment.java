@@ -68,7 +68,7 @@ public class SchoolFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
         adapter = new NoteAdapter();
-        adapter.addItem(new Note(0,"가스 잠그기","2020-05-06"));
+        adapter.addItem(new Note(0,"모프 팀플","2020-05-06"));
         recyclerView.setAdapter(adapter);
 
         adapter.setOnItemClickListener(new OnNoteItemClickListener() {

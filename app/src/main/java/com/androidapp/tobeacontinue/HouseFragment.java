@@ -1,6 +1,7 @@
 package com.androidapp.tobeacontinue;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +15,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.androidapp.tobeacontinue.Todolist.OnTabItemSelectedListener;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 public class HouseFragment extends Fragment {
     //집에서의 일정 프레그먼트
+
+    private static final String TAG ="HouseFragment";
 
     RecyclerView recyclerView;      //리사이클러뷰 사용
     NoteAdapter adapter;
@@ -47,7 +53,51 @@ public class HouseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.fragment_house,container,false);
         initUI(rootView);
+        loadNoteListData();
+
         return rootView;
+    }
+
+    public int loadNoteListData() {
+        AppConstants.println("loadNoteListData called.");
+        String sql = "select _id, CONTENTS, CREATE_DATE, MODIFY_DATE from"+NoteDatabase.TABLE_NOTE+" order by CREATE_DATE desc";
+
+        int recordCount = -1;
+        NoteDatabase database = NoteDatabase.getInstance(context);
+        if(database != null){
+            Cursor outCursor = database.rawQuery(sql);
+
+            recordCount = outCursor.getCount();
+            AppConstants.println("record count : "+recordCount+"\n");
+            ArrayList<Note> items = new ArrayList<>();
+
+            for(int i=0;i<recordCount;i++){
+                outCursor.moveToNext();
+
+                int _id = outCursor.getInt(0);
+                String contents = outCursor.getString(1);
+                String date=outCursor.getString(2);
+                String createDateStr = null;
+                if(date!=null&&date.length()>10){
+                    try{
+                        Date inDate = AppConstants.dateFormat4.parse(date);
+                        createDateStr = AppConstants.dateFormat3.format(inDate);
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
+                }else{
+                    createDateStr = "";
+                }
+
+                AppConstants.println("# "+i+" -> "+_id+", "+contents+", "+createDateStr);
+                items.add(new Note(_id,contents,createDateStr));
+            }
+            outCursor.close();
+
+            adapter.setItems(items);
+            adapter.notifyDataSetChanged();
+        }
+        return recordCount;
     }
 
     private void initUI(ViewGroup rootView){

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:layout_marginBottom="60dp"
     android:orientation="vertical"
-    tools:context=".HouseFragment">
+    tools:context=".SchoolFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"

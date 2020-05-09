@@ -68,7 +68,8 @@ public class CafeteriaFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
         adapter = new NoteAdapter();
-        adapter.addItem(new Note(0,"가스 잠그기","2020-05-06"));
+        adapter.addItem(new Note(0,"학생회관에서 점심 먹기","2020-05-06"));
+        adapter.addItem(new Note(1,"문구점에서 파일 사기","2020-05-08"));
         recyclerView.setAdapter(adapter);
 
         adapter.setOnItemClickListener(new OnNoteItemClickListener() {

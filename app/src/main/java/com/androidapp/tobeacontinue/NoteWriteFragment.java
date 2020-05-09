@@ -1,13 +1,13 @@
 package com.androidapp.tobeacontinue;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,12 +20,19 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class NoteWriteFragment extends Fragment {
+
+    private static final String TAG = "NoteWriteFragment";
+
     EditText edtText;
     Button savebutton;
     NoteAdapter adapter;
     OnTabItemSelectedListener listener;
 
     Context context;
+    int mMode = AppConstants.MODE_INSERT;
+    int _id = -1;
+
+    Note item;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -64,26 +71,20 @@ public class NoteWriteFragment extends Fragment {
         savebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String str = edtText.getText().toString();
-
-                if (str.length() > 0) {
-                    Date date = new Date();
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
-                    String substr = sdf.format(date);
-                    Intent intent = new Intent();
-                    intent.putExtra("main", str);
-                    intent.putExtra("sub", substr);
-
-                    if(listener!=null){
-                        listener.onTabSelected(0);
-                    }
+                if(mMode == AppConstants.MODE_INSERT) {
+                    saveNote();
+                }else if(mMode == AppConstants.MODE_MODIFY) {
+                    modifyNote();
                 }
+
+                if(listener!=null){
+                    listener.onTabSelected(0);
+                }
+
             }
         });
 
         rootview.findViewById(R.id.btnNo).setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
                 if(listener !=null){
@@ -92,6 +93,33 @@ public class NoteWriteFragment extends Fragment {
             }
         });
 
+    }
 
+    public void setItem(Note item) {
+        this.item = item;
+    }
+
+    private void saveNote(){
+        String contents = edtText.getText().toString();
+        String sql = "insert into "+NoteDatabase.TABLE_NOTE+
+                "(CONTENTS) values(" +"'"+ contents + "')";
+
+        Log.d(TAG,"sql : "+sql);
+        NoteDatabase database = NoteDatabase.getInstance(context);
+        database.execSQL(sql);
+    }
+
+    private void modifyNote(){
+        if(item != null){
+            String contents = edtText.getText().toString();
+
+            String sql = "Update "+NoteDatabase.TABLE_NOTE+" set"+
+                    "  CONTENTS = '"+contents+ "'"+
+                    " where "+ "  _id = "+item._id;
+
+            Log.d(TAG,"sql : "+sql);
+            NoteDatabase database = NoteDatabase.getInstance(context);
+            database.execSQL(sql);
+        }
     }
 }

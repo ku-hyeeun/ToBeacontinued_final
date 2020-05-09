@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Todolist.OutsideTodolist"/>
         <activity android:name=".Todolist.CafeteriaTodolist"></activity>
         <activity android:name=".Todolist.SchoolTodolist" />
         <activity android:name=".Todolist.HouseTodolist" />

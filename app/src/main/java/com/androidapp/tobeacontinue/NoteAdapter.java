@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> implements OnNoteItemClickListener {
     //리사이클러뷰 클래스 정의
 
-    ArrayList<Note> items = new ArrayList<Note>();
+    ArrayList<Note> items = new ArrayList<>();
     OnNoteItemClickListener listener;
     int layoutType = 0;
 
