@@ -10,13 +10,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> implements OnNoteItemClickListener {
     //리사이클러뷰 클래스 정의
 
     ArrayList<Note> items = new ArrayList<Note>();
-    ;
     OnNoteItemClickListener listener;
     int layoutType = 0;
 
@@ -63,7 +61,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> im
         }
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         LinearLayout layout1;
         TextView contentsTextView;
         TextView dateTextView;

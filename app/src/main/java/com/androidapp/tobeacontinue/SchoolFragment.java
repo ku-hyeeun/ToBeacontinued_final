@@ -12,14 +12,16 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class Fragment1 extends Fragment {
+import com.androidapp.tobeacontinue.Todolist.OnTabItemSelectedListener;
+
+public class SchoolFragment extends Fragment {
     //집에서의 일정 프레그먼트
 
     RecyclerView recyclerView;      //리사이클러뷰 사용
     NoteAdapter adapter;
 
     Context context;
-    OnTabSelectedListener listener;
+    OnTabItemSelectedListener listener;
 
     @Override
     public void onAttach(Context context) {     //프래그먼트가 액티비티 위에 호출
@@ -27,8 +29,8 @@ public class Fragment1 extends Fragment {
         super.onAttach(context);
         this.context = context;
 
-        if(context instanceof OnTabSelectedListener){
-            listener = (OnTabSelectedListener) context;
+        if(context instanceof OnTabItemSelectedListener){
+            listener = (OnTabItemSelectedListener)context;
         }
     }
 
@@ -43,12 +45,23 @@ public class Fragment1 extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.fragment_1,container,false);
+        ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.fragment_school,container,false);
         initUI(rootView);
         return rootView;
     }
 
     private void initUI(ViewGroup rootView){
+
+        Button writeButton = rootView.findViewById(R.id.writeButton);
+        writeButton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                if(listener!=null){
+                    listener.onTabSelected(1);
+                }
+            }
+        });
 
         recyclerView = rootView.findViewById(R.id.recyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -65,6 +78,7 @@ public class Fragment1 extends Fragment {
                 Toast.makeText(getContext(),"아이템선택됨: "+item.getContents(), Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 
 

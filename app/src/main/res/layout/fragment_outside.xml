@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:layout_marginBottom="60dp"
     android:orientation="vertical"
-    tools:context=".Fragment3">
+    tools:context=".HouseFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,6 +20,8 @@
             android:background="@drawable/write_button"
             android:text="작성"
             android:textColor = "@android:color/white" />
+
+
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView

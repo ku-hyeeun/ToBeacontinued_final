@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:layout_marginBottom="60dp"
     android:orientation="vertical"
-    tools:context=".Fragment2">
+    tools:context=".HouseFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -31,7 +31,6 @@
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
         android:layout_marginBottom="8dp" />
-
 
 
 </LinearLayout>
