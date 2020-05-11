@@ -39,9 +39,9 @@ public class NoteWriteActivity extends AppCompatActivity {
                     intent.putExtra("main",str);
                     intent.putExtra("sub",substr);
                     setResult(0, intent);
-                    setResult(1, intent);
-                    setResult(2, intent);
-                    setResult(3, intent);
+//                    setResult(1, intent);
+//                    setResult(2, intent);
+//                    setResult(3, intent);
                     finish();
 
                 }
