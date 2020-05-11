@@ -98,7 +98,7 @@ public class NoteDatabase {
             try{
                 db.execSQL(CREATE_SQL);
             }catch(Exception ex){
-                Log.e(TAG,"Exeption in CREATE_SQL",ex);
+                Log.e(TAG,"Exception in CREATE_SQL",ex);
             }
 
             String CREATE_INDEX_SQL = "Create index "+TABLE_NOTE+"_IDX ON "+TABLE_NOTE+"("+"CREATE_DATE"+")";

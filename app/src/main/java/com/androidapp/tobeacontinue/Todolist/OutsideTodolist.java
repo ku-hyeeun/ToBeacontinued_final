@@ -1,65 +1,123 @@
 package com.androidapp.tobeacontinue.Todolist;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
+import android.widget.TextView;
 
-import com.androidapp.tobeacontinue.NoteWriteFragment;
-import com.androidapp.tobeacontinue.OutsideFragment;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.androidapp.tobeacontinue.R;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
-public class OutsideTodolist extends AppCompatActivity implements OnTabItemSelectedListener{
+public class OutsideTodolist extends AppCompatActivity {
     //비콘 프레그먼트에서 각 버튼을 클릭 시 열리는 새로운 액티비티
 
-    OutsideFragment outsideFragment;
-    NoteWriteFragment noteFragment;         //작성 fragment
+    RecyclerView recyclerView;
+    RecyclerAdapter recyclerAdapter;
+    Button btnAdd;
 
-    BottomNavigationView bottomNavigationView;
+    List<Note> memoList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_house_todolist);
+        setContentView(R.layout.activity_outside_todolist);
 
-        outsideFragment = new OutsideFragment();
-        noteFragment = new NoteWriteFragment();
+        memoList = new ArrayList<>();
+        memoList.add(new Note(0,"장보기","2020-05-10"));
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.container1, outsideFragment).commit();
+        recyclerView=findViewById(R.id.recyclerview);
+        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(OutsideTodolist.this);
+        recyclerView.setLayoutManager(linearLayoutManager);
 
-        bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        recyclerAdapter= new RecyclerAdapter(memoList);
+        recyclerView.setAdapter(recyclerAdapter);
+        btnAdd=findViewById(R.id.writeButton);
+
+        btnAdd.setOnClickListener(new View.OnClickListener(){
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                switch(menuItem.getItemId()){
-                    case R.id.tab1:
-                        Toast.makeText(getApplicationContext(),"첫 번째 탭 선택됨",Toast.LENGTH_SHORT).show();
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container1,outsideFragment).commit();
-                        return true;
-
-                    case R.id.tab2:
-                        Toast.makeText(getApplicationContext(),"두 번째 탭 선택됨",Toast.LENGTH_SHORT).show();
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container1,noteFragment).commit();
-                        return true;
-                }
-                return false;
+            public void onClick(View view) {
+                //새로운 메모작성
+                Intent intent=new Intent(OutsideTodolist.this,NoteWriteActivity.class);
+                startActivityForResult(intent,2);
             }
         });
 
     }
 
     @Override
-    public void onTabSelected(int position) {
-        if(position ==0 ){
-            bottomNavigationView.setSelectedItemId(R.id.tab1);
-        }else if(position == 1){
-            bottomNavigationView.setSelectedItemId(R.id.tab2);
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode== 0){
+            String strMain=data.getStringExtra("main");
+            String strSub=data.getStringExtra("sub");
+
+            Note memo=new Note(0,strMain,strSub);
+            recyclerAdapter.addItem(memo);
+            recyclerAdapter.notifyDataSetChanged();
+        }
+    }
+
+    class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemViewHolder>{
+        private List<Note> listdata;
+
+        public RecyclerAdapter(List<Note> listdata){
+            this.listdata=listdata;
+        }
+
+        @Override
+        public int getItemCount() {
+            return listdata.size();
+        }
+
+
+        @NonNull
+        @Override
+        public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+            View view= LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.note_item,viewGroup,false);
+            return new ItemViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull ItemViewHolder itemViewHolder, int i) {
+            Note memo=listdata.get(i);
+            itemViewHolder.maintext.setText(memo.getContents());
+            itemViewHolder.subtext.setText(memo.getCreateDateStr());
+        }
+
+        void addItem(Note memo){
+            listdata.add(memo);
+        }
+
+        void removeItem(int position){
+            listdata.remove(position);
+        }
+
+        class ItemViewHolder extends RecyclerView.ViewHolder{
+            private TextView maintext;
+            private TextView subtext;
+            //private ImageView img;
+
+            public ItemViewHolder(@NonNull View itemView){
+                super(itemView);
+
+                maintext=itemView.findViewById(R.id.contentsTextView);
+                subtext=itemView.findViewById(R.id.dateTextView);
+                //img=itemView.findViewById(R.id.item_image);
+
+            }
         }
     }
 }

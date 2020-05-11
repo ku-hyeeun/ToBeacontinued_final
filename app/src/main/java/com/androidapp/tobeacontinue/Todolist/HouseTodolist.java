@@ -1,126 +1,133 @@
 package com.androidapp.tobeacontinue.Todolist;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
-import com.androidapp.tobeacontinue.HouseFragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.androidapp.tobeacontinue.NoteDatabase;
-import com.androidapp.tobeacontinue.NoteWriteFragment;
 import com.androidapp.tobeacontinue.R;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.pedro.library.AutoPermissions;
-import com.pedro.library.AutoPermissionsListener;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
-public class HouseTodolist extends AppCompatActivity implements OnTabItemSelectedListener,AutoPermissionListener{
+public class HouseTodolist extends AppCompatActivity{
     //비콘 프레그먼트에서 각 버튼을 클릭 시 열리는 새로운 액티비티
 
     private static final String TAG = "HouseTodolist";
 
-    HouseFragment houseFragment;                //집 memo 목록
-    NoteWriteFragment noteFragment;             //작성 fragment
-
-    BottomNavigationView bottomNavigationView;      //하단바
-
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmm");
-    SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd HH시");
-    SimpleDateFormat dateFormat3 = new SimpleDateFormat("MM월 dd일");
-    SimpleDateFormat dateFormat4 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-    String currentDateString;
-    Date currentDate;
+    RecyclerView recyclerView;
+    RecyclerAdapter recyclerAdapter;
+    Button btnAdd;
 
     public static NoteDatabase mDatabase = null;
 
+    List<Note> memoList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_house_todolist);
 
-        houseFragment = new HouseFragment();
-        noteFragment = new NoteWriteFragment();
+        memoList = new ArrayList<>();
+        memoList.add(new Note(0,"분리수거하기","2020-05-10"));
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.container1, houseFragment).commit();
-        //시작페이지는 memo목록으로
+        recyclerView=findViewById(R.id.recyclerview);
+        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(HouseTodolist.this);
+        recyclerView.setLayoutManager(linearLayoutManager);
 
-        bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        recyclerAdapter=new RecyclerAdapter(memoList);
+        recyclerView.setAdapter(recyclerAdapter);
+        btnAdd=findViewById(R.id.writeButton);
+
+        btnAdd.setOnClickListener(new View.OnClickListener(){
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                switch(menuItem.getItemId()){
-                    case R.id.tab1:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container1,houseFragment).commit();
-                        return true;
-
-                    case R.id.tab2:
-                        noteFragment = new NoteWriteFragment();
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container1,noteFragment).commit();
-                        return true;
-                }
-                return false;
+            public void onClick(View view) {
+                //새로운 메모작성
+                Intent intent=new Intent(HouseTodolist.this,NoteWriteActivity.class);
+                startActivityForResult(intent,0);
             }
         });
 
-        AutoPermissions.Companion.loadAllPermissions(this, 101);
-        openDatabase();
-
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-        if (mDatabase != null) {
-            mDatabase.close();
-            mDatabase = null;
+        if(requestCode== 0){
+            String strMain=data.getStringExtra("main");
+            String strSub=data.getStringExtra("sub");
+
+            Note memo=new Note(0,strMain,strSub);
+            recyclerAdapter.addItem(memo);
+            recyclerAdapter.notifyDataSetChanged();
         }
     }
 
-    public void openDatabase() {
-        // open database
-        if (mDatabase != null) {
-            mDatabase.close();
-            mDatabase = null;
+    class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemViewHolder>{
+        private List<Note> listdata;
+
+        public RecyclerAdapter(List<Note> listdata){
+            this.listdata=listdata;
         }
 
-        mDatabase = NoteDatabase.getInstance(this);
-        boolean isOpen = mDatabase.open();
-        if (isOpen) {
-            Log.d(TAG, "Note database is open.");
-        } else {
-            Log.d(TAG, "Note database is not open.");
+        @Override
+        public int getItemCount() {
+            return listdata.size();
+        }
+
+        @NonNull
+        @Override
+        public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+            View view= LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.note_item,viewGroup,false);
+            return new ItemViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull ItemViewHolder itemViewHolder, int i) {
+            Note memo=listdata.get(i);
+            itemViewHolder.maintext.setText(memo.getContents());
+            itemViewHolder.subtext.setText(memo.getCreateDateStr());
+
+//            if(memo.getIsdone()==0){
+//                itemViewHolder.img.setBackgroundColor(Color.LTGRAY);
+//            }
+//            else{
+//                itemViewHolder.img.setBackgroundColor(Color.GREEN);
+//            }
+        }
+
+        void addItem(Note memo){
+            listdata.add(memo);
+        }
+
+        void removeItem(int position){
+            listdata.remove(position);
+        }
+
+        class ItemViewHolder extends RecyclerView.ViewHolder{
+            private TextView maintext;
+            private TextView subtext;
+            //private ImageView img;
+
+            public ItemViewHolder(@NonNull View itemView){
+                super(itemView);
+
+                maintext=itemView.findViewById(R.id.contentsTextView);
+                subtext=itemView.findViewById(R.id.dateTextView);
+                //img=itemView.findViewById(R.id.item_image);
+
+            }
         }
     }
-
-    @Override
-    public void onTabSelected(int position) {
-        if(position ==0 ){
-            bottomNavigationView.setSelectedItemId(R.id.tab1);
-        }else if(position == 1){
-            noteFragment = new NoteWriteFragment();
-            bottomNavigationView.setSelectedItemId(R.id.tab2);
-        }
-    }
-
-    public void showFragment2(Note item) {
-
-        noteFragment = new NoteWriteFragment();
-        noteFragment.setItem(item);
-
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container, noteFragment).commit();
-
-    }
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        AutoPermissions.Companion.parsePermissions(this, requestCode, permissions, this);
-    }
-
-
 }
