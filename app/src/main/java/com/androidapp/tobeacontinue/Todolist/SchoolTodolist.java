@@ -15,27 +15,30 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.androidapp.tobeacontinue.R;
+import com.androidapp.tobeacontinue.database.MemoDBHelper;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
 public class SchoolTodolist extends AppCompatActivity {
     //비콘 프레그먼트에서 각 버튼을 클릭 시 열리는 새로운 액티비티
+    //HouseTodolist와 구조 같음
+    // 다른 것: 데이터 저장, 삭제, 조회 이름 다르고, requestCode로 3 넣었음
 
     RecyclerView recyclerView;
     RecyclerAdapter recyclerAdapter;
     Button btnAdd;
 
-    List<Note> memoList;
+    MemoDBHelper DBHelper;
+    List<Memo> memoList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_school_todolist);
 
-        memoList = new ArrayList<>();
-        memoList.add(new Note(0,"모프 팀플","2020-05-10"));
+        DBHelper = new MemoDBHelper(SchoolTodolist.this);
+        memoList = DBHelper.selectAll3();
 
         recyclerView=findViewById(R.id.recyclerview);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(SchoolTodolist.this);
@@ -49,7 +52,8 @@ public class SchoolTodolist extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //새로운 메모작성
-                Intent intent=new Intent(SchoolTodolist.this,NoteWriteActivity.class);
+                Intent intent=new Intent(SchoolTodolist.this, MemoWrite.class);
+                intent.putExtra("num", "3");
                 startActivityForResult(intent,3);
             }
         });
@@ -60,20 +64,24 @@ public class SchoolTodolist extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode== 3){
+        if(requestCode== resultCode){
+            if(resultCode == 3){
             String strMain=data.getStringExtra("main");
             String strSub=data.getStringExtra("sub");
 
-            Note memo=new Note(0,strMain,strSub);
+            Memo memo=new Memo(0,strMain,strSub,0);
             recyclerAdapter.addItem(memo);
             recyclerAdapter.notifyDataSetChanged();
+
+            DBHelper.insertMemo3(memo);
+            }
         }
     }
 
     class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemViewHolder>{
-        private List<Note> listdata;
+        private List<Memo> listdata;
 
-        public RecyclerAdapter(List<Note> listdata){
+        public RecyclerAdapter(List<Memo> listdata){
             this.listdata=listdata;
         }
 
@@ -85,25 +93,22 @@ public class SchoolTodolist extends AppCompatActivity {
         @NonNull
         @Override
         public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-            View view= LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.note_item,viewGroup,false);
+            View view= LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.memo_item,viewGroup,false);
             return new ItemViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(@NonNull RecyclerAdapter.ItemViewHolder itemViewHolder, int i) {
-            Note memo=listdata.get(i);
+            Memo memo=listdata.get(i);
+
+            itemViewHolder.maintext.setTag(memo.getId());
+
             itemViewHolder.maintext.setText(memo.getContents());
             itemViewHolder.subtext.setText(memo.getCreateDateStr());
 
-//            if(memo.getIsdone()==0){
-//                itemViewHolder.img.setBackgroundColor(Color.LTGRAY);
-//            }
-//            else{
-//                itemViewHolder.img.setBackgroundColor(Color.GREEN);
-//            }
         }
 
-        void addItem(Note memo){
+        void addItem(Memo memo){
             listdata.add(memo);
         }
 
@@ -114,15 +119,28 @@ public class SchoolTodolist extends AppCompatActivity {
         class ItemViewHolder extends RecyclerView.ViewHolder{
             private TextView maintext;
             private TextView subtext;
-            //private ImageView img;
 
             public ItemViewHolder(@NonNull View itemView){
                 super(itemView);
 
                 maintext=itemView.findViewById(R.id.contentsTextView);
                 subtext=itemView.findViewById(R.id.dateTextView);
-                //img=itemView.findViewById(R.id.item_image);
 
+                itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View view) {
+                        int position = getAdapterPosition();
+                        int id = (int)maintext.getTag();
+
+                        if(position != RecyclerView.NO_POSITION){
+                            DBHelper.deleteMemo3(id);
+                            removeItem(position);
+                            notifyDataSetChanged();
+                        }
+
+                        return false;
+                    }
+                });
             }
         }
     }

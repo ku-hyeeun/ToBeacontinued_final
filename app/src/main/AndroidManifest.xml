@@ -9,11 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Todolist.NoteWriteActivity"></activity>
-        <activity android:name=".Todolist.OutsideTodolist" />
-        <activity android:name=".Todolist.CafeteriaTodolist" />
-        <activity android:name=".Todolist.SchoolTodolist" />
-        <activity android:name=".Todolist.HouseTodolist" />
+        <activity android:name=".Todolist.MemoWrite" />
+        <activity android:name=".Todolist.OutsideTodolist"
+            android:label="집 밖"/>
+        <activity android:name=".Todolist.CafeteriaTodolist"
+            android:label="학생회관"/>
+        <activity android:name=".Todolist.SchoolTodolist"
+            android:label="한누리관"/>
+        <activity android:name=".Todolist.HouseTodolist"
+            android:label="집 안"/>
         <activity
             android:name=".MenuActivity"
             android:theme="@style/AppTheme.NoActionBar" />

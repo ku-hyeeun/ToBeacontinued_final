@@ -14,32 +14,30 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.androidapp.tobeacontinue.NoteDatabase;
 import com.androidapp.tobeacontinue.R;
+import com.androidapp.tobeacontinue.database.MemoDBHelper;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
-public class HouseTodolist extends AppCompatActivity{
+public class HouseTodolist extends AppCompatActivity {
     //비콘 프레그먼트에서 각 버튼을 클릭 시 열리는 새로운 액티비티
 
-    private static final String TAG = "HouseTodolist";
-
-    RecyclerView recyclerView;
+    RecyclerView recyclerView;                  //리사이클러뷰
     RecyclerAdapter recyclerAdapter;
-    Button btnAdd;
+    Button btnAdd;                              //작성 버튼
 
-    public static NoteDatabase mDatabase = null;
+    MemoDBHelper DBHelper;                     //DB 만들기
 
-    List<Note> memoList;
+    List<Memo> memoList;                        //Memo 리스트 만들기
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_house_todolist);
 
-        memoList = new ArrayList<>();
-        memoList.add(new Note(0,"분리수거하기","2020-05-10"));
+        DBHelper = new MemoDBHelper(HouseTodolist.this);
+        memoList = DBHelper.selectAll1();       //메모리스트 -> DB 조회
 
         recyclerView=findViewById(R.id.recyclerview);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(HouseTodolist.this);
@@ -49,12 +47,13 @@ public class HouseTodolist extends AppCompatActivity{
         recyclerView.setAdapter(recyclerAdapter);
         btnAdd=findViewById(R.id.writeButton);
 
-        btnAdd.setOnClickListener(new View.OnClickListener(){
+        btnAdd.setOnClickListener(new View.OnClickListener(){       //작성 버튼 누를시 memowrite.class로 이동!!
             @Override
             public void onClick(View view) {
                 //새로운 메모작성
-                Intent intent=new Intent(HouseTodolist.this,NoteWriteActivity.class);
-                startActivityForResult(intent,0);
+                Intent intent=new Intent(HouseTodolist.this, MemoWrite.class);
+                intent.putExtra("num", "1");                       //requestCode로 4개 액티비티 구분 지어서 resultCode 나눠 받기 위해 num에 1이란 데이터 넣어서 전달
+                startActivityForResult(intent,1);
             }
         });
 
@@ -64,20 +63,25 @@ public class HouseTodolist extends AppCompatActivity{
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode== 0){
-            String strMain=data.getStringExtra("main");
-            String strSub=data.getStringExtra("sub");
+        if(requestCode== resultCode){
+            if(resultCode==1) {                             //resultCode 1로 받을 때
+                String strMain = data.getStringExtra("main");   //내용 받기
+                String strSub = data.getStringExtra("sub");     //날짜 받기
 
-            Note memo=new Note(0,strMain,strSub);
-            recyclerAdapter.addItem(memo);
-            recyclerAdapter.notifyDataSetChanged();
+                Memo memo = new Memo(0, strMain, strSub, 0);    //id=0,완료 여부 = 0
+                recyclerAdapter.addItem(memo);
+                recyclerAdapter.notifyDataSetChanged();
+
+                DBHelper.insertMemo1(memo);                 //memowrite.class에서 데이터 받은 것 DB에 저장
+            }
         }
     }
 
+//리사이클러 어댑터 클래스
     class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemViewHolder>{
-        private List<Note> listdata;
+        private List<Memo> listdata;                        //메모리스트
 
-        public RecyclerAdapter(List<Note> listdata){
+        public RecyclerAdapter(List<Memo> listdata){
             this.listdata=listdata;
         }
 
@@ -89,25 +93,23 @@ public class HouseTodolist extends AppCompatActivity{
         @NonNull
         @Override
         public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-            View view= LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.note_item,viewGroup,false);
+            View view= LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.memo_item,viewGroup,false);
             return new ItemViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(@NonNull ItemViewHolder itemViewHolder, int i) {
-            Note memo=listdata.get(i);
+            Memo memo=listdata.get(i);
+
+            itemViewHolder.maintext.setTag(memo.getId());
+
             itemViewHolder.maintext.setText(memo.getContents());
             itemViewHolder.subtext.setText(memo.getCreateDateStr());
 
-//            if(memo.getIsdone()==0){
-//                itemViewHolder.img.setBackgroundColor(Color.LTGRAY);
-//            }
-//            else{
-//                itemViewHolder.img.setBackgroundColor(Color.GREEN);
-//            }
+
         }
 
-        void addItem(Note memo){
+        void addItem(Memo memo){
             listdata.add(memo);
         }
 
@@ -118,15 +120,28 @@ public class HouseTodolist extends AppCompatActivity{
         class ItemViewHolder extends RecyclerView.ViewHolder{
             private TextView maintext;
             private TextView subtext;
-            //private ImageView img;
 
             public ItemViewHolder(@NonNull View itemView){
                 super(itemView);
 
                 maintext=itemView.findViewById(R.id.contentsTextView);
                 subtext=itemView.findViewById(R.id.dateTextView);
-                //img=itemView.findViewById(R.id.item_image);
 
+                itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View view) {             //메모 리스트에서 원하는 아이템 길게 누르면 데이터 삭제
+                        int position = getAdapterPosition();
+                        int id = (int)maintext.getTag();
+
+                        if(position != RecyclerView.NO_POSITION){
+                            DBHelper.deleteMemo1(id);
+                            removeItem(position);
+                            notifyDataSetChanged();
+                        }
+
+                        return false;
+                    }
+                });
             }
         }
     }
