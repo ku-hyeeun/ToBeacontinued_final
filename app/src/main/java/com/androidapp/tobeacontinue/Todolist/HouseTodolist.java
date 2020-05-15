@@ -35,9 +35,9 @@ public class HouseTodolist extends AppCompatActivity {
     RecyclerView recyclerView;                  //리사이클러뷰
     RecyclerAdapter recyclerAdapter;
     Button btnAdd;                              //작성 버튼
-    Button btnSelection;
+    Button btnSelection;                        //select 버튼
 
-    MemoDBHelper DBHelper;                     //DB 만들기
+    MemoDBHelper DBHelper;                      //DB 만들기
 
     List<Memo> memoList;                        //Memo 리스트 만들기
 
@@ -70,6 +70,7 @@ public class HouseTodolist extends AppCompatActivity {
             }
         });
 
+        //체크한 메모 표시하기 위함 -> 비콘에 이용
         btnSelection = (Button)findViewById(R.id.btnShow);
         btnSelection.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,7 +99,7 @@ public class HouseTodolist extends AppCompatActivity {
                 String strMain = data.getStringExtra("main");   //내용 받기
                 String strSub = data.getStringExtra("sub");     //날짜 받기
 
-                Memo memo = new Memo(0, strMain, strSub,0);
+                Memo memo = new Memo(0, strMain, strSub, 0);
                 recyclerAdapter.addItem(memo);
                 recyclerAdapter.notifyDataSetChanged();
 
@@ -107,7 +108,7 @@ public class HouseTodolist extends AppCompatActivity {
         }
     }
 
-//리사이클러 어댑터 클래스
+    //리사이클러 어댑터 클래스
     class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemViewHolder>{
         private List<Memo> listdata;                        //메모리스트
 
