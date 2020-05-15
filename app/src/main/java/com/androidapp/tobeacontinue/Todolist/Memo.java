@@ -9,12 +9,21 @@ public class Memo implements Serializable {
     public String contents;               //내용
     public String createDateStr;          //날짜
     int isdone;                            //완료 여부
+    boolean isSelected;
 
     public Memo(int id, String contents, String createDateStr, int isdone){
         this.id = id;
         this.contents = contents;
         this.createDateStr = createDateStr;
         this.isdone = isdone;
+    }
+
+    public Memo(int id, String contents, String createDateStr, int isdone, boolean isSelected) {
+        this.id = id;
+        this.contents = contents;
+        this.createDateStr = createDateStr;
+        this.isdone = isdone;
+        this.isSelected = isSelected;
     }
 
     public int getId() {
@@ -47,5 +56,13 @@ public class Memo implements Serializable {
 
     public void setIsdone(int isdone) {
         this.isdone = isdone;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 }

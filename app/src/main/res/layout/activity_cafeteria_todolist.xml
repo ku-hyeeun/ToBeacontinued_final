@@ -10,7 +10,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content">
 
         <Button
             android:id = "@+id/writeButton"
@@ -22,8 +22,20 @@
             android:text="작성"
             android:textColor = "@android:color/white" />
 
+        <TextView
+            android:id = "@+id/textview"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text = " 메모를 꾹 누르면 삭제\n 체크시 반복 일정 설정 가능"
+            android:textSize="20dp"/>
 
     </RelativeLayout>
+
+    <Button
+        android:id="@+id/btnShow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SHOW SELECTED" />
 
     <ScrollView
         android:layout_width="match_parent"

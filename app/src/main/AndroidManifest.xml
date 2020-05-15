@@ -17,7 +17,7 @@
         <activity android:name=".Todolist.SchoolTodolist"
             android:label="한누리관"/>
         <activity android:name=".Todolist.HouseTodolist"
-            android:label="집 안"/>
+            android:label="집 안" />
         <activity
             android:name=".MenuActivity"
             android:theme="@style/AppTheme.NoActionBar" />
