@@ -45,7 +45,7 @@ public class CafeteriaTodolist extends AppCompatActivity {
     List<Memo> memoList;
 
     private Intent intent;
-    private final String packageName = "com.everytime.v2";
+    private final String packageName = "com.everytime.v2";          //에브리타입 앱 연동
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,10 +92,9 @@ public class CafeteriaTodolist extends AppCompatActivity {
         intent = this.getPackageManager().getLaunchIntentForPackage(packageName);
         ImageButton imageButton = (ImageButton)findViewById(R.id.everytimebtn);
         imageButton.setOnClickListener(new View.OnClickListener(){
-
             @Override
             public void onClick(View view) {
-                CafeteriaTodolist.this.startActivity(intent);
+                CafeteriaTodolist.this.startActivity(intent);       //이미지 버튼을 클릭하면 패키지이름인 에브리타임 앱으로 연동됨
             }
         });
     }

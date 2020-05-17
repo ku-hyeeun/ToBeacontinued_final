@@ -27,7 +27,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.androidapp.tobeacontinue.R;
-import com.androidapp.tobeacontinue.database.ImageDBHelper;
 import com.androidapp.tobeacontinue.database.MemoDBHelper;
 import com.androidapp.tobeacontinue.etc.Settings;
 
@@ -44,13 +43,11 @@ public class SchoolTodolist extends AppCompatActivity {
     RecyclerAdapter recyclerAdapter;
     Button btnAdd;
     Button btnSelection;
-    String mimageUri;
 
     MemoDBHelper DBHelper;
-    ImageDBHelper imageDBHelper;
     List<Memo> memoList;
 
-    private static int PICK_IMAGE_REQUEST = 1;
+    private static int PICK_IMAGE_REQUEST = 1;          //이미지 로드
     ImageView imgView;
     static final String TAG = "SchoolTodolist";
 
@@ -61,7 +58,6 @@ public class SchoolTodolist extends AppCompatActivity {
 
         DBHelper = new MemoDBHelper(SchoolTodolist.this);
         memoList = DBHelper.selectAll3();
-        imageDBHelper = new ImageDBHelper(SchoolTodolist.this);
 
         recyclerView=findViewById(R.id.recyclerview);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(SchoolTodolist.this);
@@ -99,6 +95,7 @@ public class SchoolTodolist extends AppCompatActivity {
 
     }
 
+    //갤러리로부터 이미지 로드
     public void loadImagefromGallery(View view){
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
@@ -127,9 +124,6 @@ public class SchoolTodolist extends AppCompatActivity {
 
             if(requestCode == PICK_IMAGE_REQUEST && resultCode ==RESULT_OK && null!=data) {
                 Uri uri = data.getData();
-                mimageUri = uri.toString();
-                String imageUri = data.getStringExtra("image");
-                imageDBHelper.insertImage(imageUri);
 
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
                 int nh = (int) (bitmap.getHeight() * (1024.0 / bitmap.getWidth()));
