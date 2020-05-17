@@ -56,30 +56,25 @@ public class MemoDBHelper extends SQLiteOpenHelper{
     //INSERT INTO MemoTable VALUES(NULL,'MAINTEXT','SUBTEXT',0);
     public void insertMemo1(Memo memo){
 
-
-        String sql1 = "INSERT INTO "+TABLE1+" VALUES(NULL, '"+memo.contents+"', '"+memo.createDateStr+"', "+
-                memo.getIsdone()+");";
+        String sql1 = "INSERT INTO "+TABLE1+" VALUES(NULL, '"+memo.contents+"', '"+memo.createDateStr+"', "+ memo.getIsdone()+");";
         db.execSQL(sql1);
 
     }
     public void insertMemo2(Memo memo){
 
-        String sql2 = "INSERT INTO "+TABLE2+" VALUES(NULL, '"+memo.contents+"', '"+memo.createDateStr+"', "+
-                memo.getIsdone()+");";
+        String sql2 = "INSERT INTO "+TABLE2+" VALUES(NULL, '"+memo.contents+"', '"+memo.createDateStr+"', "+ memo.getIsdone()+");";
         db.execSQL(sql2);
 
     }
     public void insertMemo3(Memo memo){
 
-        String sql3 = "INSERT INTO "+TABLE3+" VALUES(NULL, '"+memo.contents+"', '"+memo.createDateStr+"', "+
-                memo.getIsdone()+");";
+        String sql3 = "INSERT INTO "+TABLE3+" VALUES(NULL, '"+memo.contents+"', '"+memo.createDateStr+"', "+ memo.getIsdone()+");";
         db.execSQL(sql3);
 
     }
     public void insertMemo4(Memo memo){
 
-        String sql4 = "INSERT INTO "+TABLE4+" VALUES(NULL, '"+memo.contents+"', '"+memo.createDateStr+"', "+
-                memo.getIsdone()+");";
+        String sql4 = "INSERT INTO "+TABLE4+" VALUES(NULL, '"+memo.contents+"', '"+memo.createDateStr+"', "+ memo.getIsdone()+");";
         db.execSQL(sql4);
 
     }

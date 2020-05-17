@@ -2,8 +2,11 @@ package com.androidapp.tobeacontinue.Todolist;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,9 +27,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.androidapp.tobeacontinue.R;
+import com.androidapp.tobeacontinue.database.ImageDBHelper;
 import com.androidapp.tobeacontinue.database.MemoDBHelper;
 import com.androidapp.tobeacontinue.etc.Settings;
 
+import java.io.IOException;
 import java.util.List;
 
 
@@ -38,9 +44,15 @@ public class SchoolTodolist extends AppCompatActivity {
     RecyclerAdapter recyclerAdapter;
     Button btnAdd;
     Button btnSelection;
+    String mimageUri;
 
     MemoDBHelper DBHelper;
+    ImageDBHelper imageDBHelper;
     List<Memo> memoList;
+
+    private static int PICK_IMAGE_REQUEST = 1;
+    ImageView imgView;
+    static final String TAG = "SchoolTodolist";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +61,7 @@ public class SchoolTodolist extends AppCompatActivity {
 
         DBHelper = new MemoDBHelper(SchoolTodolist.this);
         memoList = DBHelper.selectAll3();
+        imageDBHelper = new ImageDBHelper(SchoolTodolist.this);
 
         recyclerView=findViewById(R.id.recyclerview);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(SchoolTodolist.this);
@@ -86,6 +99,13 @@ public class SchoolTodolist extends AppCompatActivity {
 
     }
 
+    public void loadImagefromGallery(View view){
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+
+        startActivityForResult(Intent.createChooser(intent,"Select Picture"),PICK_IMAGE_REQUEST);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -102,7 +122,30 @@ public class SchoolTodolist extends AppCompatActivity {
             DBHelper.insertMemo3(memo);
             }
         }
+
+        try {
+
+            if(requestCode == PICK_IMAGE_REQUEST && resultCode ==RESULT_OK && null!=data) {
+                Uri uri = data.getData();
+                mimageUri = uri.toString();
+                String imageUri = data.getStringExtra("image");
+                imageDBHelper.insertImage(imageUri);
+
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                int nh = (int) (bitmap.getHeight() * (1024.0 / bitmap.getWidth()));
+                Bitmap scaled = Bitmap.createScaledBitmap(bitmap, 1024, nh, true);
+
+                imgView = (ImageView) findViewById(R.id.imageView);
+                imgView.setImageBitmap(scaled);
+            }else {
+                Toast.makeText(this,"취소되었습니다.",Toast.LENGTH_SHORT).show();
+            }
+        } catch (IOException e) {
+            Toast.makeText(this,"로딩에 오류가 있습니다.",Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
     }
+
 
     class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemViewHolder>{
         private List<Memo> listdata;
@@ -203,6 +246,7 @@ public class SchoolTodolist extends AppCompatActivity {
             }
         }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {                             //액션바에 오른쪽에 위치한 검색 메뉴

@@ -42,7 +42,6 @@ public class HouseTodolist extends AppCompatActivity {
     List<Memo> memoList;                        //Memo 리스트 만들기
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -211,8 +210,6 @@ public class HouseTodolist extends AppCompatActivity {
             }
         }
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {                             //액션바에 오른쪽에 위치한 검색 메뉴

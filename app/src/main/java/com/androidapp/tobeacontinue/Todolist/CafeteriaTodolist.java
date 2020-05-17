@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,6 +43,9 @@ public class CafeteriaTodolist extends AppCompatActivity {
     MemoDBHelper DBHelper;
 
     List<Memo> memoList;
+
+    private Intent intent;
+    private final String packageName = "com.everytime.v2";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +89,15 @@ public class CafeteriaTodolist extends AppCompatActivity {
             }
         });
 
+        intent = this.getPackageManager().getLaunchIntentForPackage(packageName);
+        ImageButton imageButton = (ImageButton)findViewById(R.id.everytimebtn);
+        imageButton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                CafeteriaTodolist.this.startActivity(intent);
+            }
+        });
     }
 
     @Override
