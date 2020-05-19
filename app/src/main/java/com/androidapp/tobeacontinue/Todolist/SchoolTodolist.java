@@ -2,7 +2,10 @@ package com.androidapp.tobeacontinue.Todolist;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,10 +30,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.androidapp.tobeacontinue.R;
+import com.androidapp.tobeacontinue.database.ImageDBHelper;
 import com.androidapp.tobeacontinue.database.MemoDBHelper;
 import com.androidapp.tobeacontinue.etc.Settings;
 
-import java.io.IOException;
+import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 
@@ -44,12 +48,15 @@ public class SchoolTodolist extends AppCompatActivity {
     Button btnAdd;
     Button btnSelection;
 
-    MemoDBHelper DBHelper;
-    List<Memo> memoList;
+    MemoDBHelper DBHelper;                              //메모 디비
+    List<Memo> memoList;                                //메모 리스트
+    Bitmap scaled;                                      //사진 처리 bitmap
+    public static ImageDBHelper imageDBHelper;          //이미지 저장 디비
 
     private static int PICK_IMAGE_REQUEST = 1;          //이미지 로드
     ImageView imgView;
     static final String TAG = "SchoolTodolist";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +64,7 @@ public class SchoolTodolist extends AppCompatActivity {
         setContentView(R.layout.activity_school_todolist);
 
         DBHelper = new MemoDBHelper(SchoolTodolist.this);
-        memoList = DBHelper.selectAll3();
+        memoList = DBHelper.selectAll3();                       //메모DB 조회
 
         recyclerView=findViewById(R.id.recyclerview);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(SchoolTodolist.this);
@@ -77,7 +84,7 @@ public class SchoolTodolist extends AppCompatActivity {
             }
         });
 
-        btnSelection = (Button)findViewById(R.id.btnShow);
+        btnSelection = findViewById(R.id.btnShow);              //selection 버튼으로 체크한 메모 보여줌
         btnSelection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,12 +100,25 @@ public class SchoolTodolist extends AppCompatActivity {
             }
         });
 
+        imageDBHelper = new ImageDBHelper(this);                //이미지 저장을 위한 DB
+        imageDBHelper.queryData("CREATE TABLE IF NOT EXISTS table_image (image BLOB);");        //테이블 만들기
+
+        imgView = findViewById(R.id.imageView);                 //이미지 뷰에 DB에 저장된 데이터 띄우기
+        Cursor cursor = imageDBHelper.getData("SELECT * FROM table_image;");    //조회
+        while(cursor.moveToNext())
+        {
+            byte[] image = cursor.getBlob(0);                       //이미지를 바이트로 처리한 후
+            scaled = byteArrayToBitmap(image);                      //byte를 bitmap으로 바꿔주는 함수를 통해 변환
+            imgView.setImageBitmap(scaled);                         //이미지 뷰에 띄우기
+        }
+
     }
 
-    //갤러리로부터 이미지 로드
+    //갤러리로부터 이미지 불러오기
     public void loadImagefromGallery(View view){
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
+        intent.setAction(Intent.ACTION_PICK);
 
         startActivityForResult(Intent.createChooser(intent,"Select Picture"),PICK_IMAGE_REQUEST);
     }
@@ -107,7 +127,7 @@ public class SchoolTodolist extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode== resultCode){
+        if(requestCode== resultCode){                               // 메모 작성 창에서 intent 넘겨받을 때 오는 resultCode
             if(resultCode == 3){
             String strMain=data.getStringExtra("main");
             String strSub=data.getStringExtra("sub");
@@ -120,24 +140,38 @@ public class SchoolTodolist extends AppCompatActivity {
             }
         }
 
-        try {
-
+        try {                                                       // 갤러리에서 이미지 로드할 때 오는 resultcode
             if(requestCode == PICK_IMAGE_REQUEST && resultCode ==RESULT_OK && null!=data) {
                 Uri uri = data.getData();
 
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
                 int nh = (int) (bitmap.getHeight() * (1024.0 / bitmap.getWidth()));
-                Bitmap scaled = Bitmap.createScaledBitmap(bitmap, 1024, nh, true);
+                scaled = Bitmap.createScaledBitmap(bitmap, 1024, nh, true);
 
-                imgView = (ImageView) findViewById(R.id.imageView);
-                imgView.setImageBitmap(scaled);
+                imgView = findViewById(R.id.imageView);
+                imgView.setImageBitmap(scaled);                     //이미지 불러온 후
+                imageDBHelper.insertImage(imgViewToByte(imgView));  //DB에 img를 byte로 변환 후 저장
+
             }else {
                 Toast.makeText(this,"취소되었습니다.",Toast.LENGTH_SHORT).show();
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             Toast.makeText(this,"로딩에 오류가 있습니다.",Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
+    }
+
+    private byte[] imgViewToByte(ImageView imageView) {             //이미지 바이트 변환 함수
+        Bitmap bitmap = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG,100,stream);
+        byte[] byteArray = stream.toByteArray();
+        return byteArray;
+    }
+
+    public Bitmap byteArrayToBitmap( byte[] $byteArray ) {          //바이트 이미지 변환 함수
+        Bitmap bitmap = BitmapFactory.decodeByteArray( $byteArray, 0, $byteArray.length ) ;
+        return bitmap ;
     }
 
 

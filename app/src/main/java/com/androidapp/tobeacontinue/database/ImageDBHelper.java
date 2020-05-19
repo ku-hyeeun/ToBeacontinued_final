@@ -1,8 +1,10 @@
 package com.androidapp.tobeacontinue.database;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteStatement;
 
 import androidx.annotation.Nullable;
 
@@ -12,18 +14,32 @@ public class ImageDBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "imageDB";
     private static final String DB_TABLE = "table_image";
 
-    private static final String KEY_IMAGE = "image_data";
-
-    private static final String CREATE_TABLE_IMAGE =
-            "CREATE TABLE "+DB_TABLE+"("+KEY_IMAGE+" TEXT);";
 
     public ImageDBHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    public void queryData(String sql){
+        SQLiteDatabase db= getWritableDatabase();
+        db.execSQL(sql);
+    }
+
+    public void insertImage(byte[] image){
+        SQLiteDatabase db = getWritableDatabase();
+        String sql = "INSERT INTO " + DB_TABLE + " VALUES(?);";
+        SQLiteStatement statement = db.compileStatement(sql);
+        statement.bindBlob(1,image);
+
+        statement.executeInsert();
+    }
+
+    public Cursor getData(String sql){
+        SQLiteDatabase database = getReadableDatabase();
+        return database.rawQuery(sql,null);
+    }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(CREATE_TABLE_IMAGE);
     }
 
     @Override
@@ -32,13 +48,5 @@ public class ImageDBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    SQLiteDatabase db;
-
-    public void insertImage(String imageUri){
-        if(imageUri != null) {
-            String sql1 = "INSERT INTO " + CREATE_TABLE_IMAGE + " VALUES('" + imageUri + "');";
-            db.execSQL(sql1);
-        }
-    }
 
 }

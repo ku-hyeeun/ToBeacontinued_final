@@ -1,11 +1,11 @@
 package com.androidapp.tobeacontinue;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
     //스플래쉬 화면 첫번째 켜질때 뜨는 화면
