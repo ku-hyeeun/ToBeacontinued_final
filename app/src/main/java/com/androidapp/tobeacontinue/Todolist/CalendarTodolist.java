@@ -1,5 +1,6 @@
 package com.androidapp.tobeacontinue.Todolist;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -49,7 +51,7 @@ public class CalendarTodolist extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //새로운 메모작성
-                Intent intent=new Intent(CalendarTodolist.this,CalendarAddActivity.class);
+                Intent intent=new Intent(CalendarTodolist.this, CalendarAddActivity.class);
                 startActivityForResult(intent,0);
             }
         });
@@ -69,11 +71,14 @@ public class CalendarTodolist extends AppCompatActivity {
             recyclerAdapter.notifyDataSetChanged();
 
             dbHelper.insertMemo(memo);
+
         }
     }
 
     class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemViewHolder>{
         private List<CalendarMemo> listdata;
+
+        AlertDialog.Builder builder;
 
         public RecyclerAdapter(List<CalendarMemo> listdata){
             this.listdata=listdata;
@@ -102,14 +107,7 @@ public class CalendarTodolist extends AppCompatActivity {
             itemViewHolder.maintext.setText(memo.getMaintext());
             itemViewHolder.subtext.setText(memo.getSubtext());
             itemViewHolder.timetext.setText(memo.getTimetext());
-//
-//            //imageview는 0일때와 1일때의 색상이 다름,
-//            if(memo.getIsdone()==0){ //0일때는 회색
-//                itemViewHolder.img.setBackgroundColor(Color.LTGRAY);
-//            }
-//            else{ //1일때는 녹색
-//                itemViewHolder.img.setBackgroundColor(Color.GREEN);
-//            }
+
         }
 
         //리스트추가
@@ -126,7 +124,6 @@ public class CalendarTodolist extends AppCompatActivity {
             private TextView maintext;
             private TextView subtext;
             private TextView timetext;
-            //private ImageView img;
 
             public ItemViewHolder(@NonNull View itemView){
                 super(itemView);
@@ -134,25 +131,35 @@ public class CalendarTodolist extends AppCompatActivity {
                 maintext=itemView.findViewById(R.id.item_maintext);
                 subtext=itemView.findViewById(R.id.item_subtext);
                 timetext=itemView.findViewById(R.id.item_time);
-                //img=itemView.findViewById(R.id.item_image);
 
                 itemView.setOnLongClickListener(new View.OnLongClickListener(){
 
                     @Override
                     public boolean onLongClick(View view) {
-                        //메모하나를 길게 눌렀을 때 해당 메모의 포지션을 가져온다.
-                        //이때 포지션은 DB의 포지션이 아니라 현재 화면에 보이는 리스트 중 몇번쨰인가를 가져오는것->seq가져오기
-                        int position =getAdapterPosition();
-                        int seq=(int)maintext.getTag();
+                        final int position =getAdapterPosition();
+                        final int seq=(int)maintext.getTag();
 
-                        if(position!=RecyclerView.NO_POSITION){
-                            dbHelper.deleteMemo(seq);
-                            removeItem(position);
-                            notifyDataSetChanged();
-                        }
+                        builder = new AlertDialog.Builder(CalendarTodolist.this);
+                        builder.setTitle("메모를 삭제하시겠습니까? ");
+                        builder.setMessage("\n");
+                        builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                if(position != RecyclerView.NO_POSITION){
+                                    dbHelper.deleteMemo(seq);
+                                    removeItem(position);
+                                    notifyDataSetChanged();
+                                }
+                            }
+                        });
+
+                        builder.setNegativeButton("아니오", null);
+                        builder.create().show();
                         return false;
                     }
                 });
+
+
             }
         }
     }

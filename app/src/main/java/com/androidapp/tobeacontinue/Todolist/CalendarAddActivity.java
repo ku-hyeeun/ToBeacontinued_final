@@ -30,6 +30,7 @@ public class CalendarAddActivity extends AppCompatActivity {
     private DatePickerDialog.OnDateSetListener callbackMethod;
     private TimePickerDialog.OnTimeSetListener callbackMethod2;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,8 +40,9 @@ public class CalendarAddActivity extends AppCompatActivity {
         this.InitializeListener();
 
         edtText = findViewById(R.id.edtMemo);
-        edtDate = (TextView) findViewById(R.id.textView_date);
-        edtTime = (TextView) findViewById(R.id.textView_time);
+        edtDate = findViewById(R.id.textView_date);
+        edtTime = findViewById(R.id.textView_time);
+
 
         findViewById(R.id.btnDone).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,8 +50,7 @@ public class CalendarAddActivity extends AppCompatActivity {
                 String str = edtText.getText().toString();
 
                 if (str.length() > 0) {
-                    //Date date=new Date();
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
                     String substr = edtDate.getText().toString();
                     String timestr= edtTime.getText().toString();
 
@@ -71,11 +72,12 @@ public class CalendarAddActivity extends AppCompatActivity {
         findViewById(R.id.btnNo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                Intent intent=new Intent(CalendarAddActivity.this, CalendarTodolist.class);
+                startActivity(intent);
             }
         });
-
     }
+
 
     public void InitializeView() {
         textView_Date = (TextView) findViewById(R.id.textView_date);
