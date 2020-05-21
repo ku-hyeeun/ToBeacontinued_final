@@ -178,5 +178,4 @@ public class MemoDBHelper extends SQLiteOpenHelper{
     }
 
 
-
 }
