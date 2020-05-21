@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.fragment.app.Fragment;
 
@@ -15,7 +16,6 @@ import com.androidapp.tobeacontinue.Todolist.CalendarTodolist;
 
 public class CalendarFragment extends Fragment {
 
-    Button calendarButton;
     public CalendarFragment() {
         // Required empty public constructor
     }
@@ -26,7 +26,7 @@ public class CalendarFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_calendar, container, false);
 
-        calendarButton = view.findViewById(R.id.calendarButton);
+        ImageButton calendarButton = view.findViewById(R.id.calendarButton);
 
         calendarButton.setOnClickListener(new View.OnClickListener() {
 

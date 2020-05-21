@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.androidapp.tobeacontinue.R;
 import com.androidapp.tobeacontinue.Todolist.CafeteriaTodolist;
@@ -31,12 +32,12 @@ public class BeaconFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home2, container, false);    //기본적으로 fragment_home2.xml이 화면에 보여짐
 
-        Button house = view.findViewById(R.id.houseButton);
-        Button outside = view.findViewById(R.id.outsideButton);
-        Button school = view.findViewById(R.id.schoolButton);
-        Button cafeteria = view.findViewById(R.id.cafeteriaButton);        //fragment_home2.xml파일에 있는 5개의 버튼 중 장소 버튼 4개를 객체화
+        ImageButton house = view.findViewById(R.id.houseButton);
+        ImageButton outside = view.findViewById(R.id.outsideButton);
+        ImageButton school = view.findViewById(R.id.schoolButton);
+        ImageButton cafeteria = view.findViewById(R.id.cafeteriaButton);        //fragment_home2.xml파일에 있는 5개의 버튼 중 장소 버튼 4개를 객체화
 
-        Button addButton = view.findViewById(R.id.addButton);
+        ImageButton addButton = view.findViewById(R.id.addButton);
 
         house.setOnClickListener(new View.OnClickListener() {                       //버튼이 클릭시 Todolist 액티비티로 넘어가게 하였음
             @Override
