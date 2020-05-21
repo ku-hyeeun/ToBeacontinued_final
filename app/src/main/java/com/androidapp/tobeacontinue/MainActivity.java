@@ -2,6 +2,7 @@ package com.androidapp.tobeacontinue;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 
@@ -15,13 +16,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button button = findViewById(R.id.startButton);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(),MenuActivity.class);
-                startActivity(intent);
-            }
-        });
+        Handler hd = new Handler();
+        hd.postDelayed(new splashhandler(), 2000);  //2초 뒤 화면 변함
+
+    }
+
+    private class splashhandler implements Runnable{
+        public void run(){
+            startActivity(new Intent(getApplication(), MenuActivity.class));
+            MainActivity.this.finish(); // 로딩페이지 Activity stack에서 제거
+        }
     }
 }
