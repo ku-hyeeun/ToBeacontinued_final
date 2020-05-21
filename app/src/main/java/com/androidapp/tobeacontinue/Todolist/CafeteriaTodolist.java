@@ -90,8 +90,9 @@ public class CafeteriaTodolist extends AppCompatActivity {
         });
 
         intent = this.getPackageManager().getLaunchIntentForPackage(packageName);
-        ImageButton imageButton = (ImageButton)findViewById(R.id.everytimebtn);
-        imageButton.setOnClickListener(new View.OnClickListener(){
+        Button etabutton =(Button)findViewById(R.id.etabutton);
+
+        etabutton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 CafeteriaTodolist.this.startActivity(intent);       //이미지 버튼을 클릭하면 패키지이름인 에브리타임 앱으로 연동됨

@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Todolist.CalendarAddActivity">
+    tools:context=".Todolist.CalendarAddActivity"
+    android:background="@drawable/calendar">
 
 
     <Button
@@ -13,7 +14,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="OnClickHandler"
-        android:text="DatePicker" />
+        android:text="DatePicker"
+        android:background="@drawable/write_button"
+        android:textColor="@android:color/white"/>
 
     <TextView
         android:id="@+id/textView_date"
@@ -45,7 +48,9 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_marginLeft="3dp"
-        android:layout_marginRight="0dp" />
+        android:layout_marginRight="0dp"
+        android:background="@drawable/write_button"
+        android:textColor="@android:color/white"/>
 
     <TextView
         android:id="@+id/textView_time"
@@ -83,14 +88,18 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="완료"/>
+            android:text="완료"
+            android:background="@drawable/write_button"
+            android:textColor="@android:color/white"/>
 
         <Button
             android:id="@+id/btnNo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="취소" />
+            android:text="취소"
+            android:background="@drawable/write_button"
+            android:textColor="@android:color/white"/>
 
     </LinearLayout>
 

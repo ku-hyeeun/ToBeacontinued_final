@@ -12,6 +12,7 @@ import android.widget.Button;
 
 import com.androidapp.tobeacontinue.R;
 import com.androidapp.tobeacontinue.Todolist.CafeteriaTodolist;
+import com.androidapp.tobeacontinue.Todolist.ExtraTodolist;
 import com.androidapp.tobeacontinue.Todolist.HouseTodolist;
 import com.androidapp.tobeacontinue.Todolist.OutsideTodolist;
 import com.androidapp.tobeacontinue.Todolist.SchoolTodolist;
@@ -34,6 +35,8 @@ public class BeaconFragment extends Fragment {
         Button outside = view.findViewById(R.id.outsideButton);
         Button school = view.findViewById(R.id.schoolButton);
         Button cafeteria = view.findViewById(R.id.cafeteriaButton);        //fragment_home2.xml파일에 있는 5개의 버튼 중 장소 버튼 4개를 객체화
+
+        Button addButton = view.findViewById(R.id.addButton);
 
         house.setOnClickListener(new View.OnClickListener() {                       //버튼이 클릭시 Todolist 액티비티로 넘어가게 하였음
             @Override
@@ -65,6 +68,14 @@ public class BeaconFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), CafeteriaTodolist.class);
+                startActivity(intent);
+            }
+        });
+
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ExtraTodolist.class);
                 startActivity(intent);
             }
         });

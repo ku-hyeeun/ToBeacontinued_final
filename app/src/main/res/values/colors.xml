@@ -3,4 +3,8 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="backgroundColor">#085E6C</color>
+    <color name="plznograyColor">#A4C4C9</color>
+    <color name="toolbarColor">#222A35</color>
+    <color name="statebarColor">#333F50</color>
 </resources>

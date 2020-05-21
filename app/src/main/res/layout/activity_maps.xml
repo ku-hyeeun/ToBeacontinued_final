@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="383dp"
+        android:layout_marginTop="230dp"
+        tools:context=".MapsActivity" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="20dp"
+        android:text="주소"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="90dp"
+        android:text="할 일"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/address_editText"
+        android:layout_width="248dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="20dp"
+        android:ems="10">
+    </EditText>
+
+    <EditText
+        android:id="@+id/todo_editText"
+        android:layout_width="248dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="90dp"
+        android:ems="10">
+
+    </EditText>
+
+    <TextView
+        android:id="@+id/result_textView"
+        android:layout_width="298dp"
+        android:layout_height="77dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginRight="0dp"
+        android:text="주소, 할 일을 입력 후 확인 버튼을 누르거나 원하는 장소를 길게 눌러 선택하세요"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
+        android:id="@+id/AddressMap_Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="300dp"
+        android:layout_marginTop="150dp"
+        android:text="확인"
+        android:background="@drawable/write_button"
+        android:textColor="@android:color/white"/>
+
+    <Button
+        android:id="@+id/save_Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="300dp"
+        android:layout_marginTop="620dp"
+        android:text="저장"
+        android:background="@drawable/write_button"
+        android:textColor="@android:color/white"/>
+
+
+</RelativeLayout>

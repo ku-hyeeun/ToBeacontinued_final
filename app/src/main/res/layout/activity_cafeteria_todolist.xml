@@ -6,7 +6,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Todolist.CafeteriaTodolist">
+    tools:context=".Todolist.CafeteriaTodolist"
+    android:background="@drawable/todolist">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -42,23 +43,12 @@
         android:layout_height="100dp"
         android:layout_gravity="center">
 
-        <ImageButton
-            android:id="@+id/everytimebtn"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="0dp"
-            android:background="@mipmap/everytime_icon" />
-
-        <TextView
+        <Button
+            android:id="@+id/etabutton"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="\n ☜ 에브리타임 바로가기"
-            android:textSize="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:textColor="@android:color/black"/>
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="에타 바로가기" />
 
     </LinearLayout>
 

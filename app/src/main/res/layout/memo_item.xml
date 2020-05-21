@@ -6,51 +6,52 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@drawable/border"
+        android:background="@drawable/memo_border"
         android:visibility="visible">
 
-    <CheckBox
-        android:id="@+id/checkbox"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_gravity="center_vertical"
-        android:padding="5dp"/>
 
+        <CheckBox
+            android:id="@+id/checkbox"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center_vertical"
+            android:padding="8dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#3F51B5" />
 
     <LinearLayout
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_weight="0"
+        android:background="@drawable/border"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/contentsTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="0dp"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:background="@drawable/border">
+            android:text="내용"
+            android:textSize="24sp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
 
 
             <TextView
-                android:id="@+id/contentsTextView"
-                android:layout_width="match_parent"
+                android:id="@+id/dateTextView"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="내용"
-                android:textSize="24sp" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
-
-
-                <TextView
-                    android:id="@+id/dateTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:text ="YYYY-MM-DD"
-                    android:textColor="#FF0000FF"
-                    android:textSize="16sp" />
-            </RelativeLayout>
-
-        </LinearLayout>
-
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="YYYY-MM-DD"
+                android:textColor="#FF0000FF"
+                android:textSize="16sp" />
+        </RelativeLayout>
 
     </LinearLayout>
+
+</LinearLayout>
