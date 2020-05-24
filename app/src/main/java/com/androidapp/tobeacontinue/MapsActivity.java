@@ -145,6 +145,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         result_textView.setText("해당되는 주소 정보는 없습니다");
                     } else {
                         // 해당되는 주소로 카메라이동
+                        result_textView.setText(list.get(0).getAddressLine(0).toString());
+
                         Address addr = list.get(0);
                         double lat = addr.getLatitude();
                         double lon = addr.getLongitude();
@@ -172,21 +174,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onClick(View view) {
 
                 if(address_editText.length() != 0 && todo_editText.length() != 0){
+                    addGeofence(markerOptions.getPosition(),GEOFENCE_RADIUS);
+
+                    String location_title = address_editText.getText().toString();
+                    String todo_snippet = todo_editText.getText().toString();
+
+                    Intent intent = new Intent();
+                    intent.putExtra("place",location_title);
+                    intent.putExtra("contents",todo_snippet);
+                    setResult(1,intent);
+                    finish();
                 }
                 else{
                     Toast.makeText(MapsActivity.this,"장소와 할 일을 적어주세요",Toast.LENGTH_SHORT).show();
                 }
 
-                addGeofence(markerOptions.getPosition(),GEOFENCE_RADIUS);
-
-                String location_title = address_editText.getText().toString();
-                String todo_snippet = todo_editText.getText().toString();
-
-                Intent intent = new Intent();
-                intent.putExtra("place",location_title);
-                intent.putExtra("contents",todo_snippet);
-                setResult(1,intent);
-                finish();
             }
         });
     }
@@ -248,7 +250,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if(requestCode == BACKGROUND_LOCATION_ACCESS_REQUEST_CODE){
             if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                 //We have the permission
-                Toast.makeText(this, "지도버튼을 누르시거나 원하는 장소를 길게 눌러주세요",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "확인 버튼을 누르시거나 원하는 장소를 길게 눌러주세요",Toast.LENGTH_SHORT).show();
             }else{
                 //We do not have permission
                 Toast.makeText(this,"백그라운드 위치 접근이 Geofence에 필요합니다"
@@ -265,21 +267,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     //백그라운드 퍼미션, 마커 추가
     public void permission(LatLng latLng){
-        if(Build.VERSION.SDK_INT >= 29){
-            //We need background permission
-            if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION) ==
-                    PackageManager.PERMISSION_GRANTED){
-                setMarker(latLng);
-            }else{
-                if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION)){
-                    //We show a dialog and ask for permission
-                    ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_BACKGROUND_LOCATION},BACKGROUND_LOCATION_ACCESS_REQUEST_CODE);
-                }else{
-                    ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_BACKGROUND_LOCATION},BACKGROUND_LOCATION_ACCESS_REQUEST_CODE);
+        if(address_editText.length() != 0 && todo_editText.length() != 0) {
+            if (Build.VERSION.SDK_INT >= 29) {
+                //We need background permission
+                if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION) ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    setMarker(latLng);
+                } else {
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION)) {
+                        //We show a dialog and ask for permission
+                        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_BACKGROUND_LOCATION}, BACKGROUND_LOCATION_ACCESS_REQUEST_CODE);
+                    } else {
+                        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_BACKGROUND_LOCATION}, BACKGROUND_LOCATION_ACCESS_REQUEST_CODE);
+                    }
                 }
+            } else {
+                setMarker(latLng);
             }
-        }else{
-            setMarker(latLng);
+        }
+        else{
+            Toast.makeText(MapsActivity.this,"장소와 할 일을 적어주세요",Toast.LENGTH_SHORT).show();
         }
     }
 
