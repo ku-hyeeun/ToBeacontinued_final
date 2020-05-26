@@ -1,4 +1,4 @@
-package com.androidapp.tobeacontinue;
+package com.androidapp.tobeacontinue.fragment;
 
 import android.os.Bundle;
 
