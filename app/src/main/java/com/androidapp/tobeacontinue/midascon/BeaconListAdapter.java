@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.androidapp.tobeacontinue.R;
 import com.hanvitsi.midascon.Beacon;
 import com.hanvitsi.midascon.manager.BeaconUtils;
 
