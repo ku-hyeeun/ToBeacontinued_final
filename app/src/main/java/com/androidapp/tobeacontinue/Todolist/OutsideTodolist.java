@@ -203,48 +203,4 @@ public class OutsideTodolist extends AppCompatActivity {
         }
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {                             //액션바에 오른쪽에 위치한 검색 메뉴
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-            final SearchView v = (SearchView) menu.findItem(R.id.menu_search).getActionView();
-            v.setMaxWidth(Integer.MAX_VALUE);
-            v.setQueryHint("검색할 내용을 입력하세요");
-
-            v.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                @Override
-                public boolean onQueryTextSubmit(String s) {
-                    v.clearFocus();
-                    return false;
-                }
-
-                @Override
-                public boolean onQueryTextChange(String s) {
-                    return false;
-                }
-            });
-
-        }
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int curId = item.getItemId();
-        switch (curId){
-            case R.id.menu_search:
-                Toast.makeText(this,"검색 메뉴가 선택되었습니다.",Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.menu_settings:                //검색 메뉴와 다르게 설정 메뉴는 클릭할 경우 새로운 액티비티로 전환되게 하였음
-                Toast.makeText(this,"설정 메뉴가 검색되었습니다.",Toast.LENGTH_SHORT).show();
-                Intent settingIntent = new Intent(this, Settings.class);
-                startActivity(settingIntent);
-                break;
-            default:
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }
