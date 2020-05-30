@@ -4,8 +4,7 @@
     android:versionCode="1"
     android:versionName="1.0">
 
-    <uses-sdk
-        android:targetSdkVersion="22"/>
+    <uses-sdk android:targetSdkVersion="22" />
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -13,11 +12,11 @@
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
-
-    <uses-permission android:name="android.permission.BLUETOOTH"/>
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 
     <application
         android:name="com.hanvitsi.midascon.MidasApplication"
@@ -28,12 +27,24 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <service android:name="com.hanvitsi.midascon.MidasService"/>
+        <activity android:name=".Calendar.AlarmRingActivity"></activity>
+        <activity android:name=".Calendar.AlarmActivity" />
+        <activity android:name=".Calendar.CalendarTodolist" />
+
+        <receiver
+            android:name=".Calendar.AlarmReceiver"
+            android:enabled="true"
+            android:exported="false"/>
+        <service
+            android:name=".Calendar.AlarmService"
+            android:enabled="true"/>
+        <service android:name="com.hanvitsi.midascon.MidasService" />
 
         <receiver
             android:name=".GeofenceBroadcastReceiver"
             android:enabled="true"
             android:exported="true" />
+
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -53,8 +64,6 @@
             android:name=".Todolist.ExtraTodolist"
             android:label="추가장소" />
         <activity android:name=".Todolist.GeofencingMemo" />
-        <activity android:name=".Todolist.CalendarAddActivity" />
-        <activity android:name=".Todolist.CalendarTodolist" />
         <activity android:name=".Todolist.MemoWrite" />
         <activity
             android:name=".Todolist.OutsideTodolist"
