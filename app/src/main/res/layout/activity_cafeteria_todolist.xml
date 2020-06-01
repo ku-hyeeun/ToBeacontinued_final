@@ -9,6 +9,22 @@
     tools:context=".Todolist.CafeteriaTodolist"
     android:background="@drawable/todolist">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/toolbarColor"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -31,12 +47,6 @@
             android:textSize="20dp"/>
 
     </RelativeLayout>
-
-    <Button
-        android:id="@+id/btnShow"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="SHOW SELECTED" />
 
     <LinearLayout
         android:layout_width="match_parent"

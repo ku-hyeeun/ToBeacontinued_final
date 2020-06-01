@@ -28,8 +28,11 @@
         android:theme="@style/AppTheme">
 
         <activity android:name=".Calendar.AlarmRingActivity"></activity>
+
         <activity android:name=".Calendar.AlarmActivity" />
-        <activity android:name=".Calendar.CalendarTodolist" />
+
+        <activity android:name=".Calendar.CalendarTodolist"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
         <receiver
             android:name=".Calendar.AlarmReceiver"
@@ -60,27 +63,42 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
+
         <activity
             android:name=".Todolist.ExtraTodolist"
-            android:label="추가장소" />
+            android:label="추가장소"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity android:name=".Todolist.GeofencingMemo" />
+
         <activity android:name=".Todolist.MemoWrite" />
+
         <activity
             android:name=".Todolist.OutsideTodolist"
-            android:label="집 밖" />
+            android:label="집 밖"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity
             android:name=".Todolist.CafeteriaTodolist"
-            android:label="학생회관" />
+            android:label="학생회관"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity
             android:name=".Todolist.SchoolTodolist"
-            android:label="한누리관" />
+            android:label="한누리관"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity
             android:name=".Todolist.HouseTodolist"
-            android:label="집 안" />
+            android:label="집 안"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity
             android:name=".MenuActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity android:name=".etc.Settings" />
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -88,6 +106,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

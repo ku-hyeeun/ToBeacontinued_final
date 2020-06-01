@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,6 +12,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -23,17 +25,23 @@ import com.androidapp.tobeacontinue.database.CalendarDBHelper;
 import java.util.List;
 
 public class CalendarTodolist extends AppCompatActivity {
-    CalendarDBHelper dbHelper;
 
     RecyclerView recyclerView;
     RecyclerAdapter recyclerAdapter;
     Button btnAlarm;
+    Toolbar toolbar;
+
+    CalendarDBHelper dbHelper;
     List<CalendarMemo> memoList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
+
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         dbHelper=new CalendarDBHelper(CalendarTodolist.this);
         memoList=dbHelper.selectAll();
@@ -77,6 +85,17 @@ public class CalendarTodolist extends AppCompatActivity {
                     dbHelper.insertMemo(memo);
                 }
             }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()){
+            case android.R.id.home:{
+                finish();
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 

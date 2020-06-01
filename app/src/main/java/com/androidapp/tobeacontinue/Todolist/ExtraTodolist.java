@@ -3,6 +3,7 @@ package com.androidapp.tobeacontinue.Todolist;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,6 +28,7 @@ public class ExtraTodolist extends AppCompatActivity {
     Button btnAdd;
     RecyclerView recyclerView;                  //리사이클러뷰
     RecyclerAdapter recyclerAdapter;
+    Toolbar toolbar;
 
     GeoDBHelper databaseHelper;
     ArrayList<GeofencingMemo> arrayList;
@@ -34,6 +37,10 @@ public class ExtraTodolist extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_extra_todolist);
+
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         recyclerView=findViewById(R.id.recyclerview);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(ExtraTodolist.this);
@@ -75,6 +82,17 @@ public class ExtraTodolist extends AppCompatActivity {
 
             }
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()){
+            case android.R.id.home:{
+                finish();
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemViewHolder>{
