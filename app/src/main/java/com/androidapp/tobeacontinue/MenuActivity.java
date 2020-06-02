@@ -15,7 +15,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.SearchView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -29,8 +28,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
-import com.androidapp.tobeacontinue.Todolist.HouseTodolist;
-import com.androidapp.tobeacontinue.etc.Settings;
+import com.androidapp.tobeacontinue.etc.SettingActivity;
 import com.androidapp.tobeacontinue.fragment.BeaconFragment;
 import com.androidapp.tobeacontinue.fragment.CalendarFragment;
 import com.androidapp.tobeacontinue.fragment.FragmentCallback;
@@ -102,11 +100,9 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if(id==R.id.menu1){
-            Toast.makeText(this,"장소로 추가", Toast.LENGTH_SHORT).show();
             OnFragmentSelected(0, null);
         }
         else if(id ==R.id.menu2){
-            Toast.makeText(this,"캘린더로 추가",Toast.LENGTH_SHORT).show();
             OnFragmentSelected(1, null);
         }
         drawer.closeDrawer(GravityCompat.START);
@@ -159,11 +155,9 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         int curId = item.getItemId();
         switch (curId){
             case R.id.menu_search:
-                Toast.makeText(this,"검색 메뉴가 선택되었습니다.",Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.menu_settings:                //검색 메뉴와 다르게 설정 메뉴는 클릭할 경우 새로운 액티비티로 전환되게 하였음
-                Toast.makeText(this,"설정 메뉴가 검색되었습니다.",Toast.LENGTH_SHORT).show();
-                Intent settingIntent = new Intent(this, Settings.class);
+            case R.id.menu_settings:
+                Intent settingIntent = new Intent(this, SettingActivity.class);
                 startActivity(settingIntent);
                 break;
             default:

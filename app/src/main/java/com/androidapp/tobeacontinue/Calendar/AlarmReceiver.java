@@ -11,7 +11,6 @@ public class AlarmReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
        Intent sintent=new Intent(context,AlarmService.class);
 
-       //Oreo 버전 이후부터는 background에서 실행을 금지하기 때문에 ForeGround에서 실행해야함
        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
            context.startForegroundService(sintent);
        }

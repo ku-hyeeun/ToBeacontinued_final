@@ -3,28 +3,28 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="환경 설정">
 
-    <PreferenceCategory android:title = "알림 메세지 설정">
+    <PreferenceCategory android:title = "@string/settings_alarm">
 
         <SwitchPreference
             android:key="vibrate"
-            android:title="진동알림" />
+            android:title="@string/settings_vibrate" />
 
         <CheckBoxPreference
             android:key="sound"
-            android:title="소리 알림"/>
+            android:title="@string/settings_sound"/>
 
         <RingtonePreference
             android:key = "ringtone"
-            android:title = "알림음 설정"/>
+            android:title = "@string/settings_ringtone"/>
 
         </PreferenceCategory>
 
-    <PreferenceCategory android:title = "언어 지원">
+    <PreferenceCategory android:title = "@string/settings_language">
     <ListPreference
         android:defaultValue="1"
         android:entries="@array/language"
         android:entryValues="@array/language"
-        android:key="list_preference_2"
-        android:title="언어 설정" />
+        android:key="language"
+        android:title="@string/settings_lang" />
     </PreferenceCategory>
 </PreferenceScreen>

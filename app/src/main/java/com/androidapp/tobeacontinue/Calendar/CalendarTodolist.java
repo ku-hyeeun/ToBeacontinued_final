@@ -19,7 +19,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.androidapp.tobeacontinue.R;
-import com.androidapp.tobeacontinue.Todolist.HouseTodolist;
 import com.androidapp.tobeacontinue.database.CalendarDBHelper;
 
 import java.util.List;

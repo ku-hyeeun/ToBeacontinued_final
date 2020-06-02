@@ -27,7 +27,7 @@
             android:layout_marginStart="8dp"
             android:layout_weight="1"
             android:padding="15dp"
-            android:text="날짜"
+            android:text="@string/date"
             android:textStyle="bold" />
 
         <Button
@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="달력" />
+            android:text="@string/calendar_button" />
 
 
 
@@ -51,7 +51,7 @@
         <EditText
             android:layout_centerVertical="true"
             android:id="@+id/edtMemo"
-            android:hint="할일을 입력하세요"
+            android:hint="@string/enter_todolist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
@@ -70,7 +70,7 @@
             android:id="@+id/btnAlarm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="일정등록" />
+            android:text="@string/schedule_button" />
 
 
 

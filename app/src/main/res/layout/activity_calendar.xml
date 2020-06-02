@@ -36,15 +36,15 @@
             android:layout_margin = "5dp"
             android:layout_alignParentRight="true"
             android:background="@drawable/write_button"
-            android:text="알람 등록"
+            android:text="@string/alarm_button"
             android:textColor = "@android:color/white" />
 
         <TextView
             android:id = "@+id/textview"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:text = " 메모를 꾹 누르면 삭제"
-            android:textSize="20dp"/>
+            android:text = "@string/memo_delete"
+            android:textSize="25dp"/>
 
     </RelativeLayout>
 

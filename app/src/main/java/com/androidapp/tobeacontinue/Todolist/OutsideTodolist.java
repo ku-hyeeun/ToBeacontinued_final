@@ -2,18 +2,14 @@ package com.androidapp.tobeacontinue.Todolist;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,7 +21,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.androidapp.tobeacontinue.R;
 import com.androidapp.tobeacontinue.database.MemoDBHelper;
-import com.androidapp.tobeacontinue.etc.Settings;
 
 import java.util.List;
 
