@@ -1,50 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Todolist.MemoWrite"
-    android:background="@drawable/memowrite">
+    android:background="@drawable/memowrite"
+    tools:context=".Todolist.MemoWrite">
 
     <EditText
         android:id="@+id/edtMemo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="28dp"
-        android:layout_marginRight="28dp"
         android:hint="할일을 입력하세요"
-        android:textColorLink="#000000" />
+        android:textColorLink="#000000"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_T_center_ho"
+        app:layout_constraintEnd_toEndOf="@id/guideline_right_ver"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/guideline_left_ver"
+        app:layout_constraintTop_toTopOf="@id/guideline_top_ho"
+        app:layout_constraintVertical_bias="1.0" />
 
-    <LinearLayout
-        android:padding="10dp"
+    <Button
+        android:id="@+id/btnNo"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/white_button"
+        android:text="취소"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_bottom_ho"
+        app:layout_constraintEnd_toEndOf="@id/guideline_L_center_ver"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/guideline_left_ver"
+        app:layout_constraintTop_toTopOf="@id/guideline_B_center_ho" />
+
+    <Button
+        android:id="@+id/btnDone"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/white_button"
+        android:text="완료"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_bottom_ho"
+        app:layout_constraintEnd_toEndOf="@id/guideline_right_ver"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/guideline_L_center_ver"
+        app:layout_constraintTop_toTopOf="@id/guideline_B_center_ho" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_top_ho"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below="@+id/edtMemo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        app:layout_constraintGuide_begin="20dp"
+        app:layout_constraintGuide_percent="0.45" />
 
-        <Button
-            android:id="@+id/btnNo"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_weight="1"
-            android:background="@drawable/white_button"
-            android:text="취소"
-            android:textColor="@android:color/black" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_bottom_ho"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp"
+        app:layout_constraintGuide_percent="0.645" />
 
-        <Button
-            android:id="@+id/btnDone"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="15dp"
-            android:layout_weight="1"
-            android:background="@drawable/white_button"
-            android:text="완료"
-            android:textColor="@android:color/black" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_left_ver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp"
+        app:layout_constraintGuide_percent="0.1" />
 
-    </LinearLayout>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_right_ver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp"
+        app:layout_constraintGuide_percent="0.9" />
 
-</RelativeLayout>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_T_center_ho"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp"
+        app:layout_constraintGuide_percent="0.54" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_B_center_ho"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp"
+        app:layout_constraintGuide_percent="0.58" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_L_center_ver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp"
+        app:layout_constraintGuide_percent="0.49" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_R_center_ver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp"
+        app:layout_constraintGuide_percent="0.51" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,9 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="19dp"
     android:layout_marginTop="5dp"
-    android:layout_marginRight="19dp"
     android:background="@drawable/memo_border"
     android:orientation="horizontal"
     android:visibility="visible">
