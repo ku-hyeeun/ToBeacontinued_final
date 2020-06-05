@@ -47,12 +47,12 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver{
         switch (transitionType){
             case Geofence.GEOFENCE_TRANSITION_ENTER:
                 Toast.makeText(context, "GEOFENCE_TRANSITION_ENTER", Toast.LENGTH_SHORT).show();
-                Log.d(TAG, "들어왔다고ㅠㅠㅠ");
+                Log.d(TAG, "지오펜스 들어옴");
                 notificationHelper.sendHighPriorityNotification("설정한 장소에 들어옴","할 일을 확인하세요", MapsActivity.class);
                 break;
             case Geofence.GEOFENCE_TRANSITION_DWELL:
                 Toast.makeText(context, "GEOFENCE_TRANSITION_DWELL", Toast.LENGTH_SHORT).show();
-                notificationHelper.sendHighPriorityNotification("설정한 장소에 위치하는 중", "", MapsActivity.class);
+                notificationHelper.sendHighPriorityNotification("설정한 장소에 위치하는 중", "할 일을 확인하세요", MapsActivity.class);
                 break;
             case Geofence.GEOFENCE_TRANSITION_EXIT:
                 Toast.makeText(context, "GEOFENCE_TRANSITION_EXIT", Toast.LENGTH_SHORT).show();

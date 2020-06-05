@@ -68,6 +68,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private float GEOFENCE_RADIUS = 100;
 
     private String GEOFENCE_ID = "JC_GEOFENCE_ID";
+    private String GEOFENCE_ID_2 = "JC_GEOFENCE_ID_2";
 
 
     @Override
@@ -86,6 +87,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         address_editText = findViewById(R.id.address_editText);     //주소입력창
         todo_editText = findViewById(R.id.todo_editText);       //할일입력창
 
+        //Location API 사용을 위하여 Geofencing Client 인스턴스를 생성
         geofencingClient = LocationServices.getGeofencingClient(this);
         geoFenceHelper = new GeoFenceHelper(this);
 
@@ -144,9 +146,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     if (list.size() == 0) {
                         result_textView.setText("해당되는 주소 정보는 없습니다");
                     } else {
-                        // 해당되는 주소로 카메라이동
+
+                        //입력한 주소 결과창에 표시
                         result_textView.setText(list.get(0).getAddressLine(0).toString());
 
+                        // 해당되는 주소로 카메라이동
                         Address addr = list.get(0);
                         double lat = addr.getLatitude();
                         double lon = addr.getLongitude();
@@ -300,6 +304,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     //지오펜스 개체 만들기
     public void addGeofence(LatLng latLng, float radius){
+
         Geofence geofence = geoFenceHelper.getGeofence(GEOFENCE_ID, latLng, radius,
                 Geofence.GEOFENCE_TRANSITION_ENTER);
         //Geofence geofence = geoFenceHelper.getGeofence(GEOFENCE_ID, latLng, radius,
@@ -315,6 +320,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        String errorMessage = geoFenceHelper.getErrorString(e);
+                        Log.d(TAG,"onFailure: " + errorMessage);
+                    }
+                });
+
+    }
+
+    public void removeGeofence(){
+
+        PendingIntent pendingIntent = geoFenceHelper.getPendingIntent();
+
+        geofencingClient.removeGeofences(pendingIntent)
+                .addOnSuccessListener(this, new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "onSuccess: Geofence Removed");
+                    }
+                })
+                .addOnFailureListener(this, new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         String errorMessage = geoFenceHelper.getErrorString(e);

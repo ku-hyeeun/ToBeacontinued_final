@@ -11,9 +11,13 @@ import com.google.android.gms.location.GeofenceStatusCodes;
 import com.google.android.gms.location.GeofencingRequest;
 import com.google.android.gms.maps.model.LatLng;
 
+import java.util.List;
+
 public class GeoFenceHelper extends ContextWrapper {
 
     private static final String TAG = "GeofenceHelper";
+    private static final long GEOFENCE_TIMEOUT = 24 * 60 * 60 * 1000; // 24 hours
+
     PendingIntent pendingIntent;
 
     public GeoFenceHelper(Context base) {
@@ -24,7 +28,8 @@ public class GeoFenceHelper extends ContextWrapper {
     //모니터링할 지오펜싱을 지정하고 관련 지오펜싱 이벤트가 트리거되는 방법 설정
     public GeofencingRequest getGeofencingRequest(Geofence geofence){
         return new GeofencingRequest.Builder()
-                .addGeofence(geofence)      //싱글 지오펜스? 옵션 더있음 확인
+                .addGeofence(geofence)      //싱글 지오펜스
+                //.addGeofences(geofence)   //멀티 지오펜스
                 .setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER)
                 .build();
     }
@@ -35,8 +40,9 @@ public class GeoFenceHelper extends ContextWrapper {
                 .setCircularRegion(latLng.latitude,latLng.longitude,radius)  // 위치 및 반경(m)
                 .setRequestId(ID)        // 이벤트 발생시 BroadcastReceiver에서 구분할 id
                 .setTransitionTypes(transitionTypes)
-                .setLoiteringDelay(5000)        //머무는 체크 시간
-                .setExpirationDuration(Geofence.NEVER_EXPIRE)   // Geofence 만료 시간
+                .setLoiteringDelay(5000)        //Geofence 진입 후 머물기로 체크할 시간을 millisecond로 지정
+                //.setExpirationDuration(Geofence.NEVER_EXPIRE)   // Geofence 만료 시간
+                .setExpirationDuration(GEOFENCE_TIMEOUT)
                 .build();
     }
 
@@ -59,13 +65,13 @@ public class GeoFenceHelper extends ContextWrapper {
             switch (apiException.getStatusCode()){
                 case GeofenceStatusCodes
                         .GEOFENCE_NOT_AVAILABLE:
-                    return "GEOFNECE_NOT_AVAILABLE";
+                    return "GEOFNECE_NOT_AVAILABLE";    //지오펜스에서 거부됨
                 case GeofenceStatusCodes
                         .GEOFENCE_TOO_MANY_GEOFENCES:
-                    return "GEOFNECE_TOO_MANY_GEOFENCE";
+                    return "GEOFNECE_TOO_MANY_GEOFENCE";    //지오펜스를 너무 많이 등록함
                 case GeofenceStatusCodes
                         .GEOFENCE_TOO_MANY_PENDING_INTENTS:
-                    return "GEOFNECE_TOO_MANY_PENDING_INTENTS";
+                    return "GEOFNECE_TOO_MANY_PENDING_INTENTS";     //펜딩인텐드를 너무 많이 등록함
             }
         }
         return e.getLocalizedMessage();
