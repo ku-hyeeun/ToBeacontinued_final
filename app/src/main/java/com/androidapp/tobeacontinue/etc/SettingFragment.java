@@ -1,17 +1,11 @@
 package com.androidapp.tobeacontinue.etc;
 
-import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
-
 import androidx.annotation.Nullable;
-
-import android.os.VibrationEffect;
-import android.os.Vibrator;
-import android.preference.ListPreference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+import android.widget.Toast;
 
 import com.androidapp.tobeacontinue.R;
 
@@ -20,8 +14,6 @@ import com.androidapp.tobeacontinue.R;
 public class SettingFragment extends PreferenceFragment{
 
     SharedPreferences pref;
-    ListPreference language;
-    private String languageCode = "en";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,7 +21,6 @@ public class SettingFragment extends PreferenceFragment{
         addPreferencesFromResource(R.xml.preference);
 
         pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        language = (ListPreference)findPreference("language");
 
     }
 
@@ -51,24 +42,15 @@ public class SettingFragment extends PreferenceFragment{
     SharedPreferences.OnSharedPreferenceChangeListener listener= new SharedPreferences.OnSharedPreferenceChangeListener() {
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            if(key.equals("sound")){
-                boolean b= pref.getBoolean("sound", false);
+            if(key.equals("message")){
+                boolean b= pref.getBoolean("message", false);
+                Toast.makeText(getActivity(), "소리알림 : "+ b, Toast.LENGTH_SHORT).show();
             }else if(key.equals("vibrate")){
-                vibrateMessage();
+
             }
         }
 
     };
-
-    public void vibrateMessage(){
-        Vibrator vibrator = (Vibrator)getActivity().getSystemService(Context.VIBRATOR_SERVICE);
-
-        if(Build.VERSION.SDK_INT>=26){
-            vibrator.vibrate(VibrationEffect.createOneShot(1000,10));
-        }else{
-            vibrator.vibrate(1000);
-        }
-    }
 
 
 }

@@ -19,10 +19,10 @@
 
     <string name="settings_alarm">set up notification</string>
     <string name="settings_vibrate">vibration setting</string>
-    <string name="settings_sound">sound setting</string>
+    <string name="settings_message">sound setting</string>
     <string name="settings_ringtone">set notification tone</string>
-    <string name="settings_language">language support</string>
     <string name="settings_lang">language setting</string>
+    <string name="settings_language">It supports Korean and English as a language.</string>
 
     <string name="house">House</string>
     <string name="outside">Outside</string>

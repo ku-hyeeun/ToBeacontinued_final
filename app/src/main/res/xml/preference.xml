@@ -3,6 +3,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="환경 설정">
 
+
     <PreferenceCategory android:title = "@string/settings_alarm">
 
         <SwitchPreference
@@ -10,21 +11,18 @@
             android:title="@string/settings_vibrate" />
 
         <CheckBoxPreference
-            android:key="sound"
-            android:title="@string/settings_sound"/>
+            android:key="message"
+            android:title="@string/settings_message"/>
 
         <RingtonePreference
             android:key = "ringtone"
-            android:title = "@string/settings_ringtone"/>
+            android:title="@string/settings_ringtone"/>
 
-        </PreferenceCategory>
-
-    <PreferenceCategory android:title = "@string/settings_language">
-    <ListPreference
-        android:defaultValue="1"
-        android:entries="@array/language"
-        android:entryValues="@array/language"
-        android:key="language"
-        android:title="@string/settings_lang" />
     </PreferenceCategory>
+
+    <PreferenceScreen android:title = "@string/settings_lang"
+        android:summary="@string/settings_language">
+        <intent android:targetPackage="com.android.settings"
+            android:targetClass="com.android.settings.LanguageSettings"/>
+    </PreferenceScreen>
 </PreferenceScreen>
