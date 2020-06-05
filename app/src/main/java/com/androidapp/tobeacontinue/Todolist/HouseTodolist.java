@@ -14,6 +14,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -25,6 +26,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
@@ -49,9 +51,9 @@ public class HouseTodolist extends AppCompatActivity{
     RecyclerView recyclerView;                  //리사이클러뷰
     RecyclerAdapter recyclerAdapter;
     Button btnAdd;                              //작성 버튼
+    Toolbar toolbar;
 
     MemoDBHelper DBHelper;                      //DB 만들기
-
     List<Memo> memoList;                        //Memo 리스트 만들기
 
 
@@ -59,6 +61,10 @@ public class HouseTodolist extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_house_todolist);
+
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         DBHelper = new MemoDBHelper(HouseTodolist.this);
         memoList = DBHelper.selectAll1();       //메모리스트 -> DB 조회
@@ -103,6 +109,16 @@ public class HouseTodolist extends AppCompatActivity{
         }
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()){
+            case android.R.id.home:{
+                finish();
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     //리사이클러 어댑터 클래스
     class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemViewHolder>{

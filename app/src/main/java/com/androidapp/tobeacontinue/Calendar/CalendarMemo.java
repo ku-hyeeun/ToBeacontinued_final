@@ -1,4 +1,5 @@
-package com.androidapp.tobeacontinue.Todolist;
+package com.androidapp.tobeacontinue.Calendar;
+
 import java.io.Serializable;
 
 public class CalendarMemo implements Serializable {
@@ -10,7 +11,7 @@ public class CalendarMemo implements Serializable {
     int isdone;//완료 //int값을 플래그 값으로 활용 ex) 0=시작안함 1=진행중 2=완료 같은 느낌
 
 
-    public CalendarMemo(int seq,String maintext,String subtext,String timetext,int isdone){
+    public CalendarMemo(int seq, String maintext, String subtext, String timetext, int isdone){
         this.seq=seq;
         this.maintext=maintext;
         this.subtext=subtext;
@@ -26,6 +27,7 @@ public class CalendarMemo implements Serializable {
         this.isdone=isdone;
 
     }
+
 
     public String getTimetext() {
         return timetext;

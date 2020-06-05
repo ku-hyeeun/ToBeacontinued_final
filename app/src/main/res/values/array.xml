@@ -4,9 +4,5 @@
         <item>한국어</item>
         <item>English</item>
     </string-array>
-    <string-array name="alarm">
-        <item>소리</item>
-        <item>진동</item>
-        <item>무음</item>
-    </string-array>
+
 </resources>

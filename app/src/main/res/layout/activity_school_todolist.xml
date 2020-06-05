@@ -8,6 +8,22 @@
     android:layout_height="match_parent"
     tools:context=".Todolist.SchoolTodolist">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/toolbarColor"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -19,7 +35,7 @@
             android:layout_alignParentRight="true"
             android:layout_margin="5dp"
             android:background="@drawable/write_button"
-            android:text="작성"
+            android:text="@string/write_button"
             android:textColor="@android:color/white" />
 
         <Button
@@ -30,24 +46,17 @@
             android:layout_toLeftOf="@id/writeButton"
             android:background="@drawable/write_button"
             android:onClick="loadImagefromGallery"
-            android:text="시간표 넣기"
+            android:text="@string/push_image"
             android:textColor="@android:color/white"/>
 
         <TextView
             android:id = "@+id/textview"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:text = " 메모를 꾹 누르면 삭제\n 체크시 반복 일정 설정 가능"
-            android:textSize="20dp"/>
+            android:text = "@string/memo_delete"
+            android:textSize="25dp"/>
 
     </RelativeLayout>
-
-
-    <Button
-        android:id="@+id/btnShow"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="SHOW SELECTED" />
 
 
     <ScrollView

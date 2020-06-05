@@ -1,20 +1,22 @@
-package com.androidapp.tobeacontinue.Todolist;
-
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
+package com.androidapp.tobeacontinue.Calendar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.androidapp.tobeacontinue.R;
 import com.androidapp.tobeacontinue.database.CalendarDBHelper;
@@ -23,57 +25,78 @@ import java.util.List;
 
 public class CalendarTodolist extends AppCompatActivity {
 
-    CalendarDBHelper dbHelper;
-
     RecyclerView recyclerView;
     RecyclerAdapter recyclerAdapter;
-    Button btnAdd;
+    Button btnAlarm;
+    Toolbar toolbar;
+
+    CalendarDBHelper dbHelper;
     List<CalendarMemo> memoList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_calendar_todolist);
+        setContentView(R.layout.activity_calendar);
+
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         dbHelper=new CalendarDBHelper(CalendarTodolist.this);
-        memoList = dbHelper.selectAll(); //
+        memoList=dbHelper.selectAll();
 
         recyclerView=findViewById(R.id.recyclerview);
+
+        //리사이클러뷰는 리니어레이아웃매니저를 사용해야함
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(CalendarTodolist.this);
         recyclerView.setLayoutManager(linearLayoutManager);
 
         recyclerAdapter=new RecyclerAdapter(memoList);
         recyclerView.setAdapter(recyclerAdapter);
-        btnAdd=findViewById(R.id.writeButton);
 
+        btnAlarm=findViewById(R.id.btnAlarm);
 
-        btnAdd.setOnClickListener(new View.OnClickListener(){
+        btnAlarm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //새로운 메모작성
-                Intent intent=new Intent(CalendarTodolist.this, CalendarAddActivity.class);
-                startActivityForResult(intent,0);
+                Intent intent=new Intent(CalendarTodolist.this, AlarmActivity.class);
+                startActivityForResult(intent,5);
             }
         });
+
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode== 0){
-            String strMain=data.getStringExtra("main");
-            String strSub=data.getStringExtra("sub");
-            String strTime=data.getStringExtra("time");
+            if(requestCode == resultCode) {
+                if (resultCode == 5) {
+                    String context = data.getStringExtra("context");
+                    String date = data.getStringExtra("date");
+                    String time = data.getStringExtra("time");
 
-            CalendarMemo memo=new CalendarMemo(strMain,strSub,strTime,0);
-            recyclerAdapter.addItem(memo);
-            recyclerAdapter.notifyDataSetChanged();
+                    CalendarMemo memo = new CalendarMemo(context, date, time, 0);
+                    recyclerAdapter.addItem(memo);
+                    recyclerAdapter.notifyDataSetChanged();
 
-            dbHelper.insertMemo(memo);
-
-        }
+                    dbHelper.insertMemo(memo);
+                }
+            }
     }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()){
+            case android.R.id.home:{
+                finish();
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
     class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemViewHolder>{
         private List<CalendarMemo> listdata;
@@ -87,7 +110,7 @@ public class CalendarTodolist extends AppCompatActivity {
         @NonNull
         @Override
         public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-            View view= LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.calendar_memo,viewGroup,false);
+            View view= LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_item,viewGroup,false);
             return new ItemViewHolder(view);
         }
 
@@ -136,6 +159,8 @@ public class CalendarTodolist extends AppCompatActivity {
 
                     @Override
                     public boolean onLongClick(View view) {
+                        //메모하나를 길게 눌렀을 때 해당 메모의 포지션을 가져온다.
+                        //이때 포지션은 DB의 포지션이 아니라 현재 화면에 보이는 리스트 중 몇번쨰인가를 가져오는것->seq가져오기
                         final int position =getAdapterPosition();
                         final int seq=(int)maintext.getTag();
 
@@ -158,9 +183,13 @@ public class CalendarTodolist extends AppCompatActivity {
                         return false;
                     }
                 });
-
-
             }
         }
     }
+
+
+
 }
+
+
+

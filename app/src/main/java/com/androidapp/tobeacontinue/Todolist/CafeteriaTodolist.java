@@ -2,30 +2,25 @@ package com.androidapp.tobeacontinue.Todolist;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.ImageButton;
-import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.androidapp.tobeacontinue.R;
 import com.androidapp.tobeacontinue.database.MemoDBHelper;
-import com.androidapp.tobeacontinue.etc.Settings;
 
 import java.util.List;
 
@@ -38,14 +33,14 @@ public class CafeteriaTodolist extends AppCompatActivity {
     RecyclerView recyclerView;
     RecyclerAdapter recyclerAdapter;
     Button btnAdd;
-    Button btnSelection;
+    Toolbar toolbar;
 
     MemoDBHelper DBHelper;
-
     List<Memo> memoList;
 
     private Intent intent;
     private final String packageName = "com.everytime.v2";          //에브리타입 앱 연동
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +49,10 @@ public class CafeteriaTodolist extends AppCompatActivity {
 
         DBHelper = new MemoDBHelper(CafeteriaTodolist.this);
         memoList = DBHelper.selectAll4();
+
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         recyclerView=findViewById(R.id.recyclerview);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(CafeteriaTodolist.this);
@@ -70,22 +69,6 @@ public class CafeteriaTodolist extends AppCompatActivity {
                 Intent intent=new Intent(CafeteriaTodolist.this, MemoWrite.class);
                 intent.putExtra("num", "4");
                 startActivityForResult(intent,4);
-            }
-        });
-
-        btnSelection = (Button)findViewById(R.id.btnShow);
-        btnSelection.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String data="";
-                List<Memo> memoList = recyclerAdapter.getListdata();
-                for(int i=0;i<memoList.size();i++){
-                    Memo memo = memoList.get(i);
-                    if(memo.isSelected()==true){
-                        data = data+"\n"+memo.getContents();
-                    }
-                }
-                Toast.makeText(CafeteriaTodolist.this,"Selected Memo: \n"+data,Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -116,6 +99,17 @@ public class CafeteriaTodolist extends AppCompatActivity {
                 DBHelper.insertMemo4(memo);
             }
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()){
+            case android.R.id.home:{
+                finish();
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemViewHolder>{

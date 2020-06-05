@@ -7,18 +7,15 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,13 +23,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.androidapp.tobeacontinue.R;
 import com.androidapp.tobeacontinue.database.ImageDBHelper;
 import com.androidapp.tobeacontinue.database.MemoDBHelper;
-import com.androidapp.tobeacontinue.etc.Settings;
 
 import java.io.ByteArrayOutputStream;
 import java.util.List;
@@ -46,7 +43,7 @@ public class SchoolTodolist extends AppCompatActivity {
     RecyclerView recyclerView;
     RecyclerAdapter recyclerAdapter;
     Button btnAdd;
-    Button btnSelection;
+    Toolbar toolbar;
 
     MemoDBHelper DBHelper;                              //메모 디비
     List<Memo> memoList;                                //메모 리스트
@@ -62,6 +59,10 @@ public class SchoolTodolist extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_school_todolist);
+
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         DBHelper = new MemoDBHelper(SchoolTodolist.this);
         memoList = DBHelper.selectAll3();                       //메모DB 조회
@@ -81,22 +82,6 @@ public class SchoolTodolist extends AppCompatActivity {
                 Intent intent=new Intent(SchoolTodolist.this, MemoWrite.class);
                 intent.putExtra("num", "3");
                 startActivityForResult(intent,3);
-            }
-        });
-
-        btnSelection = findViewById(R.id.btnShow);              //selection 버튼으로 체크한 메모 보여줌
-        btnSelection.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String data="";
-                List<Memo> memoList = recyclerAdapter.getListdata();
-                for(int i=0;i<memoList.size();i++){
-                    Memo memo = memoList.get(i);
-                    if(memo.isSelected()==true){
-                        data = data+"\n"+memo.getContents();
-                    }
-                }
-                Toast.makeText(SchoolTodolist.this,"Selected Memo: \n"+data,Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -174,6 +159,16 @@ public class SchoolTodolist extends AppCompatActivity {
         return bitmap ;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()){
+            case android.R.id.home:{
+                finish();
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemViewHolder>{
         private List<Memo> listdata;

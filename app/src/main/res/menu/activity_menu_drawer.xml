@@ -7,10 +7,10 @@
         <item
             android:id="@+id/menu1"
             android:icon="@drawable/ic_launcher_foreground"
-            android:title="장소로 추가" />
+            android:title="@string/add_Beacon" />
         <item
             android:id="@+id/menu2"
             android:icon="@drawable/ic_launcher_background"
-            android:title="캘린더로 추가" />
+            android:title="@string/add_calendar" />
     </group>
 </menu>

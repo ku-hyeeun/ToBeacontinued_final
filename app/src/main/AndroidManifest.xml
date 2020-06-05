@@ -4,20 +4,20 @@
     android:versionCode="1"
     android:versionName="1.0">
 
-    <uses-sdk
-        android:targetSdkVersion="22"/>
+    <uses-sdk android:targetSdkVersion="22" />
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
-
-    <uses-permission android:name="android.permission.BLUETOOTH"/>
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
         android:name="com.hanvitsi.midascon.MidasApplication"
@@ -27,8 +27,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".etc.SettingActivity"></activity>
+        <activity android:name=".Calendar.AlarmRingActivity" />
+        <activity android:name=".Calendar.AlarmActivity" />
+        <activity
+            android:name=".Calendar.CalendarTodolist"
+            android:theme="@style/AppTheme.NoActionBar" />
 
-        <service android:name="com.hanvitsi.midascon.MidasService"/>
+        <receiver
+            android:name=".Calendar.AlarmReceiver"
+            android:enabled="true"
+            android:exported="false" />
+
+        <service
+            android:name=".Calendar.AlarmService"
+            android:enabled="true" />
+        <service android:name="com.hanvitsi.midascon.MidasService" />
 
         <receiver
             android:name=".GeofenceBroadcastReceiver"
@@ -51,27 +65,29 @@
             android:label="@string/title_activity_maps" />
         <activity
             android:name=".Todolist.ExtraTodolist"
-            android:label="추가장소" />
+            android:label="@string/add_place"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Todolist.GeofencingMemo" />
-        <activity android:name=".Todolist.CalendarAddActivity" />
-        <activity android:name=".Todolist.CalendarTodolist" />
         <activity android:name=".Todolist.MemoWrite" />
         <activity
             android:name=".Todolist.OutsideTodolist"
-            android:label="집 밖" />
+            android:label="@string/outside"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Todolist.CafeteriaTodolist"
-            android:label="학생회관" />
+            android:label="@string/cafeteria"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Todolist.SchoolTodolist"
-            android:label="한누리관" />
+            android:label="@string/school"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Todolist.HouseTodolist"
-            android:label="집 안" />
+            android:label="@string/house"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MenuActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".etc.Settings" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

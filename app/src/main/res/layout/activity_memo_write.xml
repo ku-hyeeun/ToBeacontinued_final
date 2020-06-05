@@ -8,11 +8,14 @@
     android:background="@drawable/memowrite">
 
     <EditText
-        android:layout_centerVertical="true"
         android:id="@+id/edtMemo"
-        android:hint="할일을 입력하세요"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="28dp"
+        android:layout_marginRight="28dp"
+        android:hint="할일을 입력하세요"
+        android:textColorLink="#000000" />
 
     <LinearLayout
         android:padding="10dp"
@@ -22,23 +25,25 @@
         android:layout_height="wrap_content">
 
         <Button
-            android:layout_marginRight="15dp"
             android:id="@+id/btnNo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             android:layout_weight="1"
-            android:text="취소"
             android:background="@drawable/white_button"
-            android:textColor="@android:color/black"/>
+            android:text="취소"
+            android:textColor="@android:color/black" />
 
         <Button
             android:id="@+id/btnDone"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
             android:layout_weight="1"
-            android:text="완료"
             android:background="@drawable/white_button"
-            android:textColor="@android:color/black"/>
+            android:text="완료"
+            android:textColor="@android:color/black" />
 
     </LinearLayout>
 
