@@ -21,10 +21,10 @@
 
     <string name = "settings_alarm">알림 메세지 설정</string>
     <string name ="settings_vibrate">진동알림</string>
-    <string name ="settings_sound">소리 알림</string>
+    <string name ="settings_message">소리 알림</string>
     <string name ="settings_ringtone">알림음 설정</string>
-    <string name="settings_language">언어 지원</string>
     <string name="settings_lang">언어 설정</string>
+    <string name="settings_language">언어로 한국어와 영어를 지원합니다.</string>
 
     <string name = "house">집 안</string>
     <string name = "outside">집 밖</string>
