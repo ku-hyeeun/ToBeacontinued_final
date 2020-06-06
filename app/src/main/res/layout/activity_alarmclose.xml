@@ -29,11 +29,6 @@
         android:layout_marginTop="297dp"
         android:text="알람종료" />
 
-    <Button
-        android:id="@+id/btnMainGO"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="메모페이지 가기"/>
 
 
 </RelativeLayout>
