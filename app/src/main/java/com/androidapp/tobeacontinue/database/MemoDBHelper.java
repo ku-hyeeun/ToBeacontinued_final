@@ -13,22 +13,22 @@ import java.util.ArrayList;
 
 public class MemoDBHelper extends SQLiteOpenHelper{
 
-    private static final String DATABASE_NAME = "memo_reminder";  //DB Name
-    private static final String TABLE1 = "HouseMemo";             //DB Table Name
-    private static final String TABLE2 = "OutsideMemo";
-    private static final String TABLE3 = "SchoolMemo";
-    private static final String TABLE4 = "CafeteriaMemo";
+    private static final String DATABASE_NAME = "memo_reminder";    //Database Name
+    private static final String TABLE1 = "HouseMemo";               //House Table Name
+    private static final String TABLE2 = "OutsideMemo";             //Outside Table Name
+    private static final String TABLE3 = "SchoolMemo";              //School Table Name
+    private static final String TABLE4 = "CafeteriaMemo";           //Cafeteria Table Name
 
-    public static final int DATABASE_VERSION = 1;                //DB Version
+    public static final int DATABASE_VERSION = 1;                   //Database Version
 
 
-    SQLiteDatabase db;
+    SQLiteDatabase db;              //Sqlite db 선언
 
-    public MemoDBHelper(@Nullable Context context) {
+    public MemoDBHelper(@Nullable Context context) {                //생성자 정의
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    //DB Table 만들기
+    //Table 만들기
     @Override
     public void onCreate(SQLiteDatabase db) {
 
@@ -36,15 +36,18 @@ public class MemoDBHelper extends SQLiteOpenHelper{
         String create2 = "CREATE TABLE "+TABLE2+" (id INTEGER PRIMARY KEY AUTOINCREMENT, maintext TEXT, subtext TEXT, isdone INTEGER) ";
         String create3 = "CREATE TABLE "+TABLE3+" (id INTEGER PRIMARY KEY AUTOINCREMENT, maintext TEXT, subtext TEXT, isdone INTEGER) ";
         String create4 = "CREATE TABLE "+TABLE4+" (id INTEGER PRIMARY KEY AUTOINCREMENT, maintext TEXT, subtext TEXT, isdone INTEGER) ";
+        //각 장소 별로 create table -> id, 내용, 날짜, 완료 여부
+
         db.execSQL(create1);
         db.execSQL(create2);
         db.execSQL(create3);
         db.execSQL(create4);
+        //db 실행
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+TABLE1);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+TABLE1);         //테이블이 존재하면 삭제
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+TABLE2);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+TABLE3);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+TABLE4);

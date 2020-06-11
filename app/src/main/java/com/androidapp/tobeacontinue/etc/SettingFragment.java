@@ -13,15 +13,16 @@ import com.androidapp.tobeacontinue.R;
 
 public class SettingFragment extends PreferenceFragment{
 
-    SharedPreferences pref;
+    SharedPreferences pref;                 //SharedPreference 정의
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preference);
+        //Settingfragment를 이용할 때는 onCreateView가 아닌 addPreferencesFromResource를 이용해야 함
 
         pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-
+        //Sharedpreference를 이용하여 값을 저장함
     }
 
     @Override
@@ -29,6 +30,7 @@ public class SettingFragment extends PreferenceFragment{
         super.onResume();
 
         pref.registerOnSharedPreferenceChangeListener(listener);
+
     }
 
     @Override

@@ -206,7 +206,7 @@ public class SchoolTodolist extends AppCompatActivity implements BeaconCallback,
 
     @Override
     public void onBeaconCallback(int i, Beacon beacon) {
-        if(beacon.getMac().equals("10-78-ce-30-02-fb") && memoList.size() != 0){
+        if(beacon.getMac().equals("10-78-ce-30-02-54") && memoList.size() != 0){
             if(beacon.getRssi()+80>0) {
                 if (adapter != null)
                     adapter.addBeacon(beacon);
@@ -236,7 +236,7 @@ public class SchoolTodolist extends AppCompatActivity implements BeaconCallback,
         if (beacon == null)
             return;
         int notify = beacon.getId().hashCode();
-        Intent intent = new Intent(getApplicationContext(), MenuActivity.class);        //상단의 노티 클릭하면 menuactivity로 넘어옴.
+        Intent intent = new Intent(getApplicationContext(), SchoolTodolist.class);        //상단의 노티 클릭하면 menuactivity로 넘어옴.
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);

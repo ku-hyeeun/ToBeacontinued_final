@@ -27,6 +27,7 @@ public class CalendarFragment extends Fragment {
 
         ImageButton calendarButton = view.findViewById(R.id.calendarButton);
 
+        //버튼 클릭시 CalendarTodolist로 이동
         calendarButton.setOnClickListener(new View.OnClickListener() {
 
             @Override

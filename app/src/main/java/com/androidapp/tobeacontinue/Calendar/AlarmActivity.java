@@ -22,15 +22,14 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-//알람설정하는 창
+//알람 설정하는 액티비티
 public class AlarmActivity extends AppCompatActivity {
 
-    //알람 시간
-    private Calendar calendar;
-    private TimePicker timePicker;
+    private Calendar calendar;          //캘린더 선언 (날짜 설정)
+    private TimePicker timePicker;      //timepicker 선언 (시간 설정)
 
-    EditText edtText; //할일을 입력하세요
-    TextView edtDate; //날짜가져옴
+    EditText edtText;                   //할일을 입력하세요
+    TextView edtDate;                   //날짜가져옴
 
 
     @Override

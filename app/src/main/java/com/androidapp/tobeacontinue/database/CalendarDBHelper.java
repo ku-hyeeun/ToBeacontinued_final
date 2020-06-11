@@ -13,41 +13,42 @@ import java.util.ArrayList;
 
 public class CalendarDBHelper extends SQLiteOpenHelper {
 
-    private static final String dbName="calendar_reminder";
-    private static final String table = "CalendarMemo";
-    private static final int dbVersion=1;
+    private static final String dbName="calendar_reminder";     //Database Name
+    private static final String table = "CalendarMemo";         //Table Name
+    private static final int dbVersion=1;                       //Database Version
 
-    private SQLiteDatabase db;
+    private SQLiteDatabase db;                                  //Sqlite db 선언
 
-    public CalendarDBHelper(@Nullable Context context) {
+    public CalendarDBHelper(@Nullable Context context) {        //생성자 정의
         super(context,dbName,null,dbVersion);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         String create="CREATE TABLE "+table+"(seq INTEGER PRIMARY KEY AUTOINCREMENT, maintext TEXT, subtext TEXT, timetext TEXT, isdone INTEGER)";
-        db.execSQL(create);
+        //table 만들기 -> seq 번호, 메모 내용, 날짜, 시간, 완료여부
+        db.execSQL(create);             //db 실행
     }
 
-    @Override
+   @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ table);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ table);             //테이블이 존재하면 삭제
         onCreate(sqLiteDatabase);
     }
 
-    //INSERT INTO MemoTable VALUES(NULL,"MAINTEXT","SUBTEXT",0,"TimeTEXT"); (NULL,'"+memo.maintext+"','"+memo.subtext+"',"+memo.getIsdone()+");";
+    //INSERT INTO MemoTable VALUES(NULL,'MAINTEXT','SUBTEXT','TimeTEXT',0);
     public void insertMemo(CalendarMemo memo){
         String sql="INSERT INTO "+table+" VALUES(NULL,'"+memo.maintext+"','"+memo.subtext+"','"+memo.timetext+"',"+memo.getIsdone()+");";
         db.execSQL(sql);
     }
 
-    //데이터삭제 DELETE FROM Memo Table WHERE seq=0; =>MemoTable의 0번쨰 지우기
+    //데이터 삭제 DELETE FROM Memo Table WHERE seq=0; =>MemoTable의 0번째 지우기
     public  void deleteMemo(int position){
         String sql="DELETE FROM "+table+" WHERE seq="+position+";";
         db.execSQL(sql);
     }
 
-    //데이터조회 SELECT * FROM MemoTable;
+    //데이터 조회 SELECT * FROM MemoTable;
     public ArrayList<CalendarMemo> selectAll(){
 
         db = this.getReadableDatabase();

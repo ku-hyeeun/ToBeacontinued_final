@@ -75,16 +75,16 @@ public class CafeteriaTodolist extends AppCompatActivity implements BeaconCallba
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cafeteria_todolist);
 
-        DBHelper = new MemoDBHelper(CafeteriaTodolist.this);
-        memoList = DBHelper.selectAll4();
+        DBHelper = new MemoDBHelper(CafeteriaTodolist.this);        //DB 설정
+        memoList = DBHelper.selectAll4();                           //DB 테이블 조회해서 처음 페이지에 보여줌
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);      //toolbar 설정 , 뒤로가기 넣음
 
         recyclerView=findViewById(R.id.recyclerview);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(CafeteriaTodolist.this);
-        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setLayoutManager(linearLayoutManager);         //리사이클러뷰로 구성되어 있음
 
         recyclerAdapter=new RecyclerAdapter(memoList);
         recyclerView.setAdapter(recyclerAdapter);
@@ -95,7 +95,7 @@ public class CafeteriaTodolist extends AppCompatActivity implements BeaconCallba
             public void onClick(View view) {
                 //새로운 메모작성
                 Intent intent=new Intent(CafeteriaTodolist.this, MemoWrite.class);
-                intent.putExtra("num", "4");
+                intent.putExtra("num", "4");                    //메모 작성 창에 intent로 num = 4 보냄 ( 창 구분 )
                 startActivityForResult(intent,4);
             }
         });
@@ -110,31 +110,35 @@ public class CafeteriaTodolist extends AppCompatActivity implements BeaconCallba
             }
         });
 
+
+        //비콘
         contextManager = getMidasApplication().getContextManager();
         contextManager.getBeaconSettings().setMidasScanMode(true);
 
         adapter = new BeaconListAdapter(getBaseContext());
-        startService(new Intent(getApplicationContext(), BeaconListAdapter.class));
+        startService(new Intent(getApplicationContext(), BeaconListAdapter.class));         //startService -> 비콘 인식 + notification 옴
     }
 
+    //startActivityForResult로 보냈을 때 onActivityResult 함수로 받을 때 처리해줌
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode== resultCode){
-            if(resultCode==4) {
-                String strMain = data.getStringExtra("main");
-                String strSub = data.getStringExtra("sub");
+            if(resultCode==4) {                                 //resultCode == 4로 받음
+                String strMain = data.getStringExtra("main");   //메모 내용 받음
+                String strSub = data.getStringExtra("sub");     //날짜 받음
 
                 Memo memo = new Memo(0, strMain, strSub,0);
                 recyclerAdapter.addItem(memo);
-                recyclerAdapter.notifyDataSetChanged();
+                recyclerAdapter.notifyDataSetChanged();         //MemoList에 집어넣어서 리사이클러뷰에 보여줌
 
-                DBHelper.insertMemo4(memo);
+                DBHelper.insertMemo4(memo);                     //DB에도 저장
             }
         }
     }
 
+    //Toolbar에 뒤로가기 눌렀을 때 실행
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
@@ -146,14 +150,15 @@ public class CafeteriaTodolist extends AppCompatActivity implements BeaconCallba
         return super.onOptionsItemSelected(item);
     }
 
+    //BeaconCallback 함수
     @Override
     public void onBeaconCallback(int i, Beacon beacon) {
-        if(beacon.getMac().equals("10-78-ce-30-00-7d") && memoList.size() != 0){
-            if(beacon.getRssi()+80>0) {
+        if(beacon.getMac().equals("10-78-ce-30-00-7d") && memoList.size() != 0){        //각 장소에 비콘 아이디 다르게 설정해줌 & memoList size가 0이 아닐경우 비콘 울림
+            if(beacon.getRssi()+80>0) {         //거리 약 5m이내 까지
                 if (adapter != null)
                     adapter.addBeacon(beacon);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    showNotification(beacon);
+                    showNotification(beacon);   //노티 보여주기
                 }
 
                 runOnUiThread(this);
@@ -162,7 +167,7 @@ public class CafeteriaTodolist extends AppCompatActivity implements BeaconCallba
     }
 
 
-
+    //노티 함수
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void showNotification(Beacon beacon) {
         //오레오 (API26)이상부터 채널을 추가해야 notification 사용 가능
@@ -178,7 +183,7 @@ public class CafeteriaTodolist extends AppCompatActivity implements BeaconCallba
         if (beacon == null)
             return;
         int notify = beacon.getId().hashCode();
-        Intent intent = new Intent(getApplicationContext(), MenuActivity.class);        //상단의 노티 클릭하면 menuactivity로 넘어옴.
+        Intent intent = new Intent(getApplicationContext(), CafeteriaTodolist.class);        //상단의 노티 클릭하면 각 장소 액티비티로 넘어감.
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -265,11 +270,11 @@ public class CafeteriaTodolist extends AppCompatActivity implements BeaconCallba
         }
     }
 
+    //리사이클러어댑터 클래스
     class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemViewHolder>{
 
-        private List<Memo> listdata;
-
-        AlertDialog.Builder builder;
+        private List<Memo> listdata;    //리스트 선언
+        AlertDialog.Builder builder;    //알림 메세지 선언
 
         public RecyclerAdapter(List<Memo> listdata){
             this.listdata=listdata;
@@ -295,13 +300,13 @@ public class CafeteriaTodolist extends AppCompatActivity implements BeaconCallba
         @Override
         public void onBindViewHolder(@NonNull ItemViewHolder itemViewHolder, int i) {
             final Memo memo=listdata.get(i);
+            //메모 부분
+            itemViewHolder.maintext.setTag(memo.getId());               //id
 
-            itemViewHolder.maintext.setTag(memo.getId());
+            itemViewHolder.maintext.setText(memo.getContents());        //내용
+            itemViewHolder.subtext.setText(memo.getCreateDateStr());    //날짜
 
-            itemViewHolder.maintext.setText(memo.getContents());
-            itemViewHolder.subtext.setText(memo.getCreateDateStr());
-
-            itemViewHolder.chkSelected.setChecked(memo.isSelected());
+            itemViewHolder.chkSelected.setChecked(memo.isSelected());   //체크박스
             itemViewHolder.chkSelected.setTag(memo);
 
             itemViewHolder.chkSelected.setOnClickListener(new View.OnClickListener() {
@@ -344,7 +349,7 @@ public class CafeteriaTodolist extends AppCompatActivity implements BeaconCallba
                         final int id = (int)maintext.getTag();
 
                         builder = new AlertDialog.Builder(CafeteriaTodolist.this);
-                        builder.setTitle("메모를 삭제하시겠습니까? ");
+                        builder.setTitle("메모를 삭제하시겠습니까? ");                 //알림 메세지
                         builder.setMessage("\n");
                         builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
                             @Override

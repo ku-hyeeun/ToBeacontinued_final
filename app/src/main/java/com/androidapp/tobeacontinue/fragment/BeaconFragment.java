@@ -30,7 +30,7 @@ public class BeaconFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_home2, container, false);    //기본적으로 fragment_home2.xml이 화면에 보여짐
+        View view = inflater.inflate(R.layout.fragment_home2, container, false);    //fragment_home2.xml이 화면에 보여짐
 
         ImageButton house = view.findViewById(R.id.houseButton);
         ImageButton outside = view.findViewById(R.id.outsideButton);
@@ -39,6 +39,7 @@ public class BeaconFragment extends Fragment {
 
         ImageButton addButton = view.findViewById(R.id.addButton);
 
+        //각 버튼을 클릭하면 해당 activity로 이동
         house.setOnClickListener(new View.OnClickListener() {                       //버튼이 클릭시 Todolist 액티비티로 넘어가게 하였음
             @Override
             public void onClick(View view) {

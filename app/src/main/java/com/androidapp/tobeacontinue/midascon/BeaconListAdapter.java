@@ -13,7 +13,7 @@ import com.androidapp.tobeacontinue.R;
 import com.hanvitsi.midascon.Beacon;
 import com.hanvitsi.midascon.manager.BeaconUtils;
 
-
+//midascon에서 제공하는 소스
 public class BeaconListAdapter extends BaseAdapter {
 
     private final LayoutInflater inflater;
