@@ -68,7 +68,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private float GEOFENCE_RADIUS = 100;
 
     private String GEOFENCE_ID = "JC_GEOFENCE_ID";
-    private String GEOFENCE_ID_2 = "JC_GEOFENCE_ID_2";
 
 
     @Override
@@ -95,34 +94,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         databaseHelper = new GeoDBHelper(MapsActivity.this);
 
         //지오코딩 버튼처리----------------------------------
-        /*Address_Num_Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                List<Address> list = null;
-
-
-                String str = address_editText.getText().toString();
-                try {
-                    list = geocoder.getFromLocationName(
-                            str, // 지역 이름
-                            10); // 읽을 개수
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    Log.e("test","입출력 오류 - 서버에서 주소변환시 에러발생");
-                }
-
-                if (list != null) {
-                    if (list.size() == 0) {
-                        result_textView.setText("해당되는 주소 정보는 없습니다");
-                    } else {
-                        result_textView.setText(list.get(0).getAddressLine(0).toString());
-                        //          list.get(0).getLatitude();        // 위도
-                        //          list.get(0).getLongitude();    // 경도
-                    }
-                }
-            }
-        });
-         */
 
         //주소를 지도에 표시
         AddressMap_Button.setOnClickListener(new View.OnClickListener() {
@@ -327,26 +298,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     }
                 });
 
-    }
-
-    public void removeGeofence(){
-
-        PendingIntent pendingIntent = geoFenceHelper.getPendingIntent();
-
-        geofencingClient.removeGeofences(pendingIntent)
-                .addOnSuccessListener(this, new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d(TAG, "onSuccess: Geofence Removed");
-                    }
-                })
-                .addOnFailureListener(this, new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        String errorMessage = geoFenceHelper.getErrorString(e);
-                        Log.d(TAG,"onFailure: " + errorMessage);
-                    }
-                });
     }
 
     //마커 title,snippet 추가
