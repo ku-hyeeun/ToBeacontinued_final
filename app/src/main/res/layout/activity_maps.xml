@@ -1,84 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:map="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_top_ho"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        map:layout_constraintGuide_percent="0.08" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_bottom_ho"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        map:layout_constraintGuide_percent="0.165" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_ver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        map:layout_constraintGuide_begin="20dp"
+        map:layout_constraintGuide_percent="0.02" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_map_top_ho"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        map:layout_constraintGuide_begin="20dp"
+        map:layout_constraintGuide_percent="0.3" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_map_bottom_ho"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        map:layout_constraintGuide_begin="20dp"
+        map:layout_constraintGuide_percent="0.9" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_center_ver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        map:layout_constraintGuide_begin="20dp"
+        map:layout_constraintGuide_percent="0.75" />
+
     <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="match_parent"
-        android:layout_height="383dp"
-        android:layout_marginTop="230dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        map:layout_constraintBottom_toBottomOf="@id/guideline_map_bottom_ho"
+        map:layout_constraintEnd_toEndOf="parent"
+        map:layout_constraintStart_toStartOf="parent"
+        map:layout_constraintTop_toTopOf="@id/guideline_map_top_ho"
         tools:context=".MapsActivity" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="20dp"
-        android:text="주소"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:text="주소 "
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        map:layout_constraintBottom_toBottomOf="@id/guideline_top_ho"
+        map:layout_constraintStart_toStartOf="@id/guideline_ver" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="90dp"
         android:text="할 일"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        map:layout_constraintBottom_toBottomOf="@id/guideline_bottom_ho"
+        map:layout_constraintStart_toStartOf="@id/guideline_ver" />
 
     <EditText
         android:id="@+id/address_editText"
-        android:layout_width="248dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="20dp"
-        android:ems="10">
-    </EditText>
+        android:layout_marginLeft="10dp"
+        android:ems="10"
+        map:layout_constraintBottom_toBottomOf="@id/guideline_top_ho"
+        map:layout_constraintEnd_toEndOf="@id/guideline_center_ver"
+        map:layout_constraintStart_toEndOf="@id/textView3"></EditText>
 
     <EditText
         android:id="@+id/todo_editText"
-        android:layout_width="248dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="90dp"
-        android:ems="10">
+        android:layout_marginLeft="10dp"
+        android:ems="10"
+        map:layout_constraintBottom_toBottomOf="@id/guideline_bottom_ho"
+        map:layout_constraintEnd_toEndOf="@id/guideline_center_ver"
+        map:layout_constraintStart_toEndOf="@id/textView4">
 
     </EditText>
-
-    <TextView
-        android:id="@+id/result_textView"
-        android:layout_width="298dp"
-        android:layout_height="77dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginRight="0dp"
-        android:text="주소, 할 일을 입력 후 확인 버튼을 누르거나 원하는 장소를 길게 눌러 선택하세요"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <Button
         android:id="@+id/AddressMap_Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="300dp"
-        android:layout_marginTop="150dp"
-        android:text="확인"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/write_button"
-        android:textColor="@android:color/white"/>
+        android:text="확인"
+        android:textColor="@android:color/white"
+        map:layout_constraintBottom_toBottomOf="@id/guideline_map_top_ho"
+        map:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/save_Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="300dp"
-        android:layout_marginTop="620dp"
-        android:text="저장"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="5dp"
         android:background="@drawable/write_button"
-        android:textColor="@android:color/white"/>
+        android:text="저장"
+        android:textColor="@android:color/white"
+        map:layout_constraintEnd_toEndOf="parent"
+        map:layout_constraintTop_toTopOf="@id/guideline_map_bottom_ho" />
+
+    <view
+        android:id="@+id/result_textView"
+        class="androidx.appcompat.widget.AppCompatTextView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="8dp"
+        android:maxLines="3"
+        android:minLines="2"
+        android:text="주소, 할 일을 입력 후 확인 버튼을 누르거나 원하는 장소를 길게 눌러 선택하세요"
+        android:textSize="18sp"
+        map:autoSizeMaxTextSize="20sp"
+        map:autoSizeMinTextSize="15sp"
+        map:autoSizeStepGranularity="1sp"
+        map:autoSizeTextType="uniform"
+        map:layout_constraintBottom_toBottomOf="@id/guideline_map_top_ho"
+        map:layout_constraintEnd_toEndOf="@id/guideline_center_ver"
+        map:layout_constraintStart_toStartOf="@id/guideline_ver"
+        map:layout_constraintTop_toTopOf="@id/guideline_bottom_ho" />
 
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
