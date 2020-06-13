@@ -41,20 +41,15 @@ import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMapLongClickListener {
 
-    //주소 검색 (지오코딩)
-    //final TextView result_textView = (TextView) findViewById(R.id.result_textView); // 결과창
-    //final EditText address_editText = (EditText)findViewById(R.id.address_editText);
-
     GeoDBHelper databaseHelper;
 
-    Button Address_Num_Button, AddressMap_Button, save_Button;
+    Button AddressMap_Button, save_Button;
     TextView result_textView;
     EditText address_editText, todo_editText;
 
     final Geocoder geocoder = new Geocoder(this);
 
     final MarkerOptions markerOptions = new MarkerOptions();        //final 확인
-    //----------------
 
     private static final String TAG = "MapsActivity";
 
@@ -80,7 +75,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
 
         save_Button = findViewById(R.id.save_Button);       //저장버튼
-        //Address_Num_Button = findViewById(R.id.Address_Num_Button);
         AddressMap_Button = findViewById(R.id.AddressMap_Button);   //확인버튼
         result_textView = findViewById(R.id.result_textView);       //주소결과창
         address_editText = findViewById(R.id.address_editText);     //주소입력창
