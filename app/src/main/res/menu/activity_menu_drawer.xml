@@ -5,12 +5,8 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/menu1"
-            android:icon="@drawable/ic_launcher_foreground"
-            android:title="@string/add_Beacon" />
-        <item
             android:id="@+id/menu2"
-            android:icon="@drawable/ic_launcher_background"
+            android:icon="@color/colorAccent"
             android:title="@string/add_calendar" />
     </group>
 </menu>

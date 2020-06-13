@@ -68,10 +68,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {           //네비게이션 드로어 열었을 때 두 가지 메뉴
         int id = item.getItemId();
 
-        if(id==R.id.menu1){
-            OnFragmentSelected(0, null);
-        }
-        else if(id ==R.id.menu2){
+      if(id ==R.id.menu2){
             OnFragmentSelected(1, null);
         }
         drawer.closeDrawer(GravityCompat.START);

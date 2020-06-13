@@ -3,7 +3,7 @@
     <string name="app_name">To Bea-continued</string>
     <string name="title_activity_sample_drawer">SampleDrawer</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_title">Jeongtong Class</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
@@ -18,7 +18,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_maps">Map</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_subtitle">android@android.com</string>
+    <string name="nav_header_subtitle">To-Beacontinued</string>
 
     <string name = "settings_alarm">알림 메세지 설정</string>
     <string name ="settings_vibrate">진동알림</string>
