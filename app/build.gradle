@@ -20,7 +20,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 
             // 배포용 KEY
-            resValue "string", "google_maps_api_key", "78:57:10:3C:89:8C:27:4A:A5:E5:66:E7:B7:C8:B9:A9:B6:8A:1A:D2"
+            resValue "string", "google_maps_api_key", "AIzaSyBnrwqQL4op9polP_yi1CJGm4VnhRzz9iI"
         }
 
         debug {
