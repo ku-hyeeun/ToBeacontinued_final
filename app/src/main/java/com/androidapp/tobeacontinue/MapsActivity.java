@@ -41,7 +41,6 @@ import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMapLongClickListener {
 
-    //
     //주소 검색 (지오코딩)
     //final TextView result_textView = (TextView) findViewById(R.id.result_textView); // 결과창
     //final EditText address_editText = (EditText)findViewById(R.id.address_editText);
