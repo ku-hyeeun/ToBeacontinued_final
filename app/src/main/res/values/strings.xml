@@ -33,7 +33,7 @@
     <string name = "cafeteria">학생회관</string>
     <string name = "add_place">추가 장소</string>
 
-    <string name = "add_Beacon">장소로 추가</string>
+    <string name = "add_Beacon">비콘으로 추가</string>
     <string name = "add_calendar">캘린더로 추가</string>
     <string name = "memo_delete">메모를 꾹 누르면 삭제</string>
 
