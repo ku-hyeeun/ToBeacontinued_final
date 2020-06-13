@@ -14,21 +14,25 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="131dp"
-        android:layout_marginTop="175dp"
-        android:text="할일을 확인하세요!!!!" />
+        android:layout_marginStart="122dp"
+        android:layout_marginTop="180dp"
+        android:text="종료버튼을 눌러 \n할 일을 확인하세요"
+        android:textSize="22sp" />
 
     <Button
         android:id="@+id/btnClose"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="133dp"
+        android:layout_height="97dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="157dp"
-        android:layout_marginTop="297dp"
-        android:text="알람종료" />
-
+        android:layout_marginStart="138dp"
+        android:layout_marginTop="313dp"
+        android:layout_marginBottom="319dp"
+        android:background="@drawable/write_button"
+        android:text="알람종료"
+        android:textColor="@android:color/white" />
 
 
 </RelativeLayout>
