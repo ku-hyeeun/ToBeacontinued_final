@@ -4,21 +4,13 @@
     android:title="환경 설정">
 
 
-    <PreferenceCategory android:title = "@string/settings_alarm">
+    <PreferenceScreen android:title="@string/settings_alarm"
 
-        <SwitchPreference
-            android:key="vibrate"
-            android:title="@string/settings_vibrate" />
+        android:summary="소리및 진동알림을 설정할 수 있습니다.">
+        <intent android:targetPackage="com.android.settings"
+            android:targetClass="com.android.settings.SoundSettings"/>
 
-        <CheckBoxPreference
-            android:key="message"
-            android:title="@string/settings_message"/>
-
-        <RingtonePreference
-            android:key = "ringtone"
-            android:title="@string/settings_ringtone"/>
-
-    </PreferenceCategory>
+    </PreferenceScreen>
 
     <PreferenceScreen android:title = "@string/settings_lang"
         android:summary="@string/settings_language">

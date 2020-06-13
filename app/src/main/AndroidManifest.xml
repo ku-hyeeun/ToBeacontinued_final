@@ -58,16 +58,16 @@
         -->
 
 
-        <!-- 개발용 KEY -->
+        <!-- 개발용 KEY
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBnrwqQL4op9polP_yi1CJGm4VnhRzz9iI" />
-
-        <!-- 배포용 KEY -->
+-->
+        <!-- 배포용 KEY
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="78:57:10:3C:89:8C:27:4A:A5:E5:66:E7:B7:C8:B9:A9:B6:8A:1A:D2" />
-
+-->
         <!-- 배포용 KEY -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
