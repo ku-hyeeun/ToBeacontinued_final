@@ -96,26 +96,6 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {                             //액션바에 오른쪽에 위치한 검색 메뉴
         getMenuInflater().inflate(R.menu.menu_main, menu);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-            final SearchView v = (SearchView) menu.findItem(R.id.menu_search).getActionView();
-            v.setMaxWidth(Integer.MAX_VALUE);
-            v.setQueryHint("검색할 내용을 입력하세요");
-
-            v.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                @Override
-                public boolean onQueryTextSubmit(String s) {
-                    v.clearFocus();
-                    return false;
-                }
-
-                @Override
-                public boolean onQueryTextChange(String s) {
-                    return false;
-                }
-            });
-
-        }
         return super.onCreateOptionsMenu(menu);
     }
 

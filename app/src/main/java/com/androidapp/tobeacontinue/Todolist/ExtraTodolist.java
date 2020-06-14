@@ -1,5 +1,6 @@
 package com.androidapp.tobeacontinue.Todolist;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -96,7 +98,9 @@ public class ExtraTodolist extends AppCompatActivity {
     }
 
     class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemViewHolder>{
+
         private List<GeofencingMemo> listdata;
+        AlertDialog.Builder builder;    //알림 메세지 선언
 
         public RecyclerAdapter(List<GeofencingMemo> listdata){
             this.listdata=listdata;
@@ -146,14 +150,25 @@ public class ExtraTodolist extends AppCompatActivity {
                 itemView.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View view) {             //메모 리스트에서 원하는 아이템 길게 누르면 데이터 삭제
-                        int position = getAdapterPosition();
-                        int id = (int)maintext.getTag();
+                        final int position = getAdapterPosition();
+                        final int id = (int)maintext.getTag();
 
-                        if(position != RecyclerView.NO_POSITION){
-                            databaseHelper.deleteMemo(id);
-                            removeItem(position);
-                            notifyDataSetChanged();
-                        }
+                        builder = new AlertDialog.Builder(ExtraTodolist.this);
+                        builder.setTitle("메모를 삭제하시겠습니까? ");                 //알림 메세지
+                        builder.setMessage("\n");
+                        builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                if(position != RecyclerView.NO_POSITION){
+                                    databaseHelper.deleteMemo(id);
+                                    removeItem(position);
+                                    notifyDataSetChanged();
+                                }
+                            }
+                        });
+
+                        builder.setNegativeButton("아니오", null);
+                        builder.create().show();
 
                         return false;
                     }

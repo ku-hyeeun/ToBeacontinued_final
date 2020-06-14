@@ -250,16 +250,16 @@ public class SchoolTodolist extends AppCompatActivity implements BeaconCallback,
         builder.setPriority(NotificationCompat.PRIORITY_HIGH);
 
         builder.setSmallIcon(R.drawable.ic_launcher);
-        builder.setTicker("비콘 들어옴");
+        builder.setTicker(getString(R.string.Beacon));
         builder.setContentTitle(beacon.getId());
-        builder.setContentText(" 할 일을 확인하세요. ");
+        builder.setContentText(getString(R.string.Beacon_Alarm));
 
         builder.setAutoCancel(true);
         builder.setDefaults(NotificationCompat.DEFAULT_ALL);
 
         NotificationCompat.BigTextStyle style = new NotificationCompat.BigTextStyle(builder);
-        style.bigText(" 할 일을 확인하세요. ");
-        style.setBigContentTitle(" 비콘 들어옴");
+        style.bigText(getString(R.string.Beacon_Alarm));
+        style.setBigContentTitle(getString(R.string.Beacon));
         style.setSummaryText(getString(R.string.app_name));
 
         manager.notify(notify, style.build());

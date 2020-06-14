@@ -10,15 +10,17 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.preference.PreferenceActivity;
 
 import com.androidapp.tobeacontinue.R;
 
-public class SettingActivity extends AppCompatActivity {
+public class SettingActivity extends PreferenceActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_setting);
+        addPreferencesFromResource(R.layout.activity_setting);
+        //Settingfragment를 이용할 때는 onCreateView가 아닌 addPreferencesFromResource를 이용해야 함
     }
 
 

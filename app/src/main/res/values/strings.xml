@@ -20,10 +20,12 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_subtitle">To-Beacontinued</string>
 
-    <string name = "settings_alarm">알림 메세지 설정</string>
-    <string name ="settings_vibrate">진동알림</string>
-    <string name ="settings_message">소리 알림</string>
-    <string name ="settings_ringtone">알림음 설정</string>
+    <string name ="Beacon">비콘 들어옴</string>
+    <string name ="Beacon_Alarm">할 일을 확인하세요</string>
+
+    <string name ="settings">환경 설정</string>
+    <string name ="settings_alarm">알림 메세지 설정</string>
+    <string name ="settings_alarm_explain">소리 및 진동 알림을 설정할 수 있습니다</string>
     <string name="settings_lang">언어 설정</string>
     <string name="settings_language">언어로 한국어와 영어를 지원합니다.</string>
 
