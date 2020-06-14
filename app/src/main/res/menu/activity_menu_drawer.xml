@@ -6,11 +6,11 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/menu1"
-            android:icon="@drawable/ic_launcher_foreground"
-            android:title="@string/add_Beacon" />
+            android:icon="@android:drawable/ic_menu_mylocation"
+            android:title="비콘으로 추가" />
         <item
             android:id="@+id/menu2"
-            android:icon="@drawable/ic_launcher_background"
+            android:icon="@android:drawable/ic_menu_today"
             android:title="@string/add_calendar" />
     </group>
 </menu>

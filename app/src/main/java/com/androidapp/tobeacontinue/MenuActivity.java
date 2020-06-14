@@ -123,8 +123,6 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int curId = item.getItemId();
         switch (curId){
-            case R.id.menu_search:
-                break;
             case R.id.menu_settings:
                 Intent settingIntent = new Intent(this, SettingActivity.class);
                 startActivity(settingIntent);
