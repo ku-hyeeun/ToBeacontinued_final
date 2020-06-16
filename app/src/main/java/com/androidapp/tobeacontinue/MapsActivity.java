@@ -50,7 +50,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     final Geocoder geocoder = new Geocoder(this);
 
-    final MarkerOptions markerOptions = new MarkerOptions();        //final 확인
+    final MarkerOptions markerOptions = new MarkerOptions();
 
     private static final String TAG = "MapsActivity";
 
