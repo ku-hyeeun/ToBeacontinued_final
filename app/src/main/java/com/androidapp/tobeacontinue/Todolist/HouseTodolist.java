@@ -320,9 +320,9 @@ public class HouseTodolist extends AppCompatActivity implements BeaconCallback, 
                         final int position = getAdapterPosition();
                         final int id = (int)maintext.getTag();
 
-                        builder.setTitle("메모를 삭제하시겠습니까? ");
+                        builder.setTitle(getString(R.string.delete_Memo));
                         builder.setMessage("\n");
-                        builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                        builder.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
 
@@ -334,7 +334,7 @@ public class HouseTodolist extends AppCompatActivity implements BeaconCallback, 
                             }
                         });
 
-                        builder.setNegativeButton("아니오", null);
+                        builder.setNegativeButton(getString(R.string.no), null);
                         builder.create().show();
 
                         return true;

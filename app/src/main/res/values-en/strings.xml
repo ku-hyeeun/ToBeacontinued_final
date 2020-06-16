@@ -44,4 +44,26 @@
     <string name="schedule_button">schedule registration</string>
     <string name="enter_todolist">enter todolist</string>
     <string name="date">date</string>
+
+    <string name = "address">address </string>
+    <string name = "to_do">To do </string>
+    <string name = "to_do_text">Enter address and to do, then press the OK button or press and hold to select the desired location.</string>
+    <string name = "to_do_check">Enter</string>
+    <string name = "save">Save</string>
+    <string name = "everytime">*This button will not run without the "'"Everytime"'" app*</string>
+
+    <string name = "delete_Memo">Are you sure you want to delete the note?</string>
+    <string name = "yes">Yes</string>
+    <string name = "no">No</string>
+
+    <string name = "alarm_toast">Alarm cannot be earlier than the current time.</string>
+    <string name = "no_address">There is no applicable address information.</string>
+    <string name = "maps_toast1">Write down the location and work to do.</string>
+    <string name = "maps_toast2">Confirm your location access.</string>
+    <string name = "maps_toast3">press the OK button or press and hold to select the desired location.</string>
+    <string name = "maps_toast4">Background position access is required for Geofence.</string>
+
+    <string name="memo_write">Enter what you want to do.</string>
+    <string name ="cancel">cancel</string>
+    <string name = "complete">complete</string>
 </resources>

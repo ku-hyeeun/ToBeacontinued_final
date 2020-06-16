@@ -88,7 +88,7 @@ public class AlarmActivity extends AppCompatActivity {
 
         //현재일보다 이전이면 등록 실패
         if(this.calendar.before(Calendar.getInstance())){
-            Toast.makeText(this,"알람시간이 현재시간보다 이전일 수 없습니다.",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,getString(R.string.alarm_toast),Toast.LENGTH_LONG).show();
             return;
         }
 

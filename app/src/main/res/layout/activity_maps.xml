@@ -66,7 +66,7 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="주소 "
+        android:text="@string/address"
         android:textAppearance="?android:attr/textAppearanceLarge"
         map:layout_constraintBottom_toBottomOf="@id/guideline_top_ho"
         map:layout_constraintStart_toStartOf="@id/guideline_ver" />
@@ -75,7 +75,7 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="할 일"
+        android:text="@string/to_do"
         android:textAppearance="?android:attr/textAppearanceLarge"
         map:layout_constraintBottom_toBottomOf="@id/guideline_bottom_ho"
         map:layout_constraintStart_toStartOf="@id/guideline_ver" />
@@ -109,7 +109,7 @@
         android:layout_marginRight="5dp"
         android:layout_marginBottom="15dp"
         android:background="@drawable/write_button"
-        android:text="확인"
+        android:text="@string/to_do_check"
         android:textColor="@android:color/white"
         map:layout_constraintBottom_toBottomOf="@id/guideline_map_top_ho"
         map:layout_constraintEnd_toEndOf="parent" />
@@ -121,7 +121,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginRight="5dp"
         android:background="@drawable/write_button"
-        android:text="저장"
+        android:text="@string/save"
         android:textColor="@android:color/white"
         map:layout_constraintEnd_toEndOf="parent"
         map:layout_constraintTop_toTopOf="@id/guideline_map_bottom_ho" />
@@ -136,7 +136,7 @@
         android:layout_marginBottom="8dp"
         android:maxLines="3"
         android:minLines="2"
-        android:text="주소, 할 일을 입력 후 확인 버튼을 누르거나 원하는 장소를 길게 눌러 선택하세요"
+        android:text="@string/to_do_text"
         android:textSize="18sp"
         map:autoSizeMaxTextSize="20sp"
         map:autoSizeMinTextSize="15sp"
