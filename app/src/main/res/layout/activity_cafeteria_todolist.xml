@@ -73,7 +73,7 @@
         app:layout_constraintEnd_toEndOf="@id/guideline_right_ver"
         app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="@id/guideline_left_ver"
-        app:layout_constraintTop_toTopOf="@id/guideline_top_memo_ho"
+        app:layout_constraintTop_toTopOf="@id/guideline_text_ho"
         app:layout_constraintVertical_bias="0.0">
 
         <androidx.recyclerview.widget.RecyclerView
@@ -135,6 +135,33 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.18" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_text_ho"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp"
+        app:layout_constraintGuide_percent="0.32" />
+
+    <view
+        android:id="@+id/view"
+        class="androidx.appcompat.widget.AppCompatTextView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:maxLines="2"
+        android:minLines="1"
+        android:text="*에브리타임 어플이 없으면 실행되지 않음*"
+        android:textSize="12sp"
+        app:autoSizeMaxTextSize="13sp"
+        app:autoSizeMinTextSize="8sp"
+        app:autoSizeStepGranularity="1sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_text_ho"
+        app:layout_constraintEnd_toEndOf="@id/guideline_right_ver"
+        app:layout_constraintStart_toStartOf="@id/guideline_left_ver"
+        app:layout_constraintTop_toTopOf="@id/guideline_top_memo_ho" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
