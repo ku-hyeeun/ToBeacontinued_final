@@ -42,7 +42,13 @@ import com.hanvitsi.midascon.BeaconCallback;
 import com.hanvitsi.midascon.MidasApplication;
 import com.hanvitsi.midascon.manager.ContextManager;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.function.Function;
+import java.util.function.ToDoubleFunction;
+import java.util.function.ToIntFunction;
+import java.util.function.ToLongFunction;
 
 
 public class CafeteriaTodolist extends AppCompatActivity implements BeaconCallback, Runnable{
@@ -271,7 +277,7 @@ public class CafeteriaTodolist extends AppCompatActivity implements BeaconCallba
     }
 
     //리사이클러어댑터 클래스
-    class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemViewHolder>{
+    class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemViewHolder> {
 
         private List<Memo> listdata;    //리스트 선언
         AlertDialog.Builder builder;    //알림 메세지 선언
@@ -300,6 +306,7 @@ public class CafeteriaTodolist extends AppCompatActivity implements BeaconCallba
         @Override
         public void onBindViewHolder(@NonNull ItemViewHolder itemViewHolder, int i) {
             final Memo memo=listdata.get(i);
+
             //메모 부분
             itemViewHolder.maintext.setTag(memo.getId());               //id
 
@@ -315,8 +322,15 @@ public class CafeteriaTodolist extends AppCompatActivity implements BeaconCallba
                     CheckBox cb = (CheckBox)view;
                     Memo check = (Memo)cb.getTag();
 
+                    if(check.equals(true)){
+                        memo.isdone = 0;
+                    }else if(check.equals(false)){
+                        memo.isdone = 1;
+                    }
+
                     check.setSelected(cb.isChecked());
                     memo.setSelected(cb.isChecked());
+
 
                 }
             });
@@ -370,6 +384,19 @@ public class CafeteriaTodolist extends AppCompatActivity implements BeaconCallba
                 });
             }
         }
+
     }
+    class Ascending implements Comparator<Integer>{
+
+        @Override
+        public int compare(Integer o1, Integer o2) {
+            return o2.compareTo(o1);
+        }
+
+
+    }
+
+
+
 
 }
