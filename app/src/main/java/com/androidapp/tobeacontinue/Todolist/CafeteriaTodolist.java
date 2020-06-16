@@ -313,21 +313,6 @@ public class CafeteriaTodolist extends AppCompatActivity implements BeaconCallba
             itemViewHolder.maintext.setText(memo.getContents());        //내용
             itemViewHolder.subtext.setText(memo.getCreateDateStr());    //날짜
 
-            itemViewHolder.chkSelected.setChecked(memo.isSelected());   //체크박스
-            itemViewHolder.chkSelected.setTag(memo);
-
-            itemViewHolder.chkSelected.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    CheckBox cb = (CheckBox)view;
-                    Memo check = (Memo)cb.getTag();
-
-                    check.setSelected(cb.isChecked());
-                    memo.setSelected(cb.isChecked());
-
-
-                }
-            });
         }
 
         void addItem(Memo memo){
@@ -341,21 +326,12 @@ public class CafeteriaTodolist extends AppCompatActivity implements BeaconCallba
         class ItemViewHolder extends RecyclerView.ViewHolder{
             private TextView maintext;
             private TextView subtext;
-            public CheckBox chkSelected;
-            Memo memo1;
 
             public ItemViewHolder(@NonNull View itemView){
                 super(itemView);
 
                 maintext=itemView.findViewById(R.id.contentsTextView);
                 subtext=itemView.findViewById(R.id.dateTextView);
-                chkSelected = itemView.findViewById(R.id.checkbox);
-                if(chkSelected.equals(true)){
-                    memo1.isdone=0;
-                }else if(chkSelected.equals(false)){
-                    memo1.isdone=1;
-                }
-                Collections.sort(memoList);
 
                 itemView.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override

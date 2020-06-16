@@ -3,7 +3,7 @@ package com.androidapp.tobeacontinue.Todolist;
 import java.io.Serializable;
 
 //하나의 일정에 체크박스, 내용, 날짜가 있는 데 그 데이터를 담기 위한 클래스 정의
-public class Memo implements Serializable, Comparable<Memo>{
+public class Memo implements Serializable{
 
     int id;                                //db저장을 위함
     public String contents;               //내용
@@ -58,13 +58,5 @@ public class Memo implements Serializable, Comparable<Memo>{
         isSelected = selected;
     }
 
-    @Override
-    public int compareTo(Memo o) {
-        if(this.isdone<=o.isdone){
-            return -1;
-        }else if(this.isdone > o.isdone){
-            return 1;
-        }
-        return 0;
-    }
+
 }
