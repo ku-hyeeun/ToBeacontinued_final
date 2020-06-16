@@ -357,20 +357,7 @@ public class SchoolTodolist extends AppCompatActivity implements BeaconCallback,
 
             itemViewHolder.maintext.setText(memo.getContents());
             itemViewHolder.subtext.setText(memo.getCreateDateStr());
-            itemViewHolder.chkSelected.setChecked(memo.isSelected());
-            itemViewHolder.chkSelected.setTag(memo);
 
-            itemViewHolder.chkSelected.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    CheckBox cb = (CheckBox)view;
-                    Memo check = (Memo)cb.getTag();
-
-                    check.setSelected(cb.isChecked());
-                    memo.setSelected(cb.isChecked());
-
-                }
-            });
 
         }
 
@@ -385,14 +372,13 @@ public class SchoolTodolist extends AppCompatActivity implements BeaconCallback,
         class ItemViewHolder extends RecyclerView.ViewHolder{
             private TextView maintext;
             private TextView subtext;
-            public CheckBox chkSelected;
 
             public ItemViewHolder(@NonNull View itemView){
                 super(itemView);
 
                 maintext=itemView.findViewById(R.id.contentsTextView);
                 subtext=itemView.findViewById(R.id.dateTextView);
-                chkSelected = itemView.findViewById(R.id.checkbox);
+
 
                 itemView.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override

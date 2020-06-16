@@ -313,27 +313,6 @@ public class CafeteriaTodolist extends AppCompatActivity implements BeaconCallba
             itemViewHolder.maintext.setText(memo.getContents());        //내용
             itemViewHolder.subtext.setText(memo.getCreateDateStr());    //날짜
 
-            itemViewHolder.chkSelected.setChecked(memo.isSelected());   //체크박스
-            itemViewHolder.chkSelected.setTag(memo);
-
-            itemViewHolder.chkSelected.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    CheckBox cb = (CheckBox)view;
-                    Memo check = (Memo)cb.getTag();
-
-                    if(check.equals(true)){
-                        memo.isdone = 0;
-                    }else if(check.equals(false)){
-                        memo.isdone = 1;
-                    }
-
-                    check.setSelected(cb.isChecked());
-                    memo.setSelected(cb.isChecked());
-
-
-                }
-            });
         }
 
         void addItem(Memo memo){
@@ -347,14 +326,12 @@ public class CafeteriaTodolist extends AppCompatActivity implements BeaconCallba
         class ItemViewHolder extends RecyclerView.ViewHolder{
             private TextView maintext;
             private TextView subtext;
-            public CheckBox chkSelected;
 
             public ItemViewHolder(@NonNull View itemView){
                 super(itemView);
 
                 maintext=itemView.findViewById(R.id.contentsTextView);
                 subtext=itemView.findViewById(R.id.dateTextView);
-                chkSelected = itemView.findViewById(R.id.checkbox);
 
                 itemView.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
@@ -384,15 +361,6 @@ public class CafeteriaTodolist extends AppCompatActivity implements BeaconCallba
                 });
             }
         }
-
-    }
-    class Ascending implements Comparator<Integer>{
-
-        @Override
-        public int compare(Integer o1, Integer o2) {
-            return o2.compareTo(o1);
-        }
-
 
     }
 
