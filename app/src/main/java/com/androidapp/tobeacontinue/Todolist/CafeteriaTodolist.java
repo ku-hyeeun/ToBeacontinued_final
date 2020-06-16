@@ -322,12 +322,6 @@ public class CafeteriaTodolist extends AppCompatActivity implements BeaconCallba
                     CheckBox cb = (CheckBox)view;
                     Memo check = (Memo)cb.getTag();
 
-                    if(check.equals(true)){
-                        memo.isdone = 0;
-                    }else if(check.equals(false)){
-                        memo.isdone = 1;
-                    }
-
                     check.setSelected(cb.isChecked());
                     memo.setSelected(cb.isChecked());
 
@@ -348,6 +342,7 @@ public class CafeteriaTodolist extends AppCompatActivity implements BeaconCallba
             private TextView maintext;
             private TextView subtext;
             public CheckBox chkSelected;
+            Memo memo1;
 
             public ItemViewHolder(@NonNull View itemView){
                 super(itemView);
@@ -355,6 +350,12 @@ public class CafeteriaTodolist extends AppCompatActivity implements BeaconCallba
                 maintext=itemView.findViewById(R.id.contentsTextView);
                 subtext=itemView.findViewById(R.id.dateTextView);
                 chkSelected = itemView.findViewById(R.id.checkbox);
+                if(chkSelected.equals(true)){
+                    memo1.isdone=0;
+                }else if(chkSelected.equals(false)){
+                    memo1.isdone=1;
+                }
+                Collections.sort(memoList);
 
                 itemView.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
@@ -384,15 +385,6 @@ public class CafeteriaTodolist extends AppCompatActivity implements BeaconCallba
                 });
             }
         }
-
-    }
-    class Ascending implements Comparator<Integer>{
-
-        @Override
-        public int compare(Integer o1, Integer o2) {
-            return o2.compareTo(o1);
-        }
-
 
     }
 
