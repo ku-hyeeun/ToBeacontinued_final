@@ -57,12 +57,11 @@
              You can define the keys for the debug and release targets in src/debug/ and src/release/.
         -->
 
-        <!-- 배포용 KEY -->
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="78:57:10:3C:89:8C:27:4A:A5:E5:66:E7:B7:C8:B9:A9:B6:8A:1A:D2" />
 
-        
+        <meta-data
+        android:name="com.google.android.geo.API_KEY"
+        android:value="AIzaSyCNJSGMVbMnWvWXNB808sl7aB8gShY_hNU"/>
+
         <!--
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
