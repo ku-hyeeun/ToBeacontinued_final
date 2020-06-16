@@ -387,9 +387,9 @@ public class SchoolTodolist extends AppCompatActivity implements BeaconCallback,
                         final int id = (int)maintext.getTag();
 
                         builder = new AlertDialog.Builder(SchoolTodolist.this);
-                        builder.setTitle("메모를 삭제하시겠습니까? ");
+                        builder.setTitle(getString(R.string.delete_Memo));
                         builder.setMessage("\n");
-                        builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                        builder.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 if(position != RecyclerView.NO_POSITION){
@@ -400,7 +400,7 @@ public class SchoolTodolist extends AppCompatActivity implements BeaconCallback,
                             }
                         });
 
-                        builder.setNegativeButton("아니오", null);
+                        builder.setNegativeButton(getString(R.string.no), null);
                         builder.create().show();
 
                         return false;

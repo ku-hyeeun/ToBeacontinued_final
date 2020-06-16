@@ -9,7 +9,7 @@
         android:title="@string/settings" />
 
     <PreferenceScreen
-        android:icon="@drawable/ic_vibrate"
+        android:icon="@drawable/ic_vibration"
         android:title="@string/settings_alarm"
         android:summary="@string/settings_alarm_explain">
         <intent
