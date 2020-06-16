@@ -28,7 +28,14 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 
+            // 배포용 KEY
+            resValue "string", "google_maps_key", "AIzaSyCI2xNepQT7M_pNfP2mx4-czgo9WilA3jU"
         }
+
+        debug {
+            resValue "string", "google_maps_key", "AIzaSyAK6cxHJeYIJ7NUVmXpTyY9AdpFfvD7c5s"
+        }
+
     }
 }
 
