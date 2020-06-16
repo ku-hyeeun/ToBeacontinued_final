@@ -8,16 +8,24 @@
     <PreferenceCategory
         android:title="@string/settings" />
 
-    <PreferenceScreen android:title="@string/settings_alarm"
+    <PreferenceScreen
+        android:icon="@drawable/ic_vibrate"
+        android:title="@string/settings_alarm"
         android:summary="@string/settings_alarm_explain">
-        <intent android:targetPackage="com.android.settings"
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="com.android.settings"
             android:targetClass="com.android.settings.SoundSettings"/>
 
     </PreferenceScreen>
 
-    <PreferenceScreen android:title = "@string/settings_lang"
+    <PreferenceScreen
+        android:icon="@drawable/ic_language"
+        android:title = "@string/settings_lang"
         android:summary="@string/settings_language">
-        <intent android:targetPackage="com.android.settings"
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="com.android.settings"
             android:targetClass="com.android.settings.LanguageSettings"/>
     </PreferenceScreen>
 
