@@ -41,6 +41,7 @@ import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMapLongClickListener {
 
+    
     GeoDBHelper databaseHelper;
 
     Button AddressMap_Button, save_Button;
