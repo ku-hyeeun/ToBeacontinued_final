@@ -1,44 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:padding="10dp"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:background="@drawable/memo_border"
+    android:orientation="horizontal"
+    android:visibility="visible">
 
-    <LinearLayout
+
+<ImageView
+    android:id="@+id/imageView"
+    android:layout_width="32dp"
+    android:layout_height="32dp"
+    android:layout_gravity="center_vertical"
+    android:layout_marginRight="10dp"
+    android:padding="8dp"
+    app:srcCompat="@drawable/ic_memodot"
+    tools:ignore="VectorDrawableCompat" />
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_marginRight="5dp"
+    android:layout_weight="1"
+    android:background="@drawable/border"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/contentsTextView"
+        android:layout_width="286dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="9dp"
+        android:text="내용"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:padding="2dp"/>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="#ffffff"
-        android:padding="10dp">
+        android:layout_marginTop="4dp"
+        android:padding="3dp">
+
 
         <TextView
-            android:id="@+id/item_maintext"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:textSize="14sp"
-            android:layout_weight="1"
-            />
+            android:id="@+id/dateTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="65dp"
+            android:text="YYYY-MM-DD"
+            android:textColor="#293A98"
+            android:textSize="15sp" />
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/slash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="55dp"
+            android:text="/"
+            android:textColor="#293A98"
+            android:textSize="15sp" />
 
-    <TextView
-        android:id="@+id/item_subtext"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#F1F1F1"
-        android:padding="10dp"
-        android:textAlignment="textEnd"
-        android:gravity="end" />
+        <TextView
+            android:id="@+id/timeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="14dp"
+            android:text="HH:mm"
+            android:textColor="#293A98"
+            android:textSize="15sp" />
 
-    <TextView
-        android:id="@+id/item_time"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#F1F1F1"
-        android:textAlignment="textEnd"
-        android:padding="5dp"
-        android:gravity="end" />
+    </RelativeLayout>
+
+
 </LinearLayout>
+
+</LinearLayout>
+
+

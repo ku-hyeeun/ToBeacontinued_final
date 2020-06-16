@@ -110,7 +110,7 @@ public class CalendarTodolist extends AppCompatActivity {
         @NonNull
         @Override
         public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-            View view= LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_item,viewGroup,false);
+            View view= LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.calendar_memo,viewGroup,false);
             return new ItemViewHolder(view);
         }
 
@@ -151,9 +151,9 @@ public class CalendarTodolist extends AppCompatActivity {
             public ItemViewHolder(@NonNull View itemView){
                 super(itemView);
 
-                maintext=itemView.findViewById(R.id.item_maintext);
-                subtext=itemView.findViewById(R.id.item_subtext);
-                timetext=itemView.findViewById(R.id.item_time);
+                maintext=itemView.findViewById(R.id.contentsTextView);
+                subtext=itemView.findViewById(R.id.dateTextView);
+                timetext=itemView.findViewById(R.id.timeTextView);
 
                 itemView.setOnLongClickListener(new View.OnLongClickListener(){
 
