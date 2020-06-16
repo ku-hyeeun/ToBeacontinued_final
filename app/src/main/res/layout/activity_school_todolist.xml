@@ -78,17 +78,6 @@
         app:layout_constraintStart_toStartOf="@id/guideline_ver"
         app:layout_constraintTop_toTopOf="@id/guideline_top_ho" />
 
-    <TextView
-        android:id="@+id/textview"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="@string/memo_delete"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="@id/guideline_bottom_ho"
-        app:layout_constraintEnd_toEndOf="@id/guideline_ver"
-        app:layout_constraintStart_toStartOf="@id/guideline_left_ver"
-        app:layout_constraintTop_toTopOf="@id/guideline_top_ho" />
-
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -143,5 +132,23 @@
         </RelativeLayout>
 
     </ScrollView>
+
+    <view
+        android:id="@+id/view"
+        class="androidx.appcompat.widget.AppCompatTextView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:maxLines="3"
+        android:minLines="2"
+        android:text="@string/memo_delete"
+        android:textSize="15sp"
+        app:autoSizeMaxTextSize="17sp"
+        app:autoSizeMinTextSize="10sp"
+        app:autoSizeStepGranularity="1sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_bottom_ho"
+        app:layout_constraintEnd_toEndOf="@id/guideline_ver"
+        app:layout_constraintStart_toStartOf="@id/guideline_left_ver"
+        app:layout_constraintTop_toTopOf="@id/guideline_top_ho" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
