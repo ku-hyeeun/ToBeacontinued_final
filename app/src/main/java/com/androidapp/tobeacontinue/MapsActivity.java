@@ -103,6 +103,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     list = geocoder.getFromLocationName
                             (str, // 지역 이름
                                     10); // 읽을 개수
+
                 } catch (IOException e) {
                     e.printStackTrace();
                     Log.e("test","입출력 오류 - 서버에서 주소변환시 에러발생");
@@ -110,7 +111,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 if (list != null) {
                     if (list.size() == 0) {
-                        result_textView.setText("해당되는 주소 정보는 없습니다");
+                        result_textView.setText(getString(R.string.no_address));
                     } else {
 
                         //입력한 주소 결과창에 표시
@@ -131,7 +132,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 if(address_editText.length() != 0 && todo_editText.length() != 0){
                 }
                 else{
-                    Toast.makeText(MapsActivity.this,"장소와 할 일을 적어주세요",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MapsActivity.this,getString(R.string.maps_toast1),Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -156,7 +157,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     finish();
                 }
                 else{
-                    Toast.makeText(MapsActivity.this,"장소와 할 일을 적어주세요",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MapsActivity.this,getString(R.string.maps_toast1),Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -212,7 +213,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 mMap.setMyLocationEnabled(true);
             }else{
                 //We do not have permission
-                Toast.makeText(this,"위치 접근 권한을 확인해주세요"
+                Toast.makeText(this,getString(R.string.maps_toast2)
                         ,Toast.LENGTH_SHORT).show();
             }
         }
@@ -220,10 +221,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if(requestCode == BACKGROUND_LOCATION_ACCESS_REQUEST_CODE){
             if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                 //We have the permission
-                Toast.makeText(this, "확인 버튼을 누르시거나 원하는 장소를 길게 눌러주세요",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.maps_toast3),Toast.LENGTH_SHORT).show();
             }else{
                 //We do not have permission
-                Toast.makeText(this,"백그라운드 위치 접근이 Geofence에 필요합니다"
+                Toast.makeText(this,getString(R.string.maps_toast4)
                         ,Toast.LENGTH_SHORT).show();
             }
         }
@@ -256,7 +257,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         }
         else{
-            Toast.makeText(MapsActivity.this,"장소와 할 일을 적어주세요",Toast.LENGTH_SHORT).show();
+            Toast.makeText(MapsActivity.this,getString(R.string.maps_toast1),Toast.LENGTH_SHORT).show();
         }
     }
 
