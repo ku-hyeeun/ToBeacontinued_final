@@ -29,7 +29,7 @@
 
 ### [디자인]
 #### 2-14. splash 화면
-#### 2-15. nevigation bar
+#### 2-15. nevigation Drawer
 #### 2-16. Tool Bar
 #### 2-17. 기종에 상관없는 디자인
 
