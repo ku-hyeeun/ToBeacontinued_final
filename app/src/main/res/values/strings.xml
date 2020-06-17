@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="app_name">To Bea-continued</string>
@@ -75,4 +76,4 @@
     <string name = "school_message">한누리관입니다.</string>
     <string name = "cafeteria_message">학생회관입니다.</string>
 
-<resources>
+</resources>
