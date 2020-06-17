@@ -160,7 +160,7 @@ public class CafeteriaTodolist extends AppCompatActivity implements BeaconCallba
     @Override
     public void onBeaconCallback(int i, Beacon beacon) {
         if(beacon.getMac().equals("10-78-ce-30-00-7d") && memoList.size() != 0){        //각 장소에 비콘 아이디 다르게 설정해줌 & memoList size가 0이 아닐경우 비콘 울림
-            if(beacon.getRssi()+70>0) {         //거리 약 5m이내 까지
+            if(beacon.getRssi()+70>0) {         //test를 위해 다 1m 반경으로 설정하였습니다.
                 if (adapter != null)
                     adapter.addBeacon(beacon);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
