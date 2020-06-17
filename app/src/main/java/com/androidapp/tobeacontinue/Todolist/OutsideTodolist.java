@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -136,7 +137,7 @@ public class OutsideTodolist extends AppCompatActivity implements BeaconCallback
     @Override
     public void onBeaconCallback(int i, Beacon beacon) {
         if(beacon.getMac().equals("10-78-ce-30-00-b0") && memoList.size() != 0){
-            if(beacon.getRssi()+80>0) {
+            if(beacon.getRssi()+70>0) {
                 if (adapter != null)
                     adapter.addBeacon(beacon);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -179,7 +180,7 @@ public class OutsideTodolist extends AppCompatActivity implements BeaconCallback
         builder.setPriority(NotificationCompat.PRIORITY_HIGH);
 
         builder.setSmallIcon(R.drawable.ic_launcher);
-        builder.setTicker(getString(R.string.Beacon));
+        builder.setTicker(getString(R.string.outside_message));
         builder.setContentTitle(beacon.getId());
         builder.setContentText(getString(R.string.Beacon_Alarm));
 
@@ -188,7 +189,7 @@ public class OutsideTodolist extends AppCompatActivity implements BeaconCallback
 
         NotificationCompat.BigTextStyle style = new NotificationCompat.BigTextStyle(builder);
         style.bigText(getString(R.string.Beacon_Alarm));
-        style.setBigContentTitle(getString(R.string.Beacon));
+        style.setBigContentTitle(getString(R.string.outside_message));
         style.setSummaryText(getString(R.string.app_name));
 
         manager.notify(notify, style.build());

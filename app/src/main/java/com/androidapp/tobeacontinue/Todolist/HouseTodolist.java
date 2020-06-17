@@ -182,7 +182,7 @@ public class HouseTodolist extends AppCompatActivity implements BeaconCallback, 
 
         builder.setSmallIcon(R.drawable.ic_launcher);
         builder.setTicker(getString(R.string.Beacon));
-        builder.setContentTitle(beacon.getId());
+        builder.setContentTitle(getString(R.string.house_message));
         builder.setContentText(getString(R.string.Beacon_Alarm));
 
         builder.setAutoCancel(true);
@@ -190,7 +190,7 @@ public class HouseTodolist extends AppCompatActivity implements BeaconCallback, 
 
         NotificationCompat.BigTextStyle style = new NotificationCompat.BigTextStyle(builder);
         style.bigText(getString(R.string.Beacon_Alarm));
-        style.setBigContentTitle(getString(R.string.Beacon));
+        style.setBigContentTitle(getString(R.string.house_message));
         style.setSummaryText(getString(R.string.app_name));
 
         manager.notify(notify, style.build());

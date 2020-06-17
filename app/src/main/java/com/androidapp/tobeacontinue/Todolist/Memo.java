@@ -1,5 +1,7 @@
 package com.androidapp.tobeacontinue.Todolist;
 
+import android.widget.ImageView;
+
 import java.io.Serializable;
 
 //하나의 일정에 체크박스, 내용, 날짜가 있는 데 그 데이터를 담기 위한 클래스 정의
@@ -9,7 +11,6 @@ public class Memo implements Serializable{
     public String contents;               //내용
     public String createDateStr;          //날짜
     int isdone;                            //완료 여부
-    boolean isSelected;
 
     public Memo(int id, String contents, String createDateStr, int isdone){
         this.id = id;
@@ -48,14 +49,6 @@ public class Memo implements Serializable{
 
     public void setIsdone(int isdone) {
         this.isdone = isdone;
-    }
-
-    public boolean isSelected() {
-        return isSelected;
-    }
-
-    public void setSelected(boolean selected) {
-        isSelected = selected;
     }
 
 

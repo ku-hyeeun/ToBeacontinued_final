@@ -160,7 +160,7 @@ public class CafeteriaTodolist extends AppCompatActivity implements BeaconCallba
     @Override
     public void onBeaconCallback(int i, Beacon beacon) {
         if(beacon.getMac().equals("10-78-ce-30-00-7d") && memoList.size() != 0){        //각 장소에 비콘 아이디 다르게 설정해줌 & memoList size가 0이 아닐경우 비콘 울림
-            if(beacon.getRssi()+80>0) {         //거리 약 5m이내 까지
+            if(beacon.getRssi()+70>0) {         //거리 약 5m이내 까지
                 if (adapter != null)
                     adapter.addBeacon(beacon);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -204,7 +204,7 @@ public class CafeteriaTodolist extends AppCompatActivity implements BeaconCallba
 
         builder.setSmallIcon(R.drawable.ic_launcher);
         builder.setTicker(getString(R.string.Beacon));
-        builder.setContentTitle(beacon.getId());
+        builder.setContentTitle(getString(R.string.cafeteria_message));
         builder.setContentText(getString(R.string.Beacon_Alarm));
 
         builder.setAutoCancel(true);
@@ -212,7 +212,7 @@ public class CafeteriaTodolist extends AppCompatActivity implements BeaconCallba
 
         NotificationCompat.BigTextStyle style = new NotificationCompat.BigTextStyle(builder);
         style.bigText(getString(R.string.Beacon_Alarm));
-        style.setBigContentTitle(getString(R.string.Beacon));
+        style.setBigContentTitle(getString(R.string.cafeteria_message));
         style.setSummaryText(getString(R.string.app_name));
 
         manager.notify(notify, style.build());

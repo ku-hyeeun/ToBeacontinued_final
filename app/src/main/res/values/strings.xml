@@ -70,4 +70,9 @@
     <string name ="cancel">취소</string>
     <string name = "complete">완료</string>
 
-</resources>
+    <string name = "house_message">집입니다.</string>
+    <string name = "outside_message">집 밖입니다.</string>
+    <string name = "school_message">한누리관입니다.</string>
+    <string name = "cafeteria_message">학생회관입니다.</string>
+
+<resources>

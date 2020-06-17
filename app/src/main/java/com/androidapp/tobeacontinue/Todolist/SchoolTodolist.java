@@ -207,7 +207,7 @@ public class SchoolTodolist extends AppCompatActivity implements BeaconCallback,
     @Override
     public void onBeaconCallback(int i, Beacon beacon) {
         if(beacon.getMac().equals("10-78-ce-30-02-54") && memoList.size() != 0){
-            if(beacon.getRssi()+80>0) {
+            if(beacon.getRssi()+70>0) {
                 if (adapter != null)
                     adapter.addBeacon(beacon);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -251,7 +251,7 @@ public class SchoolTodolist extends AppCompatActivity implements BeaconCallback,
 
         builder.setSmallIcon(R.drawable.ic_launcher);
         builder.setTicker(getString(R.string.Beacon));
-        builder.setContentTitle(beacon.getId());
+        builder.setContentTitle(getString(R.string.school_message));
         builder.setContentText(getString(R.string.Beacon_Alarm));
 
         builder.setAutoCancel(true);
@@ -259,7 +259,7 @@ public class SchoolTodolist extends AppCompatActivity implements BeaconCallback,
 
         NotificationCompat.BigTextStyle style = new NotificationCompat.BigTextStyle(builder);
         style.bigText(getString(R.string.Beacon_Alarm));
-        style.setBigContentTitle(getString(R.string.Beacon));
+        style.setBigContentTitle(getString(R.string.school_message));
         style.setSummaryText(getString(R.string.app_name));
 
         manager.notify(notify, style.build());
