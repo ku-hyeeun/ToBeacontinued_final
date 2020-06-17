@@ -21,6 +21,8 @@ import java.util.Random;
 
 public class NotificationHelper extends ContextWrapper {
 
+    // 지오펜스 notification
+
     private static final String TAG = "NotificationHelper";
 
     public NotificationHelper(Context base) {

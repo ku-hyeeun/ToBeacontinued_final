@@ -28,8 +28,7 @@ public class GeoFenceHelper extends ContextWrapper {
     //모니터링할 지오펜싱을 지정하고 관련 지오펜싱 이벤트가 트리거되는 방법 설정
     public GeofencingRequest getGeofencingRequest(Geofence geofence){
         return new GeofencingRequest.Builder()
-                .addGeofence(geofence)      //싱글 지오펜스
-                //.addGeofences(geofence)   //멀티 지오펜스
+                .addGeofence(geofence)
                 .setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER)
                 .build();
     }
