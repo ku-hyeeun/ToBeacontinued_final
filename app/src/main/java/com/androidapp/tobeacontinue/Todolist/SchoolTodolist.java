@@ -207,9 +207,9 @@ public class SchoolTodolist extends AppCompatActivity implements BeaconCallback,
     @Override
     public void onBeaconCallback(int i, Beacon beacon) {
         if(beacon.getMac().equals("10-78-ce-30-02-54") && memoList.size() != 0){
+            if (adapter != null)
+                adapter.addBeacon(beacon);
             if(beacon.getRssi()+70>0) {
-                if (adapter != null)
-                    adapter.addBeacon(beacon);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     showNotification(beacon);
                 }

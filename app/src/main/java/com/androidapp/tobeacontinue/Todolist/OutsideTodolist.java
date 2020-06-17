@@ -18,10 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -33,8 +30,6 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.androidapp.tobeacontinue.MenuActivity;
 import com.androidapp.tobeacontinue.R;
 import com.androidapp.tobeacontinue.database.MemoDBHelper;
 import com.androidapp.tobeacontinue.midascon.BeaconListAdapter;
@@ -134,16 +129,16 @@ public class OutsideTodolist extends AppCompatActivity implements BeaconCallback
         return super.onOptionsItemSelected(item);
     }
 
+
     @Override
     public void onBeaconCallback(int i, Beacon beacon) {
-        if(beacon.getMac().equals("10-78-ce-30-00-b0") && memoList.size() != 0){
-            if(beacon.getRssi()+70>0) {
-                if (adapter != null)
-                    adapter.addBeacon(beacon);
+        if (beacon.getMac().equals("10-78-ce-30-00-b0") && memoList.size() != 0){
+            if (adapter != null)
+                adapter.addBeacon(beacon);
+            if (beacon.getRssi() + 70 > 0) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     showNotification(beacon);
                 }
-
                 runOnUiThread(this);
             }
         }
@@ -181,7 +176,7 @@ public class OutsideTodolist extends AppCompatActivity implements BeaconCallback
 
         builder.setSmallIcon(R.drawable.ic_launcher);
         builder.setTicker(getString(R.string.outside_message));
-        builder.setContentTitle(beacon.getId());
+        builder.setContentTitle(getString(R.string.outside_message));
         builder.setContentText(getString(R.string.Beacon_Alarm));
 
         builder.setAutoCancel(true);
