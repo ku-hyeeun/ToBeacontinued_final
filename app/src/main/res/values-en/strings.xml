@@ -66,4 +66,9 @@
     <string name="memo_write">Enter what you want to do.</string>
     <string name ="cancel">cancel</string>
     <string name = "complete">complete</string>
+
+    <string name = "house_message">You"'"re in the house.</string>
+    <string name = "outside_message">You"''re outside the house.</string>
+    <string name = "school_message">You"'"re in the school.</string>
+    <string name = "cafeteria_message">You"'"re in the cafeteria.</string>
 </resources>
