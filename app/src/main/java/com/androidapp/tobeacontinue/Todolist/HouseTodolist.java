@@ -97,6 +97,7 @@ public class HouseTodolist extends AppCompatActivity implements BeaconCallback, 
             }
         });
 
+        //비콘
         contextManager = getMidasApplication().getContextManager();
         contextManager.getBeaconSettings().setMidasScanMode(true);
 
@@ -138,9 +139,9 @@ public class HouseTodolist extends AppCompatActivity implements BeaconCallback, 
     @Override
     public void onBeaconCallback(int i, Beacon beacon) {
         if(beacon.getMac().equals("10-78-ce-30-02-fb") && memoList.size() != 0){
-            if (adapter != null)
-                adapter.addBeacon(beacon);
             if(beacon.getRssi()+70>0) {             //거리 약 1m 50cm ~ 2m 사이
+                if (adapter != null)
+                    adapter.addBeacon(beacon);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     showNotification(beacon);
                 }
