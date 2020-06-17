@@ -28,8 +28,8 @@
 #### 2-13. 언어 설정
 
 ### [디자인]
-#### 2-14. splash 화면
-#### 2-15. nevigation Drawer
+#### 2-14. Splash 화면
+#### 2-15. Nevigation Drawer
 #### 2-16. Tool Bar
 #### 2-17. 기종에 상관없는 디자인
 
