@@ -171,8 +171,6 @@ public class SchoolTodolist extends AppCompatActivity implements BeaconCallback,
                 imgView.setImageBitmap(scaled);                     //이미지 불러온 후
                 imageDBHelper.insertImage(imgViewToByte(imgView));  //DB에 img를 byte로 변환 후 저장
 
-            }else {
-                Toast.makeText(this,"취소되었습니다.",Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
             Toast.makeText(this,"로딩에 오류가 있습니다.",Toast.LENGTH_SHORT).show();
