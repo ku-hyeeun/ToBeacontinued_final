@@ -31,6 +31,7 @@
     <string name="cafeteria">Cafeteria</string>
     <string name="add_place">Add place</string>
     <string name="school">School</string>
+    <string name="alarm">Alarm</string>
 
     <string name="add_Beacon">Beacon</string>
     <string name="add_calendar">Calendar</string>
@@ -77,4 +78,8 @@
         Do you want to go to the Location Settings?</string>
     <string name = "location_access_toast">"The current postion button is not available.\n
         Confirm your location access."</string>
+
+    <string name = "bluetooth_access">Bluetooth permissions</string>
+    <string name = "bluetooth_access_alert">Bluetooth settings are required to use Beacon.\n Do you want to go to the Bluetooth setup screen?</string>
+    <string name = "bluetooth_access_toast">Beacon is not available.\n Please check Bluetooth permission.</string>
 </resources>

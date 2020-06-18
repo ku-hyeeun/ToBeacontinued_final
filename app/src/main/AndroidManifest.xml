@@ -32,7 +32,8 @@
         <activity android:name=".Calendar.AlarmActivity" />
         <activity
             android:name=".Calendar.CalendarTodolist"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:label="@string/alarm"/>
 
         <receiver
             android:name=".Calendar.AlarmReceiver"

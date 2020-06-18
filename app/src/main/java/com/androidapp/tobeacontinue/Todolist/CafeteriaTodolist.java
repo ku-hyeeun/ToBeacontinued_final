@@ -247,8 +247,8 @@ public class CafeteriaTodolist extends AppCompatActivity implements BeaconCallba
                 contextManager.stopLeScan();
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("Bluetooth 권한 설정");
-                builder.setMessage("Beacon을 사용하기 위해 Bluetooth 설정이 필요합니다. \nBluetooth 설정 화면으로 이동하시겠습니까?");
+                builder.setTitle(getString(R.string.bluetooth_access));
+                builder.setMessage(getString(R.string.bluetooth_access_alert));
                 builder.setPositiveButton(getString(R.string.yes),
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
@@ -259,7 +259,7 @@ public class CafeteriaTodolist extends AppCompatActivity implements BeaconCallba
                 builder.setNegativeButton(getString(R.string.no),
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(getApplicationContext(), "Beacon을 사용할 수 없습니다. \nBluetooth 권한을 확인해주세요.", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), getString(R.string.bluetooth_access_toast), Toast.LENGTH_LONG).show();
                             }
                         });
                 builder.show();
