@@ -134,7 +134,7 @@ public class OutsideTodolist extends AppCompatActivity implements BeaconCallback
     public void onBeaconCallback(int i, Beacon beacon) {
         if (beacon.getMac().equals("10-78-ce-30-00-b0") && memoList.size() != 0){
             if (beacon.getRssi() + 70 > 0) {
-                if (adapter != null) 
+                if (adapter != null)
                     adapter.addBeacon(beacon);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     showNotification(beacon);

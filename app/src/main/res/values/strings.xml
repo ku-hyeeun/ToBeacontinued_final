@@ -76,4 +76,8 @@
     <string name = "school_message">한누리관입니다.</string>
     <string name = "cafeteria_message">학생회관입니다.</string>
 
+    <string name = "location_access">위치 권한 설정</string>
+    <string name ="location_access_alert">Google map에서 현재위치를 가져오기 위해 위치 권한이 필요합니다.\n 위치 설정으로 이동하시겠습니까?</string>
+    <string name = "location_access_toast">"현재위치 버튼을 사용할 수 없습니다.\n 위치 접근 권한을 확인해주세요."</string>
+
 </resources>

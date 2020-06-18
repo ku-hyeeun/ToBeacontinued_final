@@ -71,4 +71,10 @@
     <string name = "outside_message">You"''re outside the house.</string>
     <string name = "school_message">You"'"re in the school.</string>
     <string name = "cafeteria_message">You"'"re in the cafeteria.</string>
+
+    <string name = "location_access">Set location permissions</string>
+    <string name ="location_access_alert">Location permission is required to get the current location from Google Maps.\n
+        Do you want to go to the Location Settings?</string>
+    <string name = "location_access_toast">"The current postion button is not available.\n
+        Confirm your location access."</string>
 </resources>

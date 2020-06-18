@@ -219,9 +219,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     mMap.setMyLocationEnabled(true);
                 } else{
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("위치 권한 설정");
-                builder.setMessage("Google map에서 현재위치를 가져오기 위해 위치 권한이 필요합니다. \n위치 설정으로 이동하시겠습니까?");
-                builder.setPositiveButton("예",
+                builder.setTitle(getString(R.string.location_access));
+                builder.setMessage(getString(R.string.location_access_alert));
+                builder.setPositiveButton(getString(R.string.yes),
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 Intent settingsIntent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
@@ -229,10 +229,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 mMap.setMyLocationEnabled(true);
                             }
                         });
-                builder.setNegativeButton("아니오",
+                builder.setNegativeButton(getString(R.string.no),
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(getApplicationContext(), "현재위치 버튼을 사용할 수 없습니다.\n위치 접근 권한을 확인해주세요.", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), getString(R.string.location_access_toast), Toast.LENGTH_LONG).show();
                             }
                         });
                 builder.show();
