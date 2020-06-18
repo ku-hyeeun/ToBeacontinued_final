@@ -1336,9 +1336,13 @@ background화면으로 drawable 폴더 내에서 배경을 만든 이미지파�
 * 기종에 따라 디자인이 영향을 받지 않도록 layout을 변경하였다.     
 
 * Layout은 ConstraintLayout을 사용하며 아래의 순서대로 xml파일을 수정한다.   
+
 ▷ Component Tree 우클릭 > Helpers > Add Vertical Guidline 또는 Add Horizontal Guidline을 추가한다.    
+
 ▷ 각 Guidline의 constraintguide_percent를 원하는 percent로 정해준다.   
+
 ▷ 버튼, 텍스트 등의 start_tostartof / end_toendof / bottom_tobottomof / top_totopof를 정해준다. (상하좌우)   
+
 ▷ 버튼, 텍스트 등이 정해진 영역을 다 차지할 경우 width와 height를 0dp로 지정한다.   
 
 <img src="https://user-images.githubusercontent.com/62587484/84990680-7bd97300-b180-11ea-93e9-0cffe035adc5.png" width="40%"><img src="https://user-images.githubusercontent.com/62587484/84990735-8c89e900-b180-11ea-97c0-4f43b6967961.png" width="20.5%">
