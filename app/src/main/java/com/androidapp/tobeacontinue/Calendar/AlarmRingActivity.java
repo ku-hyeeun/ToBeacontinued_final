@@ -1,11 +1,14 @@
 package com.androidapp.tobeacontinue.Calendar;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.androidapp.tobeacontinue.MapsActivity;
 import com.androidapp.tobeacontinue.R;
+import com.androidapp.tobeacontinue.Todolist.ExtraTodolist;
 
 //알람종료
 public class AlarmRingActivity extends AppCompatActivity {
@@ -58,6 +61,8 @@ public class AlarmRingActivity extends AppCompatActivity {
                 case R.id.btnClose:
                     //알람종료
                     finish();
+                    Intent intent = new Intent(AlarmRingActivity.this, CalendarTodolist.class);
+                    startActivity(intent);
                     break;
 
 

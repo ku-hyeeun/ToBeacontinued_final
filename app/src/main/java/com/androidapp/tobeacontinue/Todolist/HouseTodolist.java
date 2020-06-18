@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -224,11 +225,25 @@ public class HouseTodolist extends AppCompatActivity implements BeaconCallback, 
             } else {
                 contextManager.stopLeScan();
 
-                Intent settingsIntent = new Intent(android.provider.Settings.ACTION_BLUETOOTH_SETTINGS);
-                startActivity(settingsIntent);
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Bluetooth 권한 설정");
+                builder.setMessage("Beacon을 사용하기 위해 Bluetooth 설정이 필요합니다. \nBluetooth 설정 화면으로 이동하시겠습니까?");
+                builder.setPositiveButton(getString(R.string.yes),
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent settingsIntent = new Intent(android.provider.Settings.ACTION_BLUETOOTH_SETTINGS);
+                                startActivity(settingsIntent);
+                            }
+                        });
+                builder.setNegativeButton(getString(R.string.no),
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(getApplicationContext(), "Beacon을 사용할 수 없습니다. \nBluetooth 권한을 확인해주세요.", Toast.LENGTH_LONG).show();
+                            }
+                        });
+                builder.show();
             }
         }
-
     }
 
     //뒤로 가기 눌렀을 때도 정상 작동
@@ -248,9 +263,6 @@ public class HouseTodolist extends AppCompatActivity implements BeaconCallback, 
                 contextManager.startLeScan();
             } else {
                 contextManager.stopLeScan();
-
-                Intent settingsIntent = new Intent(android.provider.Settings.ACTION_BLUETOOTH_SETTINGS);
-                startActivity(settingsIntent);
             }
         }
     }
