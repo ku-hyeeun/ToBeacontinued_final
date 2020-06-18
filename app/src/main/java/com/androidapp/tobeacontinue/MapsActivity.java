@@ -1,19 +1,26 @@
 package com.androidapp.tobeacontinue;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.app.PendingIntent;
+import android.bluetooth.BluetoothAdapter;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +28,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.androidapp.tobeacontinue.Todolist.CafeteriaTodolist;
 import com.androidapp.tobeacontinue.database.GeoDBHelper;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingClient;
@@ -64,7 +72,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private float GEOFENCE_RADIUS = 100;
 
     private String GEOFENCE_ID = "JC_GEOFENCE_ID";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -190,17 +197,45 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     //구글맵에서 현재위치 permission 확인
     private void enableUserLocation(){
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) ==
-                PackageManager.PERMISSION_GRANTED){
-            mMap.setMyLocationEnabled(true);
-        }else{
-            //Ask for permission
-            if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)){
-                //We need to show uses a dialog for display why the permission is needed and than ask for the permission
 
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},FINE_LOCATION_ACCESS_REQUEST_CODE);
-            }else{
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},FINE_LOCATION_ACCESS_REQUEST_CODE);
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
+            ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.ACCESS_FINE_LOCATION }, FINE_LOCATION_ACCESS_REQUEST_CODE);
+        } else {
+            ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.ACCESS_FINE_LOCATION }, FINE_LOCATION_ACCESS_REQUEST_CODE);
+        }
+    } else {
+                LocationManager lm = (LocationManager)
+                        getSystemService(Context. LOCATION_SERVICE ) ;
+                boolean gps_enabled = false;
+
+                try {
+                    gps_enabled = lm.isProviderEnabled(LocationManager. GPS_PROVIDER ) ;
+                } catch (Exception e) {
+                    e.printStackTrace() ;
+                }
+
+                if (gps_enabled) {
+                    mMap.setMyLocationEnabled(true);
+                } else{
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("위치 권한 설정");
+                builder.setMessage("Google map에서 현재위치를 가져오기 위해 위치 권한이 필요합니다. \n위치 설정으로 이동하시겠습니까?");
+                builder.setPositiveButton("예",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent settingsIntent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                                startActivity(settingsIntent);
+                                mMap.setMyLocationEnabled(true);
+                            }
+                        });
+                builder.setNegativeButton("아니오",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(getApplicationContext(), "현재위치 버튼을 사용할 수 없습니다.\n위치 접근 권한을 확인해주세요.", Toast.LENGTH_LONG).show();
+                            }
+                        });
+                builder.show();
             }
         }
     }
