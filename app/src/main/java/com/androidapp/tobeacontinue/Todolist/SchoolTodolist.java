@@ -170,7 +170,6 @@ public class SchoolTodolist extends AppCompatActivity implements BeaconCallback,
                 imgView = findViewById(R.id.imageView);
                 imgView.setImageBitmap(scaled);                     //이미지 불러온 후
                 imageDBHelper.insertImage(imgViewToByte(imgView));  //DB에 img를 byte로 변환 후 저장
-
             }
         } catch (Exception e) {
             Toast.makeText(this,"로딩에 오류가 있습니다.",Toast.LENGTH_SHORT).show();
@@ -290,6 +289,7 @@ public class SchoolTodolist extends AppCompatActivity implements BeaconCallback,
             } else {
                 contextManager.stopLeScan();
 
+                //블루투스 권한 설정 이유 설명, 블루투스 설정창으로 넘어가기
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle(getString(R.string.bluetooth_access));
                 builder.setMessage(getString(R.string.bluetooth_access_alert));

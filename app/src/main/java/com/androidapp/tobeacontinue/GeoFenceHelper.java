@@ -45,6 +45,7 @@ public class GeoFenceHelper extends ContextWrapper {
                 .build();
     }
 
+    //pending intent 정의
     public PendingIntent getPendingIntent(){
         if(pendingIntent != null){
             return pendingIntent;

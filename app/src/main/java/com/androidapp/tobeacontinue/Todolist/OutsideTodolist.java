@@ -219,6 +219,7 @@ public class OutsideTodolist extends AppCompatActivity implements BeaconCallback
             } else {
                 contextManager.stopLeScan();
 
+                //블루투스 권한 설정 이유 설명, 블루투스 설정창으로 넘어가기
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle(getString(R.string.bluetooth_access));
                 builder.setMessage(getString(R.string.bluetooth_access_alert));
