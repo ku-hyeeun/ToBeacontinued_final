@@ -1729,4 +1729,5 @@ Text의 최소,최대 크기를 지정하고 Text가 차지하는 최소,최대 
 * 전체적인 To Beacontinued 앱의 동작 영상이다.
 
 ###### 0.75배속으로 재생을 권장한다.   (3:53 앱은 -> 앱을)
-[![Watch the video](https://i.imgur.com/vKb2F1B.png)](https://www.youtube.com/watch?v=Ac5DqnVF6M8)
+
+[![Video Label](http://img.youtube.com/vi/Ac5DqnVF6M8/0.jpg)](https://youtu.be/Ac5DqnVF6M8)
