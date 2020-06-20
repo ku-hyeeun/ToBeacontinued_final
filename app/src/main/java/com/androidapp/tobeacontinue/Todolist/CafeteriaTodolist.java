@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -34,6 +35,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.androidapp.tobeacontinue.Calendar.CalendarTodolist;
 import com.androidapp.tobeacontinue.MenuActivity;
 import com.androidapp.tobeacontinue.R;
 import com.androidapp.tobeacontinue.database.MemoDBHelper;
@@ -113,10 +115,17 @@ public class CafeteriaTodolist extends AppCompatActivity implements BeaconCallba
         etabutton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                CafeteriaTodolist.this.startActivity(intent);       //이미지 버튼을 클릭하면 패키지이름인 에브리타임 앱으로 연동됨
+
+                //에브리타임 앱이 있다면
+                if(getPackageList())
+                {
+                    CafeteriaTodolist.this.startActivity(intent);       //이미지 버튼을 클릭하면 패키지이름인 에브리타임 앱으로 연동됨
+                } else //에브리타입 앱이 없다면
+                {
+                    Toast.makeText(CafeteriaTodolist.this, getString(R.string.eveytime_not_exist), Toast.LENGTH_SHORT).show();
+                }
             }
         });
-
 
         //비콘
         contextManager = getMidasApplication().getContextManager();
@@ -124,6 +133,34 @@ public class CafeteriaTodolist extends AppCompatActivity implements BeaconCallba
 
         adapter = new BeaconListAdapter(getBaseContext());
         startService(new Intent(getApplicationContext(), BeaconListAdapter.class));         //startService -> 비콘 인식 + notification 옴
+    }
+
+    //에브리타임 앱이 있는지 확인
+    public boolean getPackageList(){
+        boolean isExist = false;
+
+        //queryIntentActivities()를 호출하여 Intent를 처리할 수 있는 활동 목록을 가져와야 함
+
+        PackageManager pkgMgr = getPackageManager();
+        List<ResolveInfo> mApps;
+        Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
+        mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+        mApps = pkgMgr.queryIntentActivities(mainIntent, 0);
+
+        //List가 비어있지 않다면 안전하게 인텐트를 사용할 수 있음
+        try {
+            for (int i = 0; i < mApps.size(); i++) {
+                if (mApps.get(i).activityInfo.packageName.startsWith(packageName)) {
+                    isExist = true;
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            isExist = false;
+        }
+
+        // isExist가 true면 최소한 하나의 앱이 인텐트에 응답. false면 인텐트를 처리할 앱이 없음
+        return isExist;
     }
 
     //startActivityForResult로 보냈을 때 onActivityResult 함수로 받을 때 처리해줌
